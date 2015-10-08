@@ -1,0 +1,73 @@
+// COLORS
+
+$gblue-0: #19242B;
+$gblue-1: #212C33;
+$gblue-2: #2C3A42;
+$gblue-3: #21414F;
+$gblue-4: #496B7F;
+$gblue-5: #6F8B9E;
+$gblue-6: #7796AA;
+$gblue-7: #9CB7C5;
+$gblue-8: #D0DEE7;
+
+$blue-0: #69A1BE;
+$blue-1: #62B1DD;
+
+$bgreen-0: #3ACFCF;
+$bgreen-1: #7FE0BF;
+
+$yellow-0: #4C4C20;
+$yellow-1: #EFB543;
+$yellow-2: #F5DA81;
+$yellow-3: #FFF5AD;
+
+$red: #FC6269;
+
+
+// MIXINS
+
+@mixin transition($value) {
+  -moz-transition: $value;
+  -o-transition: $value;
+  -ms-transition: $value;
+  -webkit-transition: $value;
+  transition: $value;
+}
+
+@mixin transition-delay($delay) {
+  -moz-transition-delay: $delay;
+  -o-transition-delay: $delay;
+  -webkit-transition-delay: $delay;
+  transition-delay: $delay;
+}
+
+@mixin opacity($value){
+  $IEValue: $value*100;
+  opacity: $value;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity="+$IEValue+")";
+  filter: alpha(opacity=$IEValue);
+}
+
+@mixin box-sizing($value:border-box) {
+  -moz-box-sizing: $value;
+  box-sizing: $value;
+}
+
+@mixin border-radius ($radius:50%){
+  -webkit-border-radius: $radius $radius $radius $radius;
+  -moz-border-radius: $radius $radius $radius $radius;
+  border-radius: $radius $radius $radius $radius;
+}
+
+@mixin transform ($transforms){
+  -webkit-transform: $transforms;
+  -moz-transform: $transforms;
+  -ms-transform: $transforms;
+  -o-transform: $transforms;
+  transform: $transforms;
+}
+
+@mixin font-smoothing{
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}

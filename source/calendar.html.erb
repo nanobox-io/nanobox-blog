@@ -1,0 +1,47 @@
+---
+pageable: true
+per_page: 20
+layout: home
+---
+
+<h1 class="small">Archive for
+  <% case page_type
+     when 'day' %>
+    <%= Date.new(year, month, day).strftime('%b %e %Y') %>
+  <% when 'month' %>
+    <%= Date.new(year, month, 1).strftime('%b %Y') %>
+  <% when 'year' %>
+    <%= year %>
+  <% end %>
+</h1>
+
+<% page_articles.each_with_index do |article, i| %>
+  <div class="title-block small">
+    <h2><%= link_to article.title, article %></h2>
+    <p class="meta">
+      <span class="author"><%= data.authors[article.data.author].name %></span>
+       &#9642; 
+      <span class="date"><%= article.date.strftime('%b %e %Y') %></span>
+    </p>
+  </div>
+<% end %>
+
+<% if paginate && num_pages > 1 %>
+  <div class="pagination">
+    <table>
+      <tr>
+        <td>
+          <% if next_page %>
+            <li class="older"><%= link_to 'Older', next_page %></li>
+          <% end %>
+        </td>
+        <td>Page <%= page_number %> of <%= num_pages %></td>
+        <td>
+          <% if prev_page %>
+            <li class="newer"><%= link_to 'Newer', prev_page %></li>
+          <% end %>
+        </td>
+      </tr>
+    </table>
+  </div>
+<% end %>

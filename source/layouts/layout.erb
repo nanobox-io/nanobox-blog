@@ -1,0 +1,44 @@
+<!doctype html>
+<html>
+  <%= partial "head" %>
+  <body>
+  <%= partial "top-nav" %>    
+    <div class="wrapper">
+      <div class="title-block">
+        <h1><%= current_page.data.title %></h1>
+        <p class="meta">
+          <span class="author"><%= data.authors[current_page.data.author].name %></span>
+           &#9642; 
+          <span class="date"><%= current_page.date.strftime('%b %e %Y') %></span>
+        </p>
+      </div>
+      <div class="content">
+        <%= yield %>
+      </div>
+      <div class="author-block">
+        <%= '<img class="gravatar" src="https://s.gravatar.com/avatar/' + data.authors[current_page.data.author].gravatar + '">' %>
+        <div class="info">
+          <p class="author"><span><%= data.authors[current_page.data.author].name %></span>            
+            <% if data.authors[current_page.data.author].twitter %>
+             <%= link_to '@'+data.authors[current_page.data.author].twitter, 'https://twitter.com/'+data.authors[current_page.data.author].twitter, :class => 'twitter', :target => '_blank' %>
+            <% end %>            
+            <% if data.authors[current_page.data.author].github %>
+              <%= link_to data.authors[current_page.data.author].github, 'https://github.com/'+data.authors[current_page.data.author].github, :class => 'github', :target => '_blank' %>
+            <% end %>
+          </p>
+          <p class="summary"><%= data.authors[current_page.data.author].summary %></p>
+        </div>
+      </div>
+      <div class="feedback">
+        <p>Have feedback on this post? Let
+          <%= link_to '@nanobox_io', 'https://twitter.com/intent/tweet?text=@nanobox_io%20&amp;url=https://blog.nanobox.io' + current_page.url, :target => '_blank' %>
+          <% if data.authors[current_page.data.author].twitter %>
+            or <%= link_to '@'+data.authors[current_page.data.author].twitter, 'https://twitter.com/intent/tweet?text=@'+data.authors[current_page.data.author].twitter+'%20&amp;url=https://blog.nanobox.io' + current_page.url, :target => '_blank' %>
+          <% end %>
+          know on Twitter.</p>
+      </div>
+      <hr class="end">
+    </div>
+    <%= partial 'aside' %>
+  </body>
+</html>

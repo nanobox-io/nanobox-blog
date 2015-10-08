@@ -1,0 +1,12 @@
+.top-nav
+  = link_to 'https://nanobox.io' do
+    = partial 'svgs/nb-logo-sm'
+    = partial 'svgs/nb-logotype'
+  %a.blog{ :href => '/'} Blog
+  %ul.right
+    %li#docs
+      %a{ :href => 'https://docs.nanobox.io' } Docs
+    %li#download
+      %a{ :href => 'https://nanobox.io/downloads' } Download
+    %li#login
+      %a{ :href => 'https://dashboard.nanobox.io' } Login/Register

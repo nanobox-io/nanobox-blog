@@ -1,0 +1,139 @@
+@import 'normalize', 'variables-mixins', 'code-block';
+
+// Global Styles
+body                { background: $gblue-1; font-size: 18px; @include box-sizing; font-family: 'Lato', sans-serif; @include font-smoothing; color: $gblue-5; line-height: 1.5em; }
+img                 { max-width: 100%; }
+h1                  { font-size: 3.5em; font-weight: 300; color: $yellow-2; line-height: 1.1em; margin-bottom: .1em;
+  &.small           { font-size: 1.35em; font-weight: 400; margin-bottom: 1em; }
+}
+h2                  { font-size: 2em; font-weight: 300; line-height: 1.1em; }
+a                   { color: $blue-1; text-decoration: none; @include transition(color .2s);
+  &:hover           { color: $gblue-8; }
+}
+
+.wrapper            { width: 100%; max-width: 45em; margin: 0 auto; padding: 0 1.5em; @include box-sizing; }
+
+// First heading link on the home page
+h2.new              { font-size: 3.5em; font-weight: 300; color: $yellow-2; line-height: 1.1em; margin: .68em 0 .09em;
+  a                 { color: $yellow-2; 
+    &:hover         { color: $blue-1; }
+  }
+}
+
+// Block that contains post title, author, & date
+.title-block        { margin-bottom: 2em; 
+  .meta             { margin-top: 0; font-size: .8em; font-weight: 700; color: $gblue-6;
+    .author         { margin-right: .25em; text-transform: uppercase; letter-spacing: 1px; }
+    .date           { margin-left: .25em; text-transform: uppercase; letter-spacing: 1px; }
+  }
+  &.small           { margin: 0; padding: 1.6em 0 1.1em; border-top: 1px solid $gblue-4;
+    h2              { margin: 0 0 .15em; }
+    .meta           { font-size: .7em; }
+    &:first-child   { margin-top: 2em; }
+    &:last-child    { border-bottom: 1px solid $gblue-4 }
+  }
+}
+
+// Top Nav Styles
+.top-nav            { margin: 0 auto; padding: 1.15em 1em; position: relative; max-width: 1060px; @include box-sizing; 
+  svg               { 
+    &#nb-logo-sm    { width: 1.05em; margin-right: 1.05em; }
+    &#nb-logotype   { width: 7em; margin: .4em .8em .4em 0; vertical-align: top; 
+      path          { @include transition(fill .15s); }
+    } 
+  }
+  a                 { 
+    &.blog          { display: inline-block; margin: 0; padding: .1em 1.1em; color: $gblue-7; border-left: 1px solid $gblue-3; font-style: italic; vertical-align: top; }
+    &:hover         { color: $gblue-8; 
+      svg#nb-logotype path { fill: $gblue-6; }
+    }
+  }
+  ul.right          { margin: 0; list-style: none; position: absolute; top: 1.25em; right: 1.15em; display: block;
+    li              { padding: 0 .5em; display: inline-block; font-size: .75em; font-weight: 700; border-right: 1px solid $gblue-2;
+      &:last-child  { border-right: none; }
+      a             { color: $gblue-5;
+        &:hover     { color: $gblue-8; }
+      }
+    }
+  }
+}
+
+// Content Styles
+.content            {
+  h2                { margin: 0 0 .65em; padding-top: 1em; font-size: 2.5em; color: $gblue-8; font-weight: 300; line-height: 1.2em; }
+  h3                { margin: -1em 0 .45em; padding-top: 2em; font-size: 1.55em; color: $bgreen-0; font-weight: 400; font-style: italic; line-height: 1.2em; }
+  h4                { margin: -1.5em 0 .25em; padding-top: 2.5em; font-size: 1.15em; color: $gblue-8; font-weight: 400; font-style: italic; line-height: 1.2em; }
+  h5                { margin: -2em 0 .25em; padding-top: 3em; font-size: .95em; color: $bgreen-0; text-transform: uppercase; line-height: 1.1em; }
+  h6                { margin: -2em 0 .25em; padding-top: 3em; font-size: .95em; color: $gblue-7; text-transform: uppercase; font-style: italic; line-height: 1.1em; }
+  p                 { margin-bottom: 1.5em; }
+  strong, em        { color: $gblue-7; }
+  p, ul, li         { line-height: 1.8em;
+    code            { padding: 5px 6px 6px; font-size: .85em; color: $yellow-2; background: $gblue-0; white-space: nowrap; }
+  }
+  hr                { margin: 3em 0 2em; border: none; border-top: 1px solid $gblue-2; }
+  blockquote        { margin: 3em 0; padding: .35em 2em .15em; color: $gblue-6; border-left: 4px solid $gblue-2;
+    p               { font-size: 1.25em; font-style: italic; line-height: 1.5em; }
+  }
+  table             { width: 100%; margin-bottom: 2em; 
+    thead           { background: $gblue-0; }
+    th              { padding: .5em .8em; border: 1px solid $gblue-2; color: $gblue-6; font-size: .95em; }
+    td              { padding: .5em .8em; border: 1px solid $gblue-2; }
+    tr              {
+      &:first-child td  { border-top: none; }
+      &:nth-child(2n+2) { background: $gblue-2;
+        td              { border-right: 1px solid $gblue-1;
+          &:last-child  { border-right: 1px solid $gblue-2; }
+        }
+       }
+    }
+    code            { border: none !important; font-size: .95em; }
+  }
+}
+
+// Block that contains author information & links
+.author-block       { position: relative; margin: 3em 0 1em; padding: 1em; background: $gblue-0;
+  img               { display: inline-block; margin-right: 1em; width: 10%; vertical-align: top; }
+  .info             { display: inline-block; width: 80%; }
+  .author           { margin: 0 0 .2em; font-size: 1.1em; font-style: italic; line-height: 1.4em; color: $gblue-8;
+    span            { margin-right: .75em; }
+    a               { font-size: .9em; color: $gblue-6; margin-right: .75em; 
+      &:hover       { color: $gblue-8; }
+      &.twitter:before { content: "\f099"; display: inline; font-family: 'FontAwesome'; font-style: normal; margin-right: .2em; }
+      &.github:before  { content: "\f09b"; display: inline; font-family: 'FontAwesome'; font-style: normal; margin-right: .2em; }
+    }
+  }
+  .summary          { margin: 0; font-size: .9em; line-height: 1.4em; }
+}
+
+// Block with link to twitter
+.feedback           { padding: .9em 1.2em 1.1em; margin-bottom: 6em; background: $gblue-0; position: relative; @include box-sizing;
+  p                 { width: 90%; margin: 0; font-size: .95em; color: $gblue-7; font-style: italic; }
+  &:after           { content: "\f099"; position: absolute; top: 1em; right: 1.2em; font-family: 'FontAwesome'; font-style: normal; color: #4099ff }
+}
+hr.end              { border: none; border-top: 1px solid $gblue-4; }
+
+// Pagination on list pages
+.pagination         { width: 100%; margin: 0; padding: 3em 0; font-size: .9em; list-style: none; font-style: italic; border-top: 1px solid $gblue-4;
+  table             { width: 100% }
+  td                { width: 33%; 
+    &:last-child    { text-align: right; }
+    &:nth-child(2)  { text-align: center; }
+  }
+  a                 { padding: .5em .75em; border: 2px solid $gblue-4; color: $gblue-4; font-size: .85em; font-weight: 700; font-style: normal; letter-spacing: 1px; text-transform: uppercase; @include transition(all .2s);
+    &:hover         { color: $gblue-7; border-color: $gblue-7; }
+  }
+}
+
+// Links at the bottom of every page
+aside               { width: 100%; max-width: 45em; margin: 2em auto 0; padding: 0 1.5em 3em; @include box-sizing;
+  ul,ol             { padding: 0; list-style: none; width: 30%;  margin-right: 2%; display: inline-block; vertical-align: top;}
+  h2                { font-size: .8em; font-weight: 700; color: $gblue-7; text-transform: uppercase; letter-spacing: 1px; }
+  li                { margin: .5em 0; line-height: 1.1em; }
+  a                 { font-size: .9em; color: $blue-0; }
+  .small-date       { margin-left: .3em; font-size: .65em; font-weight: 700; color: $gblue-5; text-transform: uppercase; }
+  .feed             { font-size: .9em; font-style: italic;
+    &:before        { content: "\f09e"; display: inline; margin-right: .4em; font-family: 'FontAwesome'; font-style: normal; }
+  }
+}
+
+@import 'media-queries';
