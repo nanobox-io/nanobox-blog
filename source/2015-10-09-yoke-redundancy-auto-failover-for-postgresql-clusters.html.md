@@ -3,6 +3,7 @@ title: Yoke - Redundancy & Auto-Failover for PostgreSQL Clusters
 date: 2015-10-09 22:15 UTC
 author: scott
 tags: Open Source
+published: false
 ---
 
 In this tutorial we will show how to setup Yoke, a primary/secondary Postgres streaming replication solution that we wrote to fit our workflow, not fail over too often, and still provide a high availability database. We have used Yoke in production for around a year, and are comfortable making it available to others. 
