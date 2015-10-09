@@ -65,11 +65,15 @@ h2.new              { font-size: 3.5em; font-weight: 300; color: $yellow-2; line
   h4                { margin: -1.5em 0 .25em; padding-top: 2.5em; font-size: 1.15em; color: $gblue-8; font-weight: 400; font-style: italic; line-height: 1.2em; }
   h5                { margin: -2em 0 .25em; padding-top: 3em; font-size: .95em; color: $bgreen-0; text-transform: uppercase; line-height: 1.1em; }
   h6                { margin: -2em 0 .25em; padding-top: 3em; font-size: .95em; color: $gblue-7; text-transform: uppercase; font-style: italic; line-height: 1.1em; }
-  p                 { margin-bottom: 1.5em; }
-  strong, em        { color: $gblue-7; }
-  p, ul, li         { line-height: 1.8em;
+  h2,h3,h4,h5,h6    {
+    & ~ .highlight  { margin-top: 1em; }
+  }
+  p                 { margin: .25em 0 2.25em; }
+  p, li             { line-height: 1.8em;
     code            { padding: 5px 6px 6px; font-size: .85em; color: $yellow-2; background: $gblue-0; white-space: nowrap; }
   }
+  ul                { padding-left: 1.2em; margin-bottom: 2em; }
+  strong, em        { color: $gblue-7; }
   hr                { margin: 3em 0 2em; border: none; border-top: 1px solid $gblue-2; }
   blockquote        { margin: 3em 0; padding: .35em 2em .15em; color: $gblue-6; border-left: 4px solid $gblue-2;
     p               { font-size: 1.25em; font-style: italic; line-height: 1.5em; }
@@ -134,6 +138,11 @@ aside               { width: 100%; max-width: 45em; margin: 2em auto 0; padding:
   .feed             { font-size: .9em; font-style: italic;
     &:before        { content: "\f09e"; display: inline; margin-right: .4em; font-family: 'FontAwesome'; font-style: normal; }
   }
+}
+
+// Fade content in on document ready
+.fade-in            { @include opacity(0); @include transition(all .5s);
+  &.show            { @include opacity(1); }
 }
 
 @import 'media-queries';

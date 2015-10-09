@@ -11,7 +11,7 @@ For purposes of this tutorial, we will be using a blank ubuntu machine and insta
 
 ## Background
 
-**TLDR**  
+###### TLDR
 Mongo was ruining our lives. If it has ruined yours, skip straight to the configuration.
 
 After running rails projects in production for several years without incident, we were pretty happy with Mongo. Last year we built a new Rails project, and to make sure that our environment was uniform, we upgraded all of our older Rails projects to the newest Rails version, which required updating our Mongo servers.
