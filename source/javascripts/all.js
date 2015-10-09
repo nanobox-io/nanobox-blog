@@ -2,5 +2,9 @@
 //= require "jquery-2.1.4.min.js"
 
 $(document).ready( function() {
-  $(".fade-in").addClass('show');
+
+  setTimeout(function() {
+    $(".fade-in").addClass('show');
+  }, 10);
+
 })
