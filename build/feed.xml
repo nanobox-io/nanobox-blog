@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Nanobox Blog</title>
+  <subtitle>The inner-workings of the brains behind Nanobox</subtitle>
+  <id>http://blog.nanobox.io/</id>
+  <link href="http://blog.nanobox.io/"/>
+  <link href="http://blog.nanobox.io/feed.xml" rel="self"/>
+  <updated>2015-10-09T11:20:00-06:00</updated>
+  <entry>
+    <title>Coming Soon</title>
+    <link rel="alternate" href="http://blog.nanobox.io/coming-soon/"/>
+    <id>http://blog.nanobox.io/coming-soon/</id>
+    <published>2015-10-09T11:20:00-06:00</published>
+    <updated>2015-10-09T11:22:17-06:00</updated>
+    <author>
+      <name>Scott Anderson</name>
+    </author>
+    <content type="html">&lt;p&gt;Welcome to the new Nanobox blog. Soon this will be the home for of the inner-workings of our teams&amp;#39; brains.&lt;/p&gt;
+</content>
+  </entry>
+</feed>
