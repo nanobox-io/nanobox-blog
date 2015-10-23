@@ -8,7 +8,7 @@ tags: Open Source
 **TLDR:** Introducing a better local development workflow. Watch the Demo.
 
 <div class="video" id="video-demo">
-  <iframe width="560" height="315" src="https://www.youtube.com/embed/TV4iBxytfyE?rel=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/TV4iBxytfyE?rel=0&amp;controls=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>
 </div>
 
 ##Declutter Workstations with a Better Workflow
@@ -25,6 +25,6 @@ While automated configuration might sound a bit scary, Nanobox ensures that you�
 Need more control? Create a custom Engine and auto-configure even the nit-pickiest of development environments. 
 
 ## Getting Started
-Ultimately, you have to see it to believe it. You should check out the [video demo](#video-demo). If you’re too strapped for time to watch a XX second video, you’re spending too much time managing a cluttered local environment. [Download Nanobox](https://desktop.nanobox.io/downloads).
+Ultimately, you have to see it to believe it. You should check out the [video demo](#video-demo). If you’re too strapped for time to watch a 2 minute video, you’re spending too much time managing a cluttered local environment. [Download Nanobox](https://desktop.nanobox.io/downloads).
 
 We’d love to get your feedback or answer additional questions, so hop into our [#nanobox IRC channel](https://webchat.freenode.net/?channels=nanobox) for a chat.
