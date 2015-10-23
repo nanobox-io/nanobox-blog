@@ -1,7 +1,7 @@
 ---
 title: Yoke - Redundancy & Auto-Failover for PostgreSQL Clusters
-date: 2015-10-09 22:15 UTC
-author: scott
+date: 2015-10-22 14:00 UTC
+author: daniel
 tags: Open Source
 published: false
 ---

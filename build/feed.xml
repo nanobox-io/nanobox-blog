@@ -5,17 +5,43 @@
   <id>http://blog.nanobox.io/</id>
   <link href="http://blog.nanobox.io/"/>
   <link href="http://blog.nanobox.io/feed.xml" rel="self"/>
-  <updated>2015-10-09T11:20:00-06:00</updated>
+  <updated>2015-10-23T12:00:00-06:00</updated>
   <entry>
-    <title>Coming Soon</title>
-    <link rel="alternate" href="http://blog.nanobox.io/coming-soon/"/>
-    <id>http://blog.nanobox.io/coming-soon/</id>
-    <published>2015-10-09T11:20:00-06:00</published>
-    <updated>2015-10-09T11:22:17-06:00</updated>
+    <title>Focus on Apps, Not Configuring Dev Environments</title>
+    <link rel="alternate" href="http://blog.nanobox.io/auto-configure-virtual-development-environments/"/>
+    <id>http://blog.nanobox.io/auto-configure-virtual-development-environments/</id>
+    <published>2015-10-23T12:00:00-06:00</published>
+    <updated>2015-10-23T12:04:51-06:00</updated>
     <author>
-      <name>Scott Anderson</name>
+      <name>Tyler Flint</name>
     </author>
-    <content type="html">&lt;p&gt;Welcome to the new Nanobox blog. Soon this will be the home for of the inner-workings of our teams&amp;#39; brains.&lt;/p&gt;
+    <content type="html">&lt;p&gt;&lt;strong&gt;TLDR:&lt;/strong&gt; Introducing a better local development workflow. Watch the Demo.&lt;/p&gt;
+
+&lt;div class="video" id="video-demo"&gt;
+  &lt;iframe width="560" height="315" src="https://www.youtube.com/embed/TV4iBxytfyE?rel=0&amp;amp;showinfo=0" frameborder="0" allowfullscreen&gt;&lt;/iframe&gt;
+&lt;/div&gt;
+
+&lt;h2 id="declutter-workstations-with-a-better-workflow"&gt;Declutter Workstations with a Better Workflow&lt;/h2&gt;
+
+&lt;p&gt;We’re excited to announce the release of Nanobox Desktop, which automatically generates fully virtualized environments on your local workstation from a single command. Nanobox auto-detects the application type, provisions a virtual machine (VM), and creates all of the app’s related services inside the VM - all without complex manual configuration.&lt;/p&gt;
+
+&lt;p&gt;Under the hood, Nanobox uses &lt;a href="https://www.virtualbox.org/"&gt;Virtualbox&lt;/a&gt; to create a VM for each app. It leverages &lt;a href="https://www.vagrantup.com"&gt;Vagrant&lt;/a&gt; for VM creation and &lt;a href="https://www.docker.com/"&gt;Docker&lt;/a&gt; to “containerize” processes inside the VM. By cleanly isolating application environments, apps with all their dependencies can be managed simply, without cruft or workstation configuration. &lt;/p&gt;
+
+&lt;h2 id="tap-into-community-expertise"&gt;Tap into Community Expertise&lt;/h2&gt;
+
+&lt;p&gt;We can’t know everything required to configure all virtual development environments. Instead, we provide simple tools that promote a community-driven collection of specialized Engines which install runtimes, detect dependencies, and compile your codebase. By default, Nanobox pulls from this &lt;a href="https://engines.nanobox.io"&gt;catalogue of community-contributed engines&lt;/a&gt;. Anyone can add and use custom Engines with minimal effort.&lt;/p&gt;
+
+&lt;h2 id="you’re-in-charge-of-the-automation"&gt;You’re in Charge of the Automation&lt;/h2&gt;
+
+&lt;p&gt;While automated configuration might sound a bit scary, Nanobox ensures that you’re always in control. Adding a &lt;a href="https://docs.nanobox.io/boxfile/"&gt;Boxfile&lt;/a&gt; in the root of an application overrides or supplements the automated build. Boxfile configuration can be as simple as specifying a custom Engine or adding a Postgres service, or more complex, like choosing a specific Ruby runtime or enabling MySQL configuration settings.&lt;/p&gt;
+
+&lt;p&gt;Need more control? Create a custom Engine and auto-configure even the nit-pickiest of development environments. &lt;/p&gt;
+
+&lt;h2 id="getting-started"&gt;Getting Started&lt;/h2&gt;
+
+&lt;p&gt;Ultimately, you have to see it to believe it. You should check out the &lt;a href="#video-demo"&gt;video demo&lt;/a&gt;. If you’re too strapped for time to watch a XX second video, you’re spending too much time managing a cluttered local environment. &lt;a href="https://desktop.nanobox.io/downloads"&gt;Download Nanobox&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;We’d love to get your feedback or answer additional questions, so hop into our &lt;a href="https://webchat.freenode.net/?channels=nanobox"&gt;#nanobox IRC channel&lt;/a&gt; for a chat.&lt;/p&gt;
 </content>
   </entry>
 </feed>

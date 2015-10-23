@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv='X-UA-Compatible' content='IE=edge;chrome=1' />
-  <title>Nanobox Blog</title>
+  <title>Focus on Apps, Not Configuring Dev Environments - Nanobox Blog</title>
   <link rel="shortcut icon" type="image/png" href="/images/favicon-57864095.png"/>
   <link href='https://fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic' rel='stylesheet' type='text/css'>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
@@ -20,7 +20,7 @@
   <script async src='//www.google-analytics.com/analytics.js'></script>
 </head>
   <body>
-    <div class='top-nav'>
+  <div class='top-nav'>
   <a href="https://nanobox.io"><svg enable-background='new 0 0 19 33' id='nb-logo-sm' space='preserve' version='1.1' viewbox='0 0 19 33' x='0px' xmlns:xlink='http://www.w3.org/1999/xlink' xmlns='http://www.w3.org/2000/svg' y='0px'>
     <g>
       <g>
@@ -73,21 +73,62 @@
 </div>
     
     <div class="wrapper fade-in">
-      <h1 class="small">Archive for
-    2015
-</h1>
+      <div class="title-block">
+        <h1>Focus on Apps, Not Configuring Dev Environments</h1>
+        <p class="meta">
+          <span class="author">Tyler Flint</span>
+           &#9642; 
+          <span class="date">Oct 23 2015</span>
+        </p>
+      </div>
+      <div class="content">
+        <p><strong>TLDR:</strong> Introducing a better local development workflow. Watch the Demo.</p>
 
-  <div class="title-block small">
-    <h2><a href="/auto-configure-virtual-development-environments/">Focus on Apps, Not Configuring Dev Environments</a></h2>
-    <p class="meta">
-      <span class="author">Tyler Flint</span>
-       &#9642; 
-      <span class="date">Oct 23 2015</span>
-    </p>
-  </div>
+<div class="video" id="video-demo">
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/TV4iBxytfyE?rel=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>
+</div>
 
+<h2 id="declutter-workstations-with-a-better-workflow">Declutter Workstations with a Better Workflow</h2>
 
-    </div>    
+<p>We’re excited to announce the release of Nanobox Desktop, which automatically generates fully virtualized environments on your local workstation from a single command. Nanobox auto-detects the application type, provisions a virtual machine (VM), and creates all of the app’s related services inside the VM - all without complex manual configuration.</p>
+
+<p>Under the hood, Nanobox uses <a href="https://www.virtualbox.org/">Virtualbox</a> to create a VM for each app. It leverages <a href="https://www.vagrantup.com">Vagrant</a> for VM creation and <a href="https://www.docker.com/">Docker</a> to “containerize” processes inside the VM. By cleanly isolating application environments, apps with all their dependencies can be managed simply, without cruft or workstation configuration. </p>
+
+<h2 id="tap-into-community-expertise">Tap into Community Expertise</h2>
+
+<p>We can’t know everything required to configure all virtual development environments. Instead, we provide simple tools that promote a community-driven collection of specialized Engines which install runtimes, detect dependencies, and compile your codebase. By default, Nanobox pulls from this <a href="https://engines.nanobox.io">catalogue of community-contributed engines</a>. Anyone can add and use custom Engines with minimal effort.</p>
+
+<h2 id="you’re-in-charge-of-the-automation">You’re in Charge of the Automation</h2>
+
+<p>While automated configuration might sound a bit scary, Nanobox ensures that you’re always in control. Adding a <a href="https://docs.nanobox.io/boxfile/">Boxfile</a> in the root of an application overrides or supplements the automated build. Boxfile configuration can be as simple as specifying a custom Engine or adding a Postgres service, or more complex, like choosing a specific Ruby runtime or enabling MySQL configuration settings.</p>
+
+<p>Need more control? Create a custom Engine and auto-configure even the nit-pickiest of development environments. </p>
+
+<h2 id="getting-started">Getting Started</h2>
+
+<p>Ultimately, you have to see it to believe it. You should check out the <a href="#video-demo">video demo</a>. If you’re too strapped for time to watch a XX second video, you’re spending too much time managing a cluttered local environment. <a href="https://desktop.nanobox.io/downloads">Download Nanobox</a>.</p>
+
+<p>We’d love to get your feedback or answer additional questions, so hop into our <a href="https://webchat.freenode.net/?channels=nanobox">#nanobox IRC channel</a> for a chat.</p>
+
+      </div>
+      <div class="author-block">
+        <img class="gravatar" src="https://s.gravatar.com/avatar/d16320670cd226d7d4984698585e2fbc">
+        <div class="info">
+          <p class="author"><span>Tyler Flint</span>            
+             <a class="twitter" target="_blank" href="https://twitter.com/tyler_flint">@tyler_flint</a>
+              <a class="github" target="_blank" href="https://github.com/tylerflint">tylerflint</a>
+          </p>
+          <p class="summary">Husband, dad, technologist, entrepreneur</p>
+        </div>
+      </div>
+      <div class="feedback">
+        <p>Have feedback on this post? Let
+          <a target="_blank" href="https://twitter.com/intent/tweet?text=@nanobox_io%20&amp;amp;url=https://blog.nanobox.io/auto-configure-virtual-development-environments/">@nanobox_io</a>
+            or <a target="_blank" href="https://twitter.com/intent/tweet?text=@tyler_flint%20&amp;amp;url=https://blog.nanobox.io/auto-configure-virtual-development-environments/">@tyler_flint</a>
+          know on Twitter.</p>
+      </div>
+      <hr class="end">
+    </div>
     <aside>
   <ul>
     <li><h2>Recent Posts</h2></li>

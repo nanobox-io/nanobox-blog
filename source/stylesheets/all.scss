@@ -60,7 +60,7 @@ h2.new              { font-size: 3.5em; font-weight: 300; color: $yellow-2; line
 
 // Content Styles
 .content            {
-  h2                { margin: 0 0 .65em; padding-top: 1em; font-size: 2.5em; color: $gblue-8; font-weight: 300; line-height: 1.2em; }
+  h2                { margin: 0 0 .65em; padding-top: .4em; font-size: 2.5em; color: $gblue-8; font-weight: 300; line-height: 1.2em; }
   h3                { margin: -1em 0 .45em; padding-top: 2em; font-size: 1.55em; color: $bgreen-0; font-weight: 400; font-style: italic; line-height: 1.2em; }
   h4                { margin: -1.5em 0 .25em; padding-top: 2.5em; font-size: 1.15em; color: $gblue-8; font-weight: 400; font-style: italic; line-height: 1.2em; }
   h5                { margin: -2em 0 .25em; padding-top: 3em; font-size: .95em; color: $bgreen-0; text-transform: uppercase; line-height: 1.1em; }
@@ -91,6 +91,9 @@ h2.new              { font-size: 3.5em; font-weight: 300; color: $yellow-2; line
        }
     }
     code            { border: none !important; font-size: .95em; }
+  }
+  .video            { position: relative; margin-bottom: 2.5em; padding-bottom: 53%; padding-top: 25px; height: 0;
+    iframe          { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
   }
 }
 
