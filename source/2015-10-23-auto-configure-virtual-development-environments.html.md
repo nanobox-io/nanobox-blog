@@ -8,7 +8,7 @@ tags: Open Source
 **TLDR:** Introducing a better local development workflow. Watch the Demo.
 
 <div class="video" id="video-demo">
-  <iframe width="560" height="315" src="https://www.youtube.com/embed/TV4iBxytfyE?rel=0&amp;controls=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/TV4iBxytfyE?rel=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>
 </div>
 
 ##Declutter Workstations with a Better Workflow
