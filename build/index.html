@@ -75,78 +75,92 @@
     <div class="wrapper fade-in">
       
   <div class="title-block">
-    <h2 class="new"><a href="/auto-configure-virtual-development-environments/">Focus on Apps, Not Configuring Dev Environments</a></h2>
+    <h2 class="new"><a href="/this-week-in-nanobox-10-30-15/">This Week in Nanobox</a></h2>
     <p class="meta">
-      <span class="author">Tyler Flint</span>
+      <span class="author">Steve Domino</span>
        &#9642;  
-      <span class="date">Oct 23 2015</span>
+      <span class="date">Oct 30 2015</span>
     </p>
   </div>
 
   <div class="content">
-    <p><strong>TLDR:</strong> Introducing a better local development workflow. Watch the Demo.</p>
+    <p>This week we&#39;ve added some cool new features to <a href="https://desktop.nanobox.io">Nanobox Desktop</a> and have resolved a few issues.</p>
 
-<div class="video" id="video-demo">
-  <iframe width="560" height="315" src="https://www.youtube.com/embed/TV4iBxytfyE?rel=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>
-</div>
+<h4 id="new-features">New Features:</h4>
 
-<h2 id="declutter-workstations-with-a-better-workflow">Declutter Workstations with a Better Workflow</h2>
+<ul>
+<li>Nanobox now generates dynamic SSH ports allowing you to now run multiple nanoboxes at the same time <em>(awesome)</em>.</li>
+<li>The way nanobox generates the dynamic IP for its private network is much smarter and greatly reduces the likelihood of conflicting IP’s.</li>
+</ul>
 
-<p>We’re excited to announce the release of Nanobox Desktop, which automatically generates fully virtualized environments on your local workstation from a single command. Nanobox auto-detects the application type, provisions a virtual machine (VM), and creates all of the app’s related services inside the VM - all without complex manual configuration.</p>
+<h4 id="resolved-issues">Resolved Issues:</h4>
 
-<p>Under the hood, Nanobox uses <a href="https://www.virtualbox.org/">Virtualbox</a> to create a VM for each app. It leverages <a href="https://www.vagrantup.com">Vagrant</a> for VM creation and <a href="https://www.docker.com/">Docker</a> to “containerize” processes inside the VM. By cleanly isolating application environments, apps with all their dependencies can be managed simply, without cruft or workstation configuration. </p>
+<ul>
+<li>The <code>vagrant.log</code> and <code>server.log</code> are now correctly generated inside the &#39;app&#39; folder (<code>~.nanobox/apps/&lt;app-name&gt;</code>).</li>
+<li>An issue causing the VM to continuously suspend after a &#39;nanobox reload&#39; has been resolved.</li>
+<li>Fixed a race condition where nanobox was attempting to kill the docker DHCP server before it was available to kill, causing the VM to freeze.</li>
+<li>Fixed an issue where nanobox was &#39;ping flooding&#39; the server causing the server to die and the client (nanobox) to suspend the VM.</li>
+</ul>
 
-<h2 id="tap-into-community-expertise">Tap into Community Expertise</h2>
+<h2 id="whats-next-for-nanobox">Whats Next for Nanobox?</h2>
 
-<p>We can’t know everything required to configure all virtual development environments. Instead, we provide simple tools that promote a community-driven collection of specialized Engines which install runtimes, detect dependencies, and compile your codebase. By default, Nanobox pulls from this <a href="https://engines.nanobox.io">catalogue of community-contributed engines</a>. Anyone can add and use custom Engines with minimal effort.</p>
+<h3 id="overlays">Overlays</h3>
 
-<h2 id="you’re-in-charge-of-the-automation">You’re in Charge of the Automation</h2>
+<p>The next big thing on our feature list is support for “overlays”; a quick way to combine functionality from different engines.</p>
 
-<p>While automated configuration might sound a bit scary, Nanobox ensures that you’re always in control. Adding a <a href="https://docs.nanobox.io/boxfile/">Boxfile</a> in the root of an application overrides or supplements the automated build. Boxfile configuration can be as simple as specifying a custom Engine or adding a Postgres service, or more complex, like choosing a specific Ruby runtime or enabling MySQL configuration settings.</p>
+<p>The way an overlay works is it takes a list of <a href="https://docs.nanobox.io/engines/">engines</a> and overlays their functionality (files). For example, a Ruby on Rails (RoR) engine would overlay the NodeJS and Ruby engines with it&#39;s own functionality. These overlays would allow the RoR engine to use things like Ruby and Bower.js without having to add them explicitly into the engine.</p>
 
-<p>Need more control? Create a custom Engine and auto-configure even the nit-pickiest of development environments. </p>
+<p>This way, when there are updates to an overlay’d engine, the engine itself wouldn’t need to be updated. For example, if the PHP engine is updated, the Wordpress engine, which includes the PHP engine as an overlay, wouldn&#39;t need to pull in those updates. It would simply get the updates once it&#39;s compiled.</p>
 
-<h2 id="getting-started">Getting Started</h2>
+<h3 id="upcoming-events">Upcoming Events</h3>
 
-<p>Ultimately, you have to see it to believe it. You should check out the <a href="#video-demo">video demo</a>. If you’re too strapped for time to watch a 2 minute video, you’re spending too much time managing a cluttered local environment. <a href="https://desktop.nanobox.io/downloads">Download Nanobox</a>.</p>
-
-<p>We’d love to get your feedback or answer additional questions, so hop into our <a href="https://webchat.freenode.net/?channels=nanobox">#nanobox IRC channel</a> for a chat.</p>
+<p>Nanobox will be presenting at the &quot;NodeJS Ninjas&quot; meetup group in SLC on Nov 18th at 6:00pm. Details can be found <a href="http://www.meetup.com/utahnodejs/events/226098953/">here</a>.</p>
 
   </div>
 
   <div class="author-block">
-    <img class="gravatar" src="https://s.gravatar.com/avatar/d16320670cd226d7d4984698585e2fbc">
+    <img class="gravatar" src="https://s.gravatar.com/avatar/da0eb236332cfbc58af6f09455fe4fc1">
     <div class="info">
-      <p class="author"><span>Tyler Flint</span>            
-         <a class="twitter" target="_blank" href="https://twitter.com/tyler_flint">@tyler_flint</a>
-          <a class="github" target="_blank" href="https://github.com/tylerflint">tylerflint</a>
+      <p class="author"><span>Steve Domino</span>            
+         <a class="twitter" target="_blank" href="https://twitter.com/skdomino">@skdomino</a>
+          <a class="github" target="_blank" href="https://github.com/sdomino">sdomino</a>
       </p>
-      <p class="summary">Husband, dad, technologist, entrepreneur</p>
+      <p class="summary">Software engineer at Nanobox by day, indie game developer by night.</p>
     </div>
   </div> 
 
   <div class="feedback">
     <p>Have feedback on this post? Let
-      <a target="_blank" href="https://twitter.com/intent/tweet?text=@nanobox_io%20&amp;amp;url=https://blog.nanobox.io/auto-configure-virtual-development-environments/">@nanobox_io</a>
-        or <a target="_blank" href="https://twitter.com/intent/tweet?text=@tyler_flint%20&amp;amp;url=https://blog.nanobox.io/auto-configure-virtual-development-environments/">@tyler_flint</a>
+      <a target="_blank" href="https://twitter.com/intent/tweet?text=@nanobox_io%20&amp;amp;url=https://blog.nanobox.io/this-week-in-nanobox-10-30-15/">@nanobox_io</a>
+        or <a target="_blank" href="https://twitter.com/intent/tweet?text=@skdomino%20&amp;amp;url=https://blog.nanobox.io/this-week-in-nanobox-10-30-15/">@skdomino</a>
       know on Twitter.</p>
   </div> 
 
+    <div class="title-block small">
+      <h2><a href="/auto-configure-virtual-development-environments/">Focus on Apps, Not Configuring Dev Environments</a></h2>
+      <p class="meta">
+        <span class="author">Tyler Flint</span>
+         &#9642; 
+        <span class="date">Oct 23 2015</span>
+      </p>
+    </div>
 
 
     </div>    
     <aside>
   <ul>
     <li><h2>Recent Posts</h2></li>
+      <li><a href="/this-week-in-nanobox-10-30-15/">This Week in Nanobox</a> <span class="small-date">Oct 30</span></li>
       <li><a href="/auto-configure-virtual-development-environments/">Focus on Apps, Not Configuring Dev Environments</a> <span class="small-date">Oct 23</span></li>
   </ul>
   <ul>
     <li><h2>Tags</h2></li>
       <li><a href="/tags/open-source/">Open Source (1)</a></li>
+      <li><a href="/tags/updates/">Updates (1)</a></li>
   </ul>
   <ul>
     <li><h2>Archives</h2></li>
-      <li><a href="/2015/">2015 (1)</a></li>
+      <li><a href="/2015/">2015 (2)</a></li>
   </ul>
   <p class="feed">Subscribe to the <a href="/feed.xml" target="_blank">feed</a></p>
 </aside>

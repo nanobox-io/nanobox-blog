@@ -5,7 +5,49 @@
   <id>http://blog.nanobox.io/</id>
   <link href="http://blog.nanobox.io/"/>
   <link href="http://blog.nanobox.io/feed.xml" rel="self"/>
-  <updated>2015-10-23T12:00:00-06:00</updated>
+  <updated>2015-10-30T16:38:00-06:00</updated>
+  <entry>
+    <title>This Week in Nanobox</title>
+    <link rel="alternate" href="http://blog.nanobox.io/this-week-in-nanobox-10-30-15/"/>
+    <id>http://blog.nanobox.io/this-week-in-nanobox-10-30-15/</id>
+    <published>2015-10-30T16:38:00-06:00</published>
+    <updated>2015-10-30T16:39:35-06:00</updated>
+    <author>
+      <name>Steve Domino</name>
+    </author>
+    <content type="html">&lt;p&gt;This week we&amp;#39;ve added some cool new features to &lt;a href="https://desktop.nanobox.io"&gt;Nanobox Desktop&lt;/a&gt; and have resolved a few issues.&lt;/p&gt;
+
+&lt;h4 id="new-features"&gt;New Features:&lt;/h4&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Nanobox now generates dynamic SSH ports allowing you to now run multiple nanoboxes at the same time &lt;em&gt;(awesome)&lt;/em&gt;.&lt;/li&gt;
+&lt;li&gt;The way nanobox generates the dynamic IP for its private network is much smarter and greatly reduces the likelihood of conflicting IP’s.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id="resolved-issues"&gt;Resolved Issues:&lt;/h4&gt;
+
+&lt;ul&gt;
+&lt;li&gt;The &lt;code&gt;vagrant.log&lt;/code&gt; and &lt;code&gt;server.log&lt;/code&gt; are now correctly generated inside the &amp;#39;app&amp;#39; folder (&lt;code&gt;~.nanobox/apps/&amp;lt;app-name&amp;gt;&lt;/code&gt;).&lt;/li&gt;
+&lt;li&gt;An issue causing the VM to continuously suspend after a &amp;#39;nanobox reload&amp;#39; has been resolved.&lt;/li&gt;
+&lt;li&gt;Fixed a race condition where nanobox was attempting to kill the docker DHCP server before it was available to kill, causing the VM to freeze.&lt;/li&gt;
+&lt;li&gt;Fixed an issue where nanobox was &amp;#39;ping flooding&amp;#39; the server causing the server to die and the client (nanobox) to suspend the VM.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id="whats-next-for-nanobox"&gt;Whats Next for Nanobox?&lt;/h2&gt;
+
+&lt;h3 id="overlays"&gt;Overlays&lt;/h3&gt;
+
+&lt;p&gt;The next big thing on our feature list is support for “overlays”; a quick way to combine functionality from different engines.&lt;/p&gt;
+
+&lt;p&gt;The way an overlay works is it takes a list of &lt;a href="https://docs.nanobox.io/engines/"&gt;engines&lt;/a&gt; and overlays their functionality (files). For example, a Ruby on Rails (RoR) engine would overlay the NodeJS and Ruby engines with it&amp;#39;s own functionality. These overlays would allow the RoR engine to use things like Ruby and Bower.js without having to add them explicitly into the engine.&lt;/p&gt;
+
+&lt;p&gt;This way, when there are updates to an overlay’d engine, the engine itself wouldn’t need to be updated. For example, if the PHP engine is updated, the Wordpress engine, which includes the PHP engine as an overlay, wouldn&amp;#39;t need to pull in those updates. It would simply get the updates once it&amp;#39;s compiled.&lt;/p&gt;
+
+&lt;h3 id="upcoming-events"&gt;Upcoming Events&lt;/h3&gt;
+
+&lt;p&gt;Nanobox will be presenting at the &amp;quot;NodeJS Ninjas&amp;quot; meetup group in SLC on Nov 18th at 6:00pm. Details can be found &lt;a href="http://www.meetup.com/utahnodejs/events/226098953/"&gt;here&lt;/a&gt;.&lt;/p&gt;
+</content>
+  </entry>
   <entry>
     <title>Focus on Apps, Not Configuring Dev Environments</title>
     <link rel="alternate" href="http://blog.nanobox.io/auto-configure-virtual-development-environments/"/>
