@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv='X-UA-Compatible' content='IE=edge;chrome=1' />
-  <title>Nanobox Blog</title>
+  <title>New Feature&#58; Engine Overlays - Nanobox Blog</title>
   <link rel="shortcut icon" type="image/png" href="/images/favicon-57864095.png"/>
   <link href='https://fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic' rel='stylesheet' type='text/css'>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
@@ -20,7 +20,7 @@
   <script async src='//www.google-analytics.com/analytics.js'></script>
 </head>
   <body>
-    <div class='top-nav'>
+  <div class='top-nav'>
   <a href="https://nanobox.io"><svg enable-background='new 0 0 19 33' id='nb-logo-sm' space='preserve' version='1.1' viewbox='0 0 19 33' x='0px' xmlns:xlink='http://www.w3.org/1999/xlink' xmlns='http://www.w3.org/2000/svg' y='0px'>
     <g>
       <g>
@@ -73,21 +73,66 @@
 </div>
     
     <div class="wrapper fade-in">
-      <h1 class="small">Archive for
-    Oct 23 2015
-</h1>
+      <div class="title-block">
+        <h1>New Feature&#58; Engine Overlays</h1>
+        <p class="meta">
+          <span class="author">Scott Anderson</span>
+           &#9642; 
+          <span class="date">Nov  6 2015</span>
+        </p>
+      </div>
+      <div class="content">
+        <p>Last week we set out to tackle the issue of importing functionality from one engine into another. The need for this feature became apparent as nearly every engine needed the option to run bower for front-end dependencies. Bower is an npm module and requires a node.js runtime. Although a node.js engine already exists that conditionally installs node, then runs a <code>bower install</code> if a bower.json exists, we found ourselves duplicating this code and functionality across engines. Other scenarios such as a WordPress engine needing to import the existing logic from the <a href="https://engines.nanobox.io/releases/9cfde7f2-44e8-45fe-80f7-800d6acf2b4b">php engine</a> made the problem abundantly clear:</p>
 
-  <div class="title-block small">
-    <h2><a href="/auto-configure-virtual-development-environments/">Focus on Apps, Not Configuring Dev Environments</a></h2>
-    <p class="meta">
-      <span class="author">Tyler Flint</span>
-       &#9642; 
-      <span class="date">Oct 23 2015</span>
-    </p>
-  </div>
+<p><strong>TLDR:</strong> We needed a simple way to combine functionality from different engines.</p>
 
+<h2 id="stacking-engines">Stacking Engines</h2>
 
-    </div>    
+<p>Having spent much of our time in the past 3 years within the Illumos and SmartOS communities, we’ve seen first-hand how well overlaying files can work in a shell/config-centric world. Illumos uses this pattern as a way to create distributions, overriding core functionality and also extending behavior. </p>
+
+<p>The idea is simple: Stack the contents of an engine on top of another engine. One by one, the contents of the overlaid engines are layered on top of the previous engine. This means that new files are added and files with the same name are replaced. Though simple, the approach provides great flexibility.</p>
+
+<h2 id="example">Example</h2>
+
+<p>To see how this feature can be put to use, let’s take a look at the <a href="https://engines.nanobox.io/releases/67f616c1-91f1-4dae-83fc-b81b8fcf9e61">WordPress engine</a>:</p>
+
+<p>First, the WordPress engine specifies in the Enginefile that it wants to overlay the php engine:</p>
+<pre class="highlight yaml"><code><span class="s">overlays</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="s">php</span>
+</code></pre>
+
+<p>The full Enginefile can be referenced here:<br>
+<a href="https://github.com/nanobox-io/nanobox-engine-wordpress/blob/master/Enginefile">https://github.com/nanobox-io/nanobox-engine-wordpress/blob/master/Enginefile</a></p>
+
+<p>Now, the WordPress engine can source the bash scripts provided by the php engine:<br>
+<a href="https://github.com/nanobox-io/nanobox-engine-wordpress/blob/master/lib/wordpress.sh#L5">https://github.com/nanobox-io/nanobox-engine-wordpress/blob/master/lib/wordpress.sh#L5</a></p>
+
+<p>Finally, the WordPress ‘prepare’ bin script can now call functions provided by the php engine:<br>
+<a href="https://github.com/nanobox-io/nanobox-engine-wordpress/blob/master/bin/prepare#L14-L24">https://github.com/nanobox-io/nanobox-engine-wordpress/blob/master/bin/prepare#L14-L24</a></p>
+
+<h2 id="making-engine-development-faster">Making Engine Development Faster</h2>
+
+<p>Engine overlays allow engine developers to include already established functionality into their own engines without having to duplicate code or fork existing engines. Framework maintainers can overlay a language-generic engine to lay the foundation for their application and only worry about functionality specific to their framework. In short, overlays keep you from having to do things that have already been done.</p>
+
+      </div>
+      <div class="author-block">
+        <img class="gravatar" src="https://s.gravatar.com/avatar/842ad9f55bff4d00dc2ddad8dbcd1f36">
+        <div class="info">
+          <p class="author"><span>Scott Anderson</span>            
+             <a class="twitter" target="_blank" href="https://twitter.com/scott_dsgn">@scott_dsgn</a>
+              <a class="github" target="_blank" href="https://github.com/sanderson">sanderson</a>
+          </p>
+          <p class="summary">Designer, writer, code dabbler, foodie, husband & father.</p>
+        </div>
+      </div>
+      <div class="feedback">
+        <p>Have feedback on this post? Let
+          <a target="_blank" href="https://twitter.com/intent/tweet?text=@nanobox_io%20&amp;amp;url=https://blog.nanobox.io/new-feature-engine-overlays/">@nanobox_io</a>
+            or <a target="_blank" href="https://twitter.com/intent/tweet?text=@scott_dsgn%20&amp;amp;url=https://blog.nanobox.io/new-feature-engine-overlays/">@scott_dsgn</a>
+          know on Twitter.</p>
+      </div>
+      <hr class="end">
+    </div>
     <aside>
   <ul>
     <li><h2>Recent Posts</h2></li>

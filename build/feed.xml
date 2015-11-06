@@ -5,7 +5,49 @@
   <id>http://blog.nanobox.io/</id>
   <link href="http://blog.nanobox.io/"/>
   <link href="http://blog.nanobox.io/feed.xml" rel="self"/>
-  <updated>2015-10-30T16:38:00-06:00</updated>
+  <updated>2015-11-06T12:01:00-07:00</updated>
+  <entry>
+    <title>New Feature&amp;#58; Engine Overlays</title>
+    <link rel="alternate" href="http://blog.nanobox.io/new-feature-engine-overlays/"/>
+    <id>http://blog.nanobox.io/new-feature-engine-overlays/</id>
+    <published>2015-11-06T12:01:00-07:00</published>
+    <updated>2015-11-06T12:25:54-07:00</updated>
+    <author>
+      <name>Scott Anderson</name>
+    </author>
+    <content type="html">&lt;p&gt;Last week we set out to tackle the issue of importing functionality from one engine into another. The need for this feature became apparent as nearly every engine needed the option to run bower for front-end dependencies. Bower is an npm module and requires a node.js runtime. Although a node.js engine already exists that conditionally installs node, then runs a &lt;code&gt;bower install&lt;/code&gt; if a bower.json exists, we found ourselves duplicating this code and functionality across engines. Other scenarios such as a WordPress engine needing to import the existing logic from the &lt;a href="https://engines.nanobox.io/releases/9cfde7f2-44e8-45fe-80f7-800d6acf2b4b"&gt;php engine&lt;/a&gt; made the problem abundantly clear:&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;TLDR:&lt;/strong&gt; We needed a simple way to combine functionality from different engines.&lt;/p&gt;
+
+&lt;h2 id="stacking-engines"&gt;Stacking Engines&lt;/h2&gt;
+
+&lt;p&gt;Having spent much of our time in the past 3 years within the Illumos and SmartOS communities, we’ve seen first-hand how well overlaying files can work in a shell/config-centric world. Illumos uses this pattern as a way to create distributions, overriding core functionality and also extending behavior. &lt;/p&gt;
+
+&lt;p&gt;The idea is simple: Stack the contents of an engine on top of another engine. One by one, the contents of the overlaid engines are layered on top of the previous engine. This means that new files are added and files with the same name are replaced. Though simple, the approach provides great flexibility.&lt;/p&gt;
+
+&lt;h2 id="example"&gt;Example&lt;/h2&gt;
+
+&lt;p&gt;To see how this feature can be put to use, let’s take a look at the &lt;a href="https://engines.nanobox.io/releases/67f616c1-91f1-4dae-83fc-b81b8fcf9e61"&gt;WordPress engine&lt;/a&gt;:&lt;/p&gt;
+
+&lt;p&gt;First, the WordPress engine specifies in the Enginefile that it wants to overlay the php engine:&lt;/p&gt;
+&lt;pre class="highlight yaml"&gt;&lt;code&gt;&lt;span class="s"&gt;overlays&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt;
+  &lt;span class="pi"&gt;-&lt;/span&gt; &lt;span class="s"&gt;php&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The full Enginefile can be referenced here:&lt;br&gt;
+&lt;a href="https://github.com/nanobox-io/nanobox-engine-wordpress/blob/master/Enginefile"&gt;https://github.com/nanobox-io/nanobox-engine-wordpress/blob/master/Enginefile&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Now, the WordPress engine can source the bash scripts provided by the php engine:&lt;br&gt;
+&lt;a href="https://github.com/nanobox-io/nanobox-engine-wordpress/blob/master/lib/wordpress.sh#L5"&gt;https://github.com/nanobox-io/nanobox-engine-wordpress/blob/master/lib/wordpress.sh#L5&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Finally, the WordPress ‘prepare’ bin script can now call functions provided by the php engine:&lt;br&gt;
+&lt;a href="https://github.com/nanobox-io/nanobox-engine-wordpress/blob/master/bin/prepare#L14-L24"&gt;https://github.com/nanobox-io/nanobox-engine-wordpress/blob/master/bin/prepare#L14-L24&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id="making-engine-development-faster"&gt;Making Engine Development Faster&lt;/h2&gt;
+
+&lt;p&gt;Engine overlays allow engine developers to include already established functionality into their own engines without having to duplicate code or fork existing engines. Framework maintainers can overlay a language-generic engine to lay the foundation for their application and only worry about functionality specific to their framework. In short, overlays keep you from having to do things that have already been done.&lt;/p&gt;
+</content>
+  </entry>
   <entry>
     <title>This Week in Nanobox</title>
     <link rel="alternate" href="http://blog.nanobox.io/this-week-in-nanobox-10-30-15/"/>
