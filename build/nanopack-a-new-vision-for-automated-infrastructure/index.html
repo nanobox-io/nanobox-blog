@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv='X-UA-Compatible' content='IE=edge;chrome=1' />
-  <title>Nanobox Blog</title>
+  <title>Nanopack - A New Vision for Automated Infrastructure - Nanobox Blog</title>
   <link rel="shortcut icon" type="image/png" href="/images/favicon-57864095.png"/>
   <link href='https://fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic' rel='stylesheet' type='text/css'>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
@@ -20,7 +20,7 @@
   <script async src='//www.google-analytics.com/analytics.js'></script>
 </head>
   <body>
-    <div class='top-nav'>
+  <div class='top-nav'>
   <a href="https://nanobox.io"><svg enable-background='new 0 0 19 33' id='nb-logo-sm' space='preserve' version='1.1' viewbox='0 0 19 33' x='0px' xmlns:xlink='http://www.w3.org/1999/xlink' xmlns='http://www.w3.org/2000/svg' y='0px'>
     <g>
       <g>
@@ -73,45 +73,54 @@
 </div>
     
     <div class="wrapper fade-in">
-      <h1 class="small">Archive for
-    2015
-</h1>
+      <div class="title-block">
+        <h1>Nanopack - A New Vision for Automated Infrastructure</h1>
+        <p class="meta">
+          <span class="author">Tyler Flint</span>
+           &#9642; 
+          <span class="date">Nov 13 2015</span>
+        </p>
+      </div>
+      <div class="content">
+        <p>Today we’d like to introduce <a href="http://nanopack.io">Nanopack</a>, our vision for a fully-automated, API-driven infrastructure. Five years ago, we launched <a href="https://pagodabox.io">Pagoda Box</a> with a mission to empower application developers by eliminating systems administration. The challenge for both Pagoda Box and Nanobox is that we need the ability to manipulate, configure, and build infrastructure in real-time via remote APIs.</p>
 
-  <div class="title-block small">
-    <h2><a href="/nanopack-a-new-vision-for-automated-infrastructure/">Nanopack - A New Vision for Automated Infrastructure</a></h2>
-    <p class="meta">
-      <span class="author">Tyler Flint</span>
-       &#9642; 
-      <span class="date">Nov 13 2015</span>
-    </p>
-  </div>
-  <div class="title-block small">
-    <h2><a href="/new-feature-engine-overlays/">New Feature&#58; Engine Overlays</a></h2>
-    <p class="meta">
-      <span class="author">Scott Anderson</span>
-       &#9642; 
-      <span class="date">Nov  6 2015</span>
-    </p>
-  </div>
-  <div class="title-block small">
-    <h2><a href="/this-week-in-nanobox-10-30-15/">This Week in Nanobox</a></h2>
-    <p class="meta">
-      <span class="author">Steve Domino</span>
-       &#9642; 
-      <span class="date">Oct 30 2015</span>
-    </p>
-  </div>
-  <div class="title-block small">
-    <h2><a href="/auto-configure-virtual-development-environments/">Focus on Apps, Not Configuring Dev Environments</a></h2>
-    <p class="meta">
-      <span class="author">Tyler Flint</span>
-       &#9642; 
-      <span class="date">Oct 23 2015</span>
-    </p>
-  </div>
+<h2 id="the-problem-in-the-wild">The Problem in the Wild</h2>
 
+<p>Let me provide a real scenario we dealt with early on with Pagoda Box that clearly illustrates the problem: Pagoda Box allows a developer to add SSL/TLS encryption to their app from the app dashboard. After the cert is created, an Nginx web server needed to be re-configured for the app. This process entailed SSH’ing into the web server machines, updating the configuration file, then reloading the nginx process. While this process was automated, it became clear that it was brittle, unstable, and would not scale. </p>
 
-    </div>    
+<p>As we were reaching critical mass and struggling to deal with scale and growth, we took a step back to re-assess. We looked at this and other processes then realized the solution was clear: we needed to develop and manage our infrastructure like we do our apps; with direct API-access at the source for real-time configuration. Instead of logging into machines, updating config files, and reloading services, we needed to expose the configuration of these services via an API. Instead of using nginx for SSL termination, we built a lightweight, API-driven SSL terminator that enabled us to apply a TLS/SSL cert in real-time, with a single API call.</p>
+
+<h2 id="sharing-our-philosophy-amp-our-projects">Sharing Our Philosophy &amp; Our Projects</h2>
+
+<p>Over the years, this pattern became our guiding philosophy. Today, we’d like to share that philosophy, as well as all of our internal components and services for nanobox cloud.</p>
+
+<p><a href="http://nanopack.io" style="max-width: 10em; margin: 0 auto; display: block;">
+  <img src="/images/nanopack-logo-ffbed69d.svg">
+</a> </p>
+
+<p>Nanopack is a collection of open source projects that embrace the Unix philosophy of a singular purpose. The collective result is left to the imagination of the consumer, likely dictated by the needs of a project. We value collaboration and recognize there are other organizations and efforts that are inline with our vision. </p>
+
+<p>We need your help to realize this vision. If you’re a systems administrator or a devops person, we need your assistance to identify scenarios and vet potential solutions. If you’re a programmer, we have lots of code that needs to be written. We need help documenting and spreading the word. Get more inforamtion about Nanopack at <a href="http://nanopack.io">nanopack.io</a> and get in touch on <a href="https://github.com/nanopack">Github</a>.</p>
+
+      </div>
+      <div class="author-block">
+        <img class="gravatar" src="https://s.gravatar.com/avatar/d16320670cd226d7d4984698585e2fbc">
+        <div class="info">
+          <p class="author"><span>Tyler Flint</span>            
+             <a class="twitter" target="_blank" href="https://twitter.com/tyler_flint">@tyler_flint</a>
+              <a class="github" target="_blank" href="https://github.com/tylerflint">tylerflint</a>
+          </p>
+          <p class="summary">Husband, dad, LDS, entrepreneur, Nanobox cofounder.</p>
+        </div>
+      </div>
+      <div class="feedback">
+        <p>Have feedback on this post? Let
+          <a target="_blank" href="https://twitter.com/intent/tweet?text=@nanobox_io%20&amp;amp;url=https://blog.nanobox.io/nanopack-a-new-vision-for-automated-infrastructure/">@nanobox_io</a>
+            or <a target="_blank" href="https://twitter.com/intent/tweet?text=@tyler_flint%20&amp;amp;url=https://blog.nanobox.io/nanopack-a-new-vision-for-automated-infrastructure/">@tyler_flint</a>
+          know on Twitter.</p>
+      </div>
+      <hr class="end">
+    </div>
     <aside>
   <ul>
     <li><h2>Recent Posts</h2></li>

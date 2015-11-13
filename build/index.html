@@ -75,67 +75,63 @@
     <div class="wrapper fade-in">
       
   <div class="title-block">
-    <h2 class="new"><a href="/new-feature-engine-overlays/">New Feature&#58; Engine Overlays</a></h2>
+    <h2 class="new"><a href="/nanopack-a-new-vision-for-automated-infrastructure/">Nanopack - A New Vision for Automated Infrastructure</a></h2>
     <p class="meta">
-      <span class="author">Scott Anderson</span>
+      <span class="author">Tyler Flint</span>
        &#9642;  
-      <span class="date">Nov  6 2015</span>
+      <span class="date">Nov 13 2015</span>
     </p>
   </div>
 
   <div class="content">
-    <p>Last week we set out to tackle the issue of importing functionality from one engine into another. The need for this feature became apparent as nearly every engine needed the option to run bower for front-end dependencies. Bower is an npm module and requires a node.js runtime. Although a node.js engine already exists that conditionally installs node, then runs a <code>bower install</code> if a bower.json exists, we found ourselves duplicating this code and functionality across engines. Other scenarios such as a WordPress engine needing to import the existing logic from the <a href="https://engines.nanobox.io/releases/9cfde7f2-44e8-45fe-80f7-800d6acf2b4b">php engine</a> made the problem abundantly clear:</p>
+    <p>Today we’d like to introduce <a href="http://nanopack.io">Nanopack</a>, our vision for a fully-automated, API-driven infrastructure. Five years ago, we launched <a href="https://pagodabox.io">Pagoda Box</a> with a mission to empower application developers by eliminating systems administration. The challenge for both Pagoda Box and Nanobox is that we need the ability to manipulate, configure, and build infrastructure in real-time via remote APIs.</p>
 
-<p><strong>TLDR:</strong> We needed a simple way to combine functionality from different engines.</p>
+<h2 id="the-problem-in-the-wild">The Problem in the Wild</h2>
 
-<h2 id="stacking-engines">Stacking Engines</h2>
+<p>Let me provide a real scenario we dealt with early on with Pagoda Box that clearly illustrates the problem: Pagoda Box allows a developer to add SSL/TLS encryption to their app from the app dashboard. After the cert is created, an Nginx web server needed to be re-configured for the app. This process entailed SSH’ing into the web server machines, updating the configuration file, then reloading the nginx process. While this process was automated, it became clear that it was brittle, unstable, and would not scale. </p>
 
-<p>Having spent much of our time in the past 3 years within the Illumos and SmartOS communities, we’ve seen first-hand how well overlaying files can work in a shell/config-centric world. Illumos uses this pattern as a way to create distributions, overriding core functionality and also extending behavior. </p>
+<p>As we were reaching critical mass and struggling to deal with scale and growth, we took a step back to re-assess. We looked at this and other processes then realized the solution was clear: we needed to develop and manage our infrastructure like we do our apps; with direct API-access at the source for real-time configuration. Instead of logging into machines, updating config files, and reloading services, we needed to expose the configuration of these services via an API. Instead of using nginx for SSL termination, we built a lightweight, API-driven SSL terminator that enabled us to apply a TLS/SSL cert in real-time, with a single API call.</p>
 
-<p>The idea is simple: Stack the contents of an engine on top of another engine. One by one, the contents of the overlaid engines are layered on top of the previous engine. This means that new files are added and files with the same name are replaced. Though simple, the approach provides great flexibility.</p>
+<h2 id="sharing-our-philosophy-amp-our-projects">Sharing Our Philosophy &amp; Our Projects</h2>
 
-<h2 id="example">Example</h2>
+<p>Over the years, this pattern became our guiding philosophy. Today, we’d like to share that philosophy, as well as all of our internal components and services for nanobox cloud.</p>
 
-<p>To see how this feature can be put to use, let’s take a look at the <a href="https://engines.nanobox.io/releases/67f616c1-91f1-4dae-83fc-b81b8fcf9e61">WordPress engine</a>:</p>
+<p><a href="http://nanopack.io" style="max-width: 10em; margin: 0 auto; display: block;">
+  <img src="/images/nanopack-logo-ffbed69d.svg">
+</a> </p>
 
-<p>First, the WordPress engine specifies in the Enginefile that it wants to overlay the php engine:</p>
-<pre class="highlight yaml"><code><span class="s">overlays</span><span class="pi">:</span>
-  <span class="pi">-</span> <span class="s">php</span>
-</code></pre>
+<p>Nanopack is a collection of open source projects that embrace the Unix philosophy of a singular purpose. The collective result is left to the imagination of the consumer, likely dictated by the needs of a project. We value collaboration and recognize there are other organizations and efforts that are inline with our vision. </p>
 
-<p>The full Enginefile can be referenced here:<br>
-<a href="https://github.com/nanobox-io/nanobox-engine-wordpress/blob/master/Enginefile">https://github.com/nanobox-io/nanobox-engine-wordpress/blob/master/Enginefile</a></p>
-
-<p>Now, the WordPress engine can source the bash scripts provided by the php engine:<br>
-<a href="https://github.com/nanobox-io/nanobox-engine-wordpress/blob/master/lib/wordpress.sh#L5">https://github.com/nanobox-io/nanobox-engine-wordpress/blob/master/lib/wordpress.sh#L5</a></p>
-
-<p>Finally, the WordPress ‘prepare’ bin script can now call functions provided by the php engine:<br>
-<a href="https://github.com/nanobox-io/nanobox-engine-wordpress/blob/master/bin/prepare#L14-L24">https://github.com/nanobox-io/nanobox-engine-wordpress/blob/master/bin/prepare#L14-L24</a></p>
-
-<h2 id="making-engine-development-faster">Making Engine Development Faster</h2>
-
-<p>Engine overlays allow engine developers to include already established functionality into their own engines without having to duplicate code or fork existing engines. Framework maintainers can overlay a language-generic engine to lay the foundation for their application and only worry about functionality specific to their framework. In short, overlays keep you from having to do things that have already been done.</p>
+<p>We need your help to realize this vision. If you’re a systems administrator or a devops person, we need your assistance to identify scenarios and vet potential solutions. If you’re a programmer, we have lots of code that needs to be written. We need help documenting and spreading the word. Get more inforamtion about Nanopack at <a href="http://nanopack.io">nanopack.io</a> and get in touch on <a href="https://github.com/nanopack">Github</a>.</p>
 
   </div>
 
   <div class="author-block">
-    <img class="gravatar" src="https://s.gravatar.com/avatar/842ad9f55bff4d00dc2ddad8dbcd1f36">
+    <img class="gravatar" src="https://s.gravatar.com/avatar/d16320670cd226d7d4984698585e2fbc">
     <div class="info">
-      <p class="author"><span>Scott Anderson</span>            
-         <a class="twitter" target="_blank" href="https://twitter.com/scott_dsgn">@scott_dsgn</a>
-          <a class="github" target="_blank" href="https://github.com/sanderson">sanderson</a>
+      <p class="author"><span>Tyler Flint</span>            
+         <a class="twitter" target="_blank" href="https://twitter.com/tyler_flint">@tyler_flint</a>
+          <a class="github" target="_blank" href="https://github.com/tylerflint">tylerflint</a>
       </p>
-      <p class="summary">Designer, writer, code dabbler, foodie, husband & father.</p>
+      <p class="summary">Husband, dad, LDS, entrepreneur, Nanobox cofounder.</p>
     </div>
   </div> 
 
   <div class="feedback">
     <p>Have feedback on this post? Let
-      <a target="_blank" href="https://twitter.com/intent/tweet?text=@nanobox_io%20&amp;amp;url=https://blog.nanobox.io/new-feature-engine-overlays/">@nanobox_io</a>
-        or <a target="_blank" href="https://twitter.com/intent/tweet?text=@scott_dsgn%20&amp;amp;url=https://blog.nanobox.io/new-feature-engine-overlays/">@scott_dsgn</a>
+      <a target="_blank" href="https://twitter.com/intent/tweet?text=@nanobox_io%20&amp;amp;url=https://blog.nanobox.io/nanopack-a-new-vision-for-automated-infrastructure/">@nanobox_io</a>
+        or <a target="_blank" href="https://twitter.com/intent/tweet?text=@tyler_flint%20&amp;amp;url=https://blog.nanobox.io/nanopack-a-new-vision-for-automated-infrastructure/">@tyler_flint</a>
       know on Twitter.</p>
   </div> 
 
+    <div class="title-block small">
+      <h2><a href="/new-feature-engine-overlays/">New Feature&#58; Engine Overlays</a></h2>
+      <p class="meta">
+        <span class="author">Scott Anderson</span>
+         &#9642; 
+        <span class="date">Nov  6 2015</span>
+      </p>
+    </div>
     <div class="title-block small">
       <h2><a href="/this-week-in-nanobox-10-30-15/">This Week in Nanobox</a></h2>
       <p class="meta">
@@ -158,19 +154,20 @@
     <aside>
   <ul>
     <li><h2>Recent Posts</h2></li>
+      <li><a href="/nanopack-a-new-vision-for-automated-infrastructure/">Nanopack - A New Vision for Automated Infrastructure</a> <span class="small-date">Nov 13</span></li>
       <li><a href="/new-feature-engine-overlays/">New Feature&#58; Engine Overlays</a> <span class="small-date">Nov  6</span></li>
       <li><a href="/this-week-in-nanobox-10-30-15/">This Week in Nanobox</a> <span class="small-date">Oct 30</span></li>
       <li><a href="/auto-configure-virtual-development-environments/">Focus on Apps, Not Configuring Dev Environments</a> <span class="small-date">Oct 23</span></li>
   </ul>
   <ul>
     <li><h2>Tags</h2></li>
-      <li><a href="/tags/open-source/">Open Source (1)</a></li>
+      <li><a href="/tags/open-source/">Open Source (2)</a></li>
       <li><a href="/tags/updates/">Updates (1)</a></li>
       <li><a href="/tags/features/">Features (1)</a></li>
   </ul>
   <ul>
     <li><h2>Archives</h2></li>
-      <li><a href="/2015/">2015 (3)</a></li>
+      <li><a href="/2015/">2015 (4)</a></li>
   </ul>
   <p class="feed">Subscribe to the <a href="/feed.xml" target="_blank">feed</a></p>
 </aside>
