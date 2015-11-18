@@ -68,7 +68,9 @@ h2.new              { font-size: 3.5em; font-weight: 300; color: $yellow-2; line
   h2,h3,h4,h5,h6    {
     & ~ .highlight  { margin-top: 1em; }
   }
-  p                 { margin: .25em 0 2.25em; }
+  p                 { margin: .25em 0 2.25em;
+    &.caption       { margin: 3.5em 0 .75em; font-style: italic; color: $gblue-7; }
+  }
   p, li             { line-height: 1.8em;
     code            { padding: 5px 6px 6px; font-size: .85em; color: $yellow-2; background: $gblue-0; white-space: nowrap; }
   }
