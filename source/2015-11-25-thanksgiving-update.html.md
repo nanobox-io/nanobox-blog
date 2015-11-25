@@ -2,7 +2,7 @@
 title: Thanksgiving Update
 date: 2015-11-25 18:49 UTC
 author: scott
-tags:
+tags: Updates
 ---
 
 Tomorrow is Thanksgiving here in the U.S. and we just wanted to give you a quick update on the progress we’ve made over the last week. Due to [Nanobox and Nanopack projects trending on Hacker News and Github](/3-projects-in-2-days-trend-on-hacker-news-github/), progress on these projects has sped up considerably; in large part due to the contributions from you, the community, in the form of issues and pull requests. Thank you so much and keep them coming!
