@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv='X-UA-Compatible' content='IE=edge;chrome=1' />
-  <title>Nanobox Blog</title>
+  <title>Thanksgiving Update - Nanobox Blog</title>
   <link rel="shortcut icon" type="image/png" href="/images/favicon-57864095.png"/>
   <link href='https://fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic' rel='stylesheet' type='text/css'>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
@@ -20,7 +20,7 @@
   <script async src='//www.google-analytics.com/analytics.js'></script>
 </head>
   <body>
-    <div class='top-nav'>
+  <div class='top-nav'>
   <a href="https://nanobox.io"><svg enable-background='new 0 0 19 33' id='nb-logo-sm' space='preserve' version='1.1' viewbox='0 0 19 33' x='0px' xmlns:xlink='http://www.w3.org/1999/xlink' xmlns='http://www.w3.org/2000/svg' y='0px'>
     <g>
       <g>
@@ -73,45 +73,85 @@
 </div>
     
     <div class="wrapper fade-in">
-      <h1 class="small">Archive for
-    Nov 2015
-</h1>
+      <div class="title-block">
+        <h1>Thanksgiving Update</h1>
+        <p class="meta">
+          <span class="author">Scott Anderson</span>
+           &#9642; 
+          <span class="date">Nov 25 2015</span>
+        </p>
+      </div>
+      <div class="content">
+        <p>Tomorrow is Thanksgiving here in the U.S. and we just wanted to give you a quick update on the progress we’ve made over the last week. Due to <a href="/3-projects-in-2-days-trend-on-hacker-news-github/">Nanobox and Nanopack projects trending on Hacker News and Github</a>, progress on these projects has sped up considerably; in large part due to the contributions from you, the community, in the form of issues and pull requests. Thank you so much and keep them coming!</p>
 
-  <div class="title-block small">
-    <h2><a href="/thanksgiving-update/">Thanksgiving Update</a></h2>
-    <p class="meta">
-      <span class="author">Scott Anderson</span>
-       &#9642; 
-      <span class="date">Nov 25 2015</span>
-    </p>
-  </div>
-  <div class="title-block small">
-    <h2><a href="/3-projects-in-2-days-trend-on-hacker-news-github/">3 Projects in 2 Days Trend on Hacker News & Github</a></h2>
-    <p class="meta">
-      <span class="author">Scott Anderson</span>
-       &#9642; 
-      <span class="date">Nov 18 2015</span>
-    </p>
-  </div>
-  <div class="title-block small">
-    <h2><a href="/nanopack-a-new-vision-for-automated-infrastructure/">Nanopack - A New Vision for Automated Infrastructure</a></h2>
-    <p class="meta">
-      <span class="author">Tyler Flint</span>
-       &#9642; 
-      <span class="date">Nov 13 2015</span>
-    </p>
-  </div>
-  <div class="title-block small">
-    <h2><a href="/new-feature-engine-overlays/">New Feature&#58; Engine Overlays</a></h2>
-    <p class="meta">
-      <span class="author">Scott Anderson</span>
-       &#9642; 
-      <span class="date">Nov  6 2015</span>
-    </p>
-  </div>
+<h2 id="important-broken-update-command"><strong><em>Important:</em></strong> Broken Update Command</h2>
 
+<p>Just as the word began to spread about Nanobox, we found a bug in the Nanobox updater that prevented it from working correctly. This bug was in v0.16.8 and has now been fixed. However, because it was in the updater, if you’re currently running v0.16.8, the <code>update</code> command can’t be used to pull the fix in. To check which version you have installed, run:</p>
+<pre class="highlight shell"><code><span class="gp">$ </span>nanobox -v
+</code></pre>
 
-    </div>    
+<p>If you are currently running 0.16.8, you’ll need to download and re-install the most recent version of the Nanobox binary (found on our <a href="https://desktop.nanobox.io/downloads/">downloads page</a>). Once installed, run the following commands in each of your Nanobox apps to ensure everything is up to date.</p>
+<pre class="highlight shell"><code><span class="gp">$ </span>nanobox update
+<span class="gp">$ </span>nanobox reload
+<span class="gp">$ </span>nanobox update-images
+<span class="gp">$ </span>nanobox dev --rebuild
+</code></pre>
+
+<h2 id="engine-updates-galore">Engine Updates Galore</h2>
+
+<p>We’ve been hard at work creating and updating engines to expand the library of languages and frameworks. We’ve been <em>happily</em> overwhelmed with issue submissions, bug-fixing pull requests, and community members volunteering time &amp; knowledge to help build fully-functional engines.</p>
+
+<p>If you’d like to help contribute to an engine, we’ve posted a list of questions in each to help identify exactly what the engine needs. We’ve already received some much appreciated feedback, but would love more. Here’s links to the Github issues that house the list of questions for each project:</p>
+
+<p><a href="https://github.com/nanobox-io/nanobox-engine-python/issues/4">Python</a><br>
+<a href="https://github.com/nanobox-io/nanobox-engine-django/issues/1">Django</a><br>
+<a href="https://github.com/nanobox-io/nanobox-engine-golang/issues/5">Go</a><br>
+<a href="https://github.com/nanobox-io/nanobox-engine-elixir/issues/2">Elixir</a>  <a href="https://github.com/nanobox-io/nanobox-engine-java/issues/5">Java</a><br>
+<a href="https://github.com/nanobox-io/nanobox-engine-scala/issues/2">Scala</a><br>
+<a href="https://github.com/nanobox-io/nanobox-engine-clojure/issues/1">Clojure</a><br>
+<a href="https://github.com/nanobox-io/nanobox-engine-nodejs/issues/7">Node.js</a><br>
+<a href="https://github.com/nanobox-io/nanobox-engine-perl/issues/1">Perl</a><br>
+<a href="https://github.com/nanobox-io/nanobox-engine-c/issues/1">C/C++</a>  </p>
+
+<h2 id="windows-compatibility">Windows Compatibility</h2>
+
+<p>Most of the testing for Nanobox prior to this week was done in OSX and Linux, leaving significant bugs in the Windows version. Thanks to those of you using Windows and the issues/pull requests you’ve submitted, we’ve been able to iron out the majority of the issues that have prevented Nanobox from working properly in Windows. The remaining “deal-breaking” bugs should be resolved by early next week.</p>
+
+<h2 id="updated-installers">Updated Installers</h2>
+
+<p>All Nanobox installers have been updated, with most of the effort going into the Linux installers. These updates fix issues discovered as the installers have been used across many different OSs and OS versions.</p>
+
+<h2 id="prepping-updated-packages-for-nanobox-pkgsrc">Prepping Updated Packages for Nanobox pkgsrc</h2>
+
+<p>We’re in the process of preparing new packages to be included in the <a href="http://pkgsrc.nanobox.io/nanobox/base/Linux/">Nanobox pkgsrc</a>. These are packages/binaries available for use in engines. Updates will include newer versions of packages as well as minor/patch versions that fill in the gaps between existing minor/patch versions and should be available sometime next week.</p>
+
+<h2 id="updates-to-nanopack-projects">Updates to Nanopack Projects</h2>
+
+<p>After open-sourcing the <a href="http://nanopack.io">Nanopack projects</a>, we’ve received significant contributions to projects such as <a href="https://github.com/nanopack/mist">Mist</a> and <a href="https://github.com/nanopack/yoke">Yoke</a>. These have helped to speed the development of each of these projects. Special thanks to <a href="https://github.com/saromanov">saromanov</a>, <a href="https://github.com/hypersleep">hypersleep</a>, <a href="https://github.com/rhcarvalho">rhcarvalho</a>, <a href="https://github.com/nsorger">nsorger</a>, <a href="https://github.com/khink">khink</a>, <a href="https://github.com/feuersteinacc01">feuersteinacc01</a>, <a href="https://github.com/cvan">cvan</a>, <a href="https://github.com/jshawl">jshawl</a>, and any others that have contributed that I may have missed. </p>
+
+<h2 id="happy-thanksgiving">Happy Thanksgiving</h2>
+
+<p>As tomorrow we’ll be celebrating Thanksgiving, for the rest of this week, our team will be spending time with our families. We’ll still likely respond to issues and pull requests (it’s hard for us to stay away), but responses may come slower than they have. For those of you who celebrate it, Happy Thanksgiving! Come Monday, we’ll be back with full stomachs and fresh minds.</p>
+
+      </div>
+      <div class="author-block">
+        <img class="gravatar" src="https://s.gravatar.com/avatar/842ad9f55bff4d00dc2ddad8dbcd1f36">
+        <div class="info">
+          <p class="author"><span>Scott Anderson</span>            
+             <a class="twitter" target="_blank" href="https://twitter.com/scott_dsgn">@scott_dsgn</a>
+              <a class="github" target="_blank" href="https://github.com/sanderson">sanderson</a>
+          </p>
+          <p class="summary">Designer, writer, code dabbler, foodie, husband & father.</p>
+        </div>
+      </div>
+      <div class="feedback">
+        <p>Have feedback on this post? Let
+          <a target="_blank" href="https://twitter.com/intent/tweet?text=@nanobox_io%20&amp;amp;url=https://blog.nanobox.io/thanksgiving-update/">@nanobox_io</a>
+            or <a target="_blank" href="https://twitter.com/intent/tweet?text=@scott_dsgn%20&amp;amp;url=https://blog.nanobox.io/thanksgiving-update/">@scott_dsgn</a>
+          know on Twitter.</p>
+      </div>
+      <hr class="end">
+    </div>
     <aside>
   <ul>
     <li><h2>Recent Posts</h2></li>

@@ -5,7 +5,68 @@
   <id>http://blog.nanobox.io/</id>
   <link href="http://blog.nanobox.io/"/>
   <link href="http://blog.nanobox.io/feed.xml" rel="self"/>
-  <updated>2015-11-18T11:47:00-07:00</updated>
+  <updated>2015-11-25T11:49:00-07:00</updated>
+  <entry>
+    <title>Thanksgiving Update</title>
+    <link rel="alternate" href="http://blog.nanobox.io/thanksgiving-update/"/>
+    <id>http://blog.nanobox.io/thanksgiving-update/</id>
+    <published>2015-11-25T11:49:00-07:00</published>
+    <updated>2015-11-25T11:55:53-07:00</updated>
+    <author>
+      <name>Scott Anderson</name>
+    </author>
+    <content type="html">&lt;p&gt;Tomorrow is Thanksgiving here in the U.S. and we just wanted to give you a quick update on the progress we’ve made over the last week. Due to &lt;a href="/3-projects-in-2-days-trend-on-hacker-news-github/"&gt;Nanobox and Nanopack projects trending on Hacker News and Github&lt;/a&gt;, progress on these projects has sped up considerably; in large part due to the contributions from you, the community, in the form of issues and pull requests. Thank you so much and keep them coming!&lt;/p&gt;
+
+&lt;h2 id="important-broken-update-command"&gt;&lt;strong&gt;&lt;em&gt;Important:&lt;/em&gt;&lt;/strong&gt; Broken Update Command&lt;/h2&gt;
+
+&lt;p&gt;Just as the word began to spread about Nanobox, we found a bug in the Nanobox updater that prevented it from working correctly. This bug was in v0.16.8 and has now been fixed. However, because it was in the updater, if you’re currently running v0.16.8, the &lt;code&gt;update&lt;/code&gt; command can’t be used to pull the fix in. To check which version you have installed, run:&lt;/p&gt;
+&lt;pre class="highlight shell"&gt;&lt;code&gt;&lt;span class="gp"&gt;$ &lt;/span&gt;nanobox -v
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;If you are currently running 0.16.8, you’ll need to download and re-install the most recent version of the Nanobox binary (found on our &lt;a href="https://desktop.nanobox.io/downloads/"&gt;downloads page&lt;/a&gt;). Once installed, run the following commands in each of your Nanobox apps to ensure everything is up to date.&lt;/p&gt;
+&lt;pre class="highlight shell"&gt;&lt;code&gt;&lt;span class="gp"&gt;$ &lt;/span&gt;nanobox update
+&lt;span class="gp"&gt;$ &lt;/span&gt;nanobox reload
+&lt;span class="gp"&gt;$ &lt;/span&gt;nanobox update-images
+&lt;span class="gp"&gt;$ &lt;/span&gt;nanobox dev --rebuild
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id="engine-updates-galore"&gt;Engine Updates Galore&lt;/h2&gt;
+
+&lt;p&gt;We’ve been hard at work creating and updating engines to expand the library of languages and frameworks. We’ve been &lt;em&gt;happily&lt;/em&gt; overwhelmed with issue submissions, bug-fixing pull requests, and community members volunteering time &amp;amp; knowledge to help build fully-functional engines.&lt;/p&gt;
+
+&lt;p&gt;If you’d like to help contribute to an engine, we’ve posted a list of questions in each to help identify exactly what the engine needs. We’ve already received some much appreciated feedback, but would love more. Here’s links to the Github issues that house the list of questions for each project:&lt;/p&gt;
+
+&lt;p&gt;&lt;a href="https://github.com/nanobox-io/nanobox-engine-python/issues/4"&gt;Python&lt;/a&gt;&lt;br&gt;
+&lt;a href="https://github.com/nanobox-io/nanobox-engine-django/issues/1"&gt;Django&lt;/a&gt;&lt;br&gt;
+&lt;a href="https://github.com/nanobox-io/nanobox-engine-golang/issues/5"&gt;Go&lt;/a&gt;&lt;br&gt;
+&lt;a href="https://github.com/nanobox-io/nanobox-engine-elixir/issues/2"&gt;Elixir&lt;/a&gt;  &lt;a href="https://github.com/nanobox-io/nanobox-engine-java/issues/5"&gt;Java&lt;/a&gt;&lt;br&gt;
+&lt;a href="https://github.com/nanobox-io/nanobox-engine-scala/issues/2"&gt;Scala&lt;/a&gt;&lt;br&gt;
+&lt;a href="https://github.com/nanobox-io/nanobox-engine-clojure/issues/1"&gt;Clojure&lt;/a&gt;&lt;br&gt;
+&lt;a href="https://github.com/nanobox-io/nanobox-engine-nodejs/issues/7"&gt;Node.js&lt;/a&gt;&lt;br&gt;
+&lt;a href="https://github.com/nanobox-io/nanobox-engine-perl/issues/1"&gt;Perl&lt;/a&gt;&lt;br&gt;
+&lt;a href="https://github.com/nanobox-io/nanobox-engine-c/issues/1"&gt;C/C++&lt;/a&gt;  &lt;/p&gt;
+
+&lt;h2 id="windows-compatibility"&gt;Windows Compatibility&lt;/h2&gt;
+
+&lt;p&gt;Most of the testing for Nanobox prior to this week was done in OSX and Linux, leaving significant bugs in the Windows version. Thanks to those of you using Windows and the issues/pull requests you’ve submitted, we’ve been able to iron out the majority of the issues that have prevented Nanobox from working properly in Windows. The remaining “deal-breaking” bugs should be resolved by early next week.&lt;/p&gt;
+
+&lt;h2 id="updated-installers"&gt;Updated Installers&lt;/h2&gt;
+
+&lt;p&gt;All Nanobox installers have been updated, with most of the effort going into the Linux installers. These updates fix issues discovered as the installers have been used across many different OSs and OS versions.&lt;/p&gt;
+
+&lt;h2 id="prepping-updated-packages-for-nanobox-pkgsrc"&gt;Prepping Updated Packages for Nanobox pkgsrc&lt;/h2&gt;
+
+&lt;p&gt;We’re in the process of preparing new packages to be included in the &lt;a href="http://pkgsrc.nanobox.io/nanobox/base/Linux/"&gt;Nanobox pkgsrc&lt;/a&gt;. These are packages/binaries available for use in engines. Updates will include newer versions of packages as well as minor/patch versions that fill in the gaps between existing minor/patch versions and should be available sometime next week.&lt;/p&gt;
+
+&lt;h2 id="updates-to-nanopack-projects"&gt;Updates to Nanopack Projects&lt;/h2&gt;
+
+&lt;p&gt;After open-sourcing the &lt;a href="http://nanopack.io"&gt;Nanopack projects&lt;/a&gt;, we’ve received significant contributions to projects such as &lt;a href="https://github.com/nanopack/mist"&gt;Mist&lt;/a&gt; and &lt;a href="https://github.com/nanopack/yoke"&gt;Yoke&lt;/a&gt;. These have helped to speed the development of each of these projects. Special thanks to &lt;a href="https://github.com/saromanov"&gt;saromanov&lt;/a&gt;, &lt;a href="https://github.com/hypersleep"&gt;hypersleep&lt;/a&gt;, &lt;a href="https://github.com/rhcarvalho"&gt;rhcarvalho&lt;/a&gt;, &lt;a href="https://github.com/nsorger"&gt;nsorger&lt;/a&gt;, &lt;a href="https://github.com/khink"&gt;khink&lt;/a&gt;, &lt;a href="https://github.com/feuersteinacc01"&gt;feuersteinacc01&lt;/a&gt;, &lt;a href="https://github.com/cvan"&gt;cvan&lt;/a&gt;, &lt;a href="https://github.com/jshawl"&gt;jshawl&lt;/a&gt;, and any others that have contributed that I may have missed. &lt;/p&gt;
+
+&lt;h2 id="happy-thanksgiving"&gt;Happy Thanksgiving&lt;/h2&gt;
+
+&lt;p&gt;As tomorrow we’ll be celebrating Thanksgiving, for the rest of this week, our team will be spending time with our families. We’ll still likely respond to issues and pull requests (it’s hard for us to stay away), but responses may come slower than they have. For those of you who celebrate it, Happy Thanksgiving! Come Monday, we’ll be back with full stomachs and fresh minds.&lt;/p&gt;
+</content>
+  </entry>
   <entry>
     <title>3 Projects in 2 Days Trend on Hacker News &amp; Github</title>
     <link rel="alternate" href="http://blog.nanobox.io/3-projects-in-2-days-trend-on-hacker-news-github/"/>
