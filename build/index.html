@@ -75,86 +75,109 @@
     <div class="wrapper fade-in">
       
   <div class="title-block">
-    <h2 class="new"><a href="/thanksgiving-update/">Thanksgiving Update</a></h2>
+    <h2 class="new"><a href="/the-vision-of-nanobox/">The Vision of Nanobox</a></h2>
     <p class="meta">
-      <span class="author">Scott Anderson</span>
+      <span class="author">Tyler Flint</span>
        &#9642;  
-      <span class="date">Nov 25 2015</span>
+      <span class="date">Dec  4 2015</span>
     </p>
   </div>
 
   <div class="content">
-    <p>Tomorrow is Thanksgiving here in the U.S. and we just wanted to give you a quick update on the progress we’ve made over the last week. Due to <a href="/3-projects-in-2-days-trend-on-hacker-news-github/">Nanobox and Nanopack projects trending on Hacker News and Github</a>, progress on these projects has sped up considerably; in large part due to the contributions from you, the community, in the form of issues and pull requests. Thank you so much and keep them coming!</p>
+    <p>As Nanobox has received a lot of attention over the last few weeks, we have felt the need to externalize our vision for the future of Nanobox. </p>
 
-<h2 id="important-broken-update-command"><strong><em>Important:</em></strong> Broken Update Command</h2>
+<p><strong>TLDR:</strong> Three guiding principles in the development of Nanobox: zero configuration, team-based workflow, and intuitive infrastructure management.</p>
 
-<p>Just as the word began to spread about Nanobox, we found a bug in the Nanobox updater that prevented it from working correctly. This bug was in v0.16.8 and has now been fixed. However, because it was in the updater, if you’re currently running v0.16.8, the <code>update</code> command can’t be used to pull the fix in. To check which version you have installed, run:</p>
-<pre class="highlight shell"><code><span class="gp">$ </span>nanobox -v
-</code></pre>
+<h2 id="our-target-users">Our Target Users</h2>
 
-<p>If you are currently running 0.16.8, you’ll need to download and re-install the most recent version of the Nanobox binary (found on our <a href="https://desktop.nanobox.io/downloads/">downloads page</a>). Once installed, run the following commands in each of your Nanobox apps to ensure everything is up to date.</p>
-<pre class="highlight shell"><code><span class="gp">$ </span>nanobox update
-<span class="gp">$ </span>nanobox reload
-<span class="gp">$ </span>nanobox update-images
-<span class="gp">$ </span>nanobox dev --rebuild
-</code></pre>
+<p>Nanobox was designed to solve environment-specific problems for application developers. We realize not everyone will want or need to use Nanobox, and that’s ok. Specifically, we’re in the business of eliminating the overhead of environment setup and configuration from application developers. </p>
 
-<h2 id="engine-updates-galore">Engine Updates Galore</h2>
+<h2 id="our-vision">Our Vision</h2>
 
-<p>We’ve been hard at work creating and updating engines to expand the library of languages and frameworks. We’ve been <em>happily</em> overwhelmed with issue submissions, bug-fixing pull requests, and community members volunteering time &amp; knowledge to help build fully-functional engines.</p>
+<p>Although Nanobox can be used in a variety of ways, all future development will be focused on providing application developers with a streamlined workflow through the following guiding principles:</p>
 
-<p>If you’d like to help contribute to an engine, we’ve posted a list of questions in each to help identify exactly what the engine needs. We’ve already received some much appreciated feedback, but would love more. Here’s links to the Github issues that house the list of questions for each project:</p>
+<h3 id="zero-configuration">Zero Configuration</h3>
 
-<p><a href="https://github.com/nanobox-io/nanobox-engine-python/issues/4">Python</a><br>
-<a href="https://github.com/nanobox-io/nanobox-engine-django/issues/1">Django</a><br>
-<a href="https://github.com/nanobox-io/nanobox-engine-golang/issues/5">Go</a><br>
-<a href="https://github.com/nanobox-io/nanobox-engine-elixir/issues/2">Elixir</a>  <a href="https://github.com/nanobox-io/nanobox-engine-java/issues/5">Java</a><br>
-<a href="https://github.com/nanobox-io/nanobox-engine-scala/issues/2">Scala</a><br>
-<a href="https://github.com/nanobox-io/nanobox-engine-clojure/issues/1">Clojure</a><br>
-<a href="https://github.com/nanobox-io/nanobox-engine-nodejs/issues/7">Node.js</a><br>
-<a href="https://github.com/nanobox-io/nanobox-engine-perl/issues/1">Perl</a><br>
-<a href="https://github.com/nanobox-io/nanobox-engine-c/issues/1">C/C++</a>  </p>
+<p>The ultimate goal of Nanobox is to make provisioning development and production environments as easy and seamless as possible. Nanobox will make opinionated, best-practice decisions on your behalf to setup your environment, leaving you to just write your application.</p>
 
-<h2 id="windows-compatibility">Windows Compatibility</h2>
+<p>It can be a real challenge to build a local dev environment that matches (or even gets close to) your production environment. Configuration of each can be daunting. Nanobox aims to automate this process by both detecting the needs of your application, then provisioning and configuring your environment to suit.</p>
 
-<p>Most of the testing for Nanobox prior to this week was done in OSX and Linux, leaving significant bugs in the Windows version. Thanks to those of you using Windows and the issues/pull requests you’ve submitted, we’ve been able to iron out the majority of the issues that have prevented Nanobox from working properly in Windows. The remaining “deal-breaking” bugs should be resolved by early next week.</p>
+<p>The bulk of automation happens through <a href="https://docs.nanobox.io/engines/">Engines</a>. Engines are what “sniff” your app’s codebase and configure the environment to match your needs. The current library of engines is still in its infancy, but as more devs contribute new language engines and framework-specific engines, Nanobox’s ability to accurately detect and configure your environment will improve.</p>
 
-<h2 id="updated-installers">Updated Installers</h2>
+<h4 id="you’re-still-in-control">You’re Still in Control</h4>
 
-<p>All Nanobox installers have been updated, with most of the effort going into the Linux installers. These updates fix issues discovered as the installers have been used across many different OSs and OS versions.</p>
+<p>We know the term “zero configuration” and the “magic” associated with automation scares some. While automation and a zero-configuration platform is our goal, know that you will always have the ability to custom-configure your environment through a <a href="https://docs.nanobox.io/boxfile/">Boxfile</a> or through <a href="https://desktop.nanobox.io/engine-dev/">building a custom engine</a>.</p>
 
-<h2 id="prepping-updated-packages-for-nanobox-pkgsrc">Prepping Updated Packages for Nanobox pkgsrc</h2>
+<h3 id="team-based-workflow">Team-Based Workflow</h3>
 
-<p>We’re in the process of preparing new packages to be included in the <a href="http://pkgsrc.nanobox.io/nanobox/base/Linux/">Nanobox pkgsrc</a>. These are packages/binaries available for use in engines. Updates will include newer versions of packages as well as minor/patch versions that fill in the gaps between existing minor/patch versions and should be available sometime next week.</p>
+<p>Adding a new developer to a project  typically involves a few hours, if not days, of getting their local workstation setup, granting access and permissions on all the necessary project dependencies, then troubleshooting the idiosyncrasies of their workstation. </p>
 
-<h2 id="updates-to-nanopack-projects">Updates to Nanopack Projects</h2>
+<p>With Nanobox desktop, all that would be involved is granting the user access to the codebase, having them clone it to their local machine, then running <code>nanobox dev</code>. Everything the app needs to run is included in the repo. Once running, the environment is housed inside of an isolated Virtual Machine (VM) and is identical to any other collaborators’ running the same app using Nanobox.</p>
 
-<p>After open-sourcing the <a href="http://nanopack.io">Nanopack projects</a>, we’ve received significant contributions to projects such as <a href="https://github.com/nanopack/mist">Mist</a> and <a href="https://github.com/nanopack/yoke">Yoke</a>. These have helped to speed the development of each of these projects. Special thanks to <a href="https://github.com/saromanov">saromanov</a>, <a href="https://github.com/hypersleep">hypersleep</a>, <a href="https://github.com/rhcarvalho">rhcarvalho</a>, <a href="https://github.com/nsorger">nsorger</a>, <a href="https://github.com/khink">khink</a>, <a href="https://github.com/feuersteinacc01">feuersteinacc01</a>, <a href="https://github.com/cvan">cvan</a>, <a href="https://github.com/jshawl">jshawl</a>, and any others that have contributed that I may have missed. </p>
+<p>This is just one example of how Nanobox hopes to streamline collaborative development. <a href="https://nanobox.io/cloud/">Nanobox Cloud</a> will introduce a completely new team-based workflow for production apps. Stay tuned...</p>
 
-<h2 id="happy-thanksgiving">Happy Thanksgiving</h2>
+<h3 id="intuitive-management">Intuitive Management</h3>
 
-<p>As tomorrow we’ll be celebrating Thanksgiving, for the rest of this week, our team will be spending time with our families. We’ll still likely respond to issues and pull requests (it’s hard for us to stay away), but responses may come slower than they have. For those of you who celebrate it, Happy Thanksgiving! Come Monday, we’ll be back with full stomachs and fresh minds.</p>
+<p>With Nanobox Desktop, we’ve invested a large amount of time and effort into making the process as simple and intuitive as possible. A single command, ‘nanobox dev’, is the only requirement for building a fully-automated development environment. All decisions have been and will be heavily geared towards keeping the process simple. </p>
+
+<p>Again, keep your eye out for Nanobox Cloud. The release will introduce a new approach to managing production infrastructure. </p>
+
+<hr>
+
+<h2 id="contributor-love">Contributor Love</h2>
+
+<p>Today we’re starting what we’d like to be a weekly tradition. We just want to recognize and thank those who have contributed to Nanobox and Nanopack projects in the past week. We’ll try our best to mention everyone who has contributed, but we may miss some. If you have contributed and we’ve missed you, please know how grateful we are and we’ll try to get you in next week.</p>
+
+<p><strong><a href="https://github.com/harobed">harobed</a></strong><br>
+• Helped to identify many issues in Nanobox<br>
+• Helped to identify critical issues in the <a href="https://engines.nanobox.io/releases/00d59bc3-7943-4082-97b8-44be36055f4b">Python Engine</a><br>
+• Provided a <a href="https://github.com/nanobox-io/nanobox-python-sample">sample Python app</a> for testing the Python engine.  </p>
+
+<p><strong><a href="https://github.com/mattn">mattn</a></strong><br>
+• Fixed an issue where Windows wasn’t properly checking if VirtualBox was installed.  </p>
+
+<p><strong><a href="https://github.com/dsandstrom">dsandstrom</a></strong><br>
+• Identified a bug in the Nanobox CLI that prevented the <code>.ssh</code> directory from being mounted correctly.<br>
+• Identified 404 pages on the Nanobox Desktop site.  </p>
+
+<p><strong><a href="https://github.com/wdiechmann">wdiechmann</a></strong><br>
+• Helped to find a bug in the ruby engine that prevented data services in the Boxfile from being recognized.  </p>
+
+<p><strong><a href="https://github.com/audieleon">audieleon</a></strong><br>
+• Helped to identify a bug where <code>nanobox dev</code> would fail if the user’s <code>.ssh</code> directory wasn’t in the user’s home directory.<br>
+• Helped to identify a bug where <code>nanobox dev</code> fails if NFS and it’s dependencies are not installed on the user system.  </p>
+
+<p><strong><a href="https://github.com/vahagnaharonian">vahagnaharonian</a></strong><br>
+• Fixed the password prompt in the Nanobox Mac installer</p>
 
   </div>
 
   <div class="author-block">
-    <img class="gravatar" src="https://s.gravatar.com/avatar/842ad9f55bff4d00dc2ddad8dbcd1f36">
+    <img class="gravatar" src="https://s.gravatar.com/avatar/d16320670cd226d7d4984698585e2fbc">
     <div class="info">
-      <p class="author"><span>Scott Anderson</span>            
-         <a class="twitter" target="_blank" href="https://twitter.com/scott_dsgn">@scott_dsgn</a>
-          <a class="github" target="_blank" href="https://github.com/sanderson">sanderson</a>
+      <p class="author"><span>Tyler Flint</span>            
+         <a class="twitter" target="_blank" href="https://twitter.com/tyler_flint">@tyler_flint</a>
+          <a class="github" target="_blank" href="https://github.com/tylerflint">tylerflint</a>
       </p>
-      <p class="summary">Designer, writer, code dabbler, foodie, husband & father.</p>
+      <p class="summary">Husband, dad, LDS, entrepreneur, Nanobox cofounder.</p>
     </div>
   </div> 
 
   <div class="feedback">
     <p>Have feedback on this post? Let
-      <a target="_blank" href="https://twitter.com/intent/tweet?text=@nanobox_io%20&amp;amp;url=https://blog.nanobox.io/thanksgiving-update/">@nanobox_io</a>
-        or <a target="_blank" href="https://twitter.com/intent/tweet?text=@scott_dsgn%20&amp;amp;url=https://blog.nanobox.io/thanksgiving-update/">@scott_dsgn</a>
+      <a target="_blank" href="https://twitter.com/intent/tweet?text=@nanobox_io%20&amp;amp;url=https://blog.nanobox.io/the-vision-of-nanobox/">@nanobox_io</a>
+        or <a target="_blank" href="https://twitter.com/intent/tweet?text=@tyler_flint%20&amp;amp;url=https://blog.nanobox.io/the-vision-of-nanobox/">@tyler_flint</a>
       know on Twitter.</p>
   </div> 
 
+    <div class="title-block small">
+      <h2><a href="/thanksgiving-update/">Thanksgiving Update</a></h2>
+      <p class="meta">
+        <span class="author">Scott Anderson</span>
+         &#9642; 
+        <span class="date">Nov 25 2015</span>
+      </p>
+    </div>
     <div class="title-block small">
       <h2><a href="/3-projects-in-2-days-trend-on-hacker-news-github/">3 Projects in 2 Days Trend on Hacker News & Github</a></h2>
       <p class="meta">
@@ -201,6 +224,7 @@
     <aside>
   <ul>
     <li><h2>Recent Posts</h2></li>
+      <li><a href="/the-vision-of-nanobox/">The Vision of Nanobox</a> <span class="small-date">Dec  4</span></li>
       <li><a href="/thanksgiving-update/">Thanksgiving Update</a> <span class="small-date">Nov 25</span></li>
       <li><a href="/3-projects-in-2-days-trend-on-hacker-news-github/">3 Projects in 2 Days Trend on Hacker News & Github</a> <span class="small-date">Nov 18</span></li>
       <li><a href="/nanopack-a-new-vision-for-automated-infrastructure/">Nanopack - A New Vision for Automated Infrastructure</a> <span class="small-date">Nov 13</span></li>
@@ -213,10 +237,11 @@
       <li><a href="/tags/open-source/">Open Source (3)</a></li>
       <li><a href="/tags/updates/">Updates (2)</a></li>
       <li><a href="/tags/features/">Features (1)</a></li>
+      <li><a href="/tags/our-vision/">Our Vision (2)</a></li>
   </ul>
   <ul>
     <li><h2>Archives</h2></li>
-      <li><a href="/2015/">2015 (6)</a></li>
+      <li><a href="/2015/">2015 (7)</a></li>
   </ul>
   <p class="feed">Subscribe to the <a href="/feed.xml" target="_blank">feed</a></p>
 </aside>

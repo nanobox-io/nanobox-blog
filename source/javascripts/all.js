@@ -1,5 +1,5 @@
 //= require_tree .
-//= require "jquery-2.1.4.min.js"
+//= require "_jquery-2.1.4.min.js"
 
 $(document).ready( function() {
 

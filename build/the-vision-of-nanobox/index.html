@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv='X-UA-Compatible' content='IE=edge;chrome=1' />
-  <title>Nanobox Blog</title>
+  <title>The Vision of Nanobox - Nanobox Blog</title>
   <link rel="shortcut icon" type="image/png" href="/images/favicon-57864095.png"/>
   <link href='https://fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic' rel='stylesheet' type='text/css'>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
@@ -20,7 +20,7 @@
   <script async src='//www.google-analytics.com/analytics.js'></script>
 </head>
   <body>
-    <div class='top-nav'>
+  <div class='top-nav'>
   <a href="https://nanobox.io"><svg enable-background='new 0 0 19 33' id='nb-logo-sm' space='preserve' version='1.1' viewbox='0 0 19 33' x='0px' xmlns:xlink='http://www.w3.org/1999/xlink' xmlns='http://www.w3.org/2000/svg' y='0px'>
     <g>
       <g>
@@ -73,45 +73,100 @@
 </div>
     
     <div class="wrapper fade-in">
-      <h1 class="small">Archive for
-    Nov 2015
-</h1>
+      <div class="title-block">
+        <h1>The Vision of Nanobox</h1>
+        <p class="meta">
+          <span class="author">Tyler Flint</span>
+           &#9642; 
+          <span class="date">Dec  4 2015</span>
+        </p>
+      </div>
+      <div class="content">
+        <p>As Nanobox has received a lot of attention over the last few weeks, we have felt the need to externalize our vision for the future of Nanobox. </p>
 
-  <div class="title-block small">
-    <h2><a href="/thanksgiving-update/">Thanksgiving Update</a></h2>
-    <p class="meta">
-      <span class="author">Scott Anderson</span>
-       &#9642; 
-      <span class="date">Nov 25 2015</span>
-    </p>
-  </div>
-  <div class="title-block small">
-    <h2><a href="/3-projects-in-2-days-trend-on-hacker-news-github/">3 Projects in 2 Days Trend on Hacker News & Github</a></h2>
-    <p class="meta">
-      <span class="author">Scott Anderson</span>
-       &#9642; 
-      <span class="date">Nov 18 2015</span>
-    </p>
-  </div>
-  <div class="title-block small">
-    <h2><a href="/nanopack-a-new-vision-for-automated-infrastructure/">Nanopack - A New Vision for Automated Infrastructure</a></h2>
-    <p class="meta">
-      <span class="author">Tyler Flint</span>
-       &#9642; 
-      <span class="date">Nov 13 2015</span>
-    </p>
-  </div>
-  <div class="title-block small">
-    <h2><a href="/new-feature-engine-overlays/">New Feature&#58; Engine Overlays</a></h2>
-    <p class="meta">
-      <span class="author">Scott Anderson</span>
-       &#9642; 
-      <span class="date">Nov  6 2015</span>
-    </p>
-  </div>
+<p><strong>TLDR:</strong> Three guiding principles in the development of Nanobox: zero configuration, team-based workflow, and intuitive infrastructure management.</p>
 
+<h2 id="our-target-users">Our Target Users</h2>
 
-    </div>    
+<p>Nanobox was designed to solve environment-specific problems for application developers. We realize not everyone will want or need to use Nanobox, and that’s ok. Specifically, we’re in the business of eliminating the overhead of environment setup and configuration from application developers. </p>
+
+<h2 id="our-vision">Our Vision</h2>
+
+<p>Although Nanobox can be used in a variety of ways, all future development will be focused on providing application developers with a streamlined workflow through the following guiding principles:</p>
+
+<h3 id="zero-configuration">Zero Configuration</h3>
+
+<p>The ultimate goal of Nanobox is to make provisioning development and production environments as easy and seamless as possible. Nanobox will make opinionated, best-practice decisions on your behalf to setup your environment, leaving you to just write your application.</p>
+
+<p>It can be a real challenge to build a local dev environment that matches (or even gets close to) your production environment. Configuration of each can be daunting. Nanobox aims to automate this process by both detecting the needs of your application, then provisioning and configuring your environment to suit.</p>
+
+<p>The bulk of automation happens through <a href="https://docs.nanobox.io/engines/">Engines</a>. Engines are what “sniff” your app’s codebase and configure the environment to match your needs. The current library of engines is still in its infancy, but as more devs contribute new language engines and framework-specific engines, Nanobox’s ability to accurately detect and configure your environment will improve.</p>
+
+<h4 id="you’re-still-in-control">You’re Still in Control</h4>
+
+<p>We know the term “zero configuration” and the “magic” associated with automation scares some. While automation and a zero-configuration platform is our goal, know that you will always have the ability to custom-configure your environment through a <a href="https://docs.nanobox.io/boxfile/">Boxfile</a> or through <a href="https://desktop.nanobox.io/engine-dev/">building a custom engine</a>.</p>
+
+<h3 id="team-based-workflow">Team-Based Workflow</h3>
+
+<p>Adding a new developer to a project  typically involves a few hours, if not days, of getting their local workstation setup, granting access and permissions on all the necessary project dependencies, then troubleshooting the idiosyncrasies of their workstation. </p>
+
+<p>With Nanobox desktop, all that would be involved is granting the user access to the codebase, having them clone it to their local machine, then running <code>nanobox dev</code>. Everything the app needs to run is included in the repo. Once running, the environment is housed inside of an isolated Virtual Machine (VM) and is identical to any other collaborators’ running the same app using Nanobox.</p>
+
+<p>This is just one example of how Nanobox hopes to streamline collaborative development. <a href="https://nanobox.io/cloud/">Nanobox Cloud</a> will introduce a completely new team-based workflow for production apps. Stay tuned...</p>
+
+<h3 id="intuitive-management">Intuitive Management</h3>
+
+<p>With Nanobox Desktop, we’ve invested a large amount of time and effort into making the process as simple and intuitive as possible. A single command, ‘nanobox dev’, is the only requirement for building a fully-automated development environment. All decisions have been and will be heavily geared towards keeping the process simple. </p>
+
+<p>Again, keep your eye out for Nanobox Cloud. The release will introduce a new approach to managing production infrastructure. </p>
+
+<hr>
+
+<h2 id="contributor-love">Contributor Love</h2>
+
+<p>Today we’re starting what we’d like to be a weekly tradition. We just want to recognize and thank those who have contributed to Nanobox and Nanopack projects in the past week. We’ll try our best to mention everyone who has contributed, but we may miss some. If you have contributed and we’ve missed you, please know how grateful we are and we’ll try to get you in next week.</p>
+
+<p><strong><a href="https://github.com/harobed">harobed</a></strong><br>
+• Helped to identify many issues in Nanobox<br>
+• Helped to identify critical issues in the <a href="https://engines.nanobox.io/releases/00d59bc3-7943-4082-97b8-44be36055f4b">Python Engine</a><br>
+• Provided a <a href="https://github.com/nanobox-io/nanobox-python-sample">sample Python app</a> for testing the Python engine.  </p>
+
+<p><strong><a href="https://github.com/mattn">mattn</a></strong><br>
+• Fixed an issue where Windows wasn’t properly checking if VirtualBox was installed.  </p>
+
+<p><strong><a href="https://github.com/dsandstrom">dsandstrom</a></strong><br>
+• Identified a bug in the Nanobox CLI that prevented the <code>.ssh</code> directory from being mounted correctly.<br>
+• Identified 404 pages on the Nanobox Desktop site.  </p>
+
+<p><strong><a href="https://github.com/wdiechmann">wdiechmann</a></strong><br>
+• Helped to find a bug in the ruby engine that prevented data services in the Boxfile from being recognized.  </p>
+
+<p><strong><a href="https://github.com/audieleon">audieleon</a></strong><br>
+• Helped to identify a bug where <code>nanobox dev</code> would fail if the user’s <code>.ssh</code> directory wasn’t in the user’s home directory.<br>
+• Helped to identify a bug where <code>nanobox dev</code> fails if NFS and it’s dependencies are not installed on the user system.  </p>
+
+<p><strong><a href="https://github.com/vahagnaharonian">vahagnaharonian</a></strong><br>
+• Fixed the password prompt in the Nanobox Mac installer</p>
+
+      </div>
+      <div class="author-block">
+        <img class="gravatar" src="https://s.gravatar.com/avatar/d16320670cd226d7d4984698585e2fbc">
+        <div class="info">
+          <p class="author"><span>Tyler Flint</span>            
+             <a class="twitter" target="_blank" href="https://twitter.com/tyler_flint">@tyler_flint</a>
+              <a class="github" target="_blank" href="https://github.com/tylerflint">tylerflint</a>
+          </p>
+          <p class="summary">Husband, dad, LDS, entrepreneur, Nanobox cofounder.</p>
+        </div>
+      </div>
+      <div class="feedback">
+        <p>Have feedback on this post? Let
+          <a target="_blank" href="https://twitter.com/intent/tweet?text=@nanobox_io%20&amp;amp;url=https://blog.nanobox.io/the-vision-of-nanobox/">@nanobox_io</a>
+            or <a target="_blank" href="https://twitter.com/intent/tweet?text=@tyler_flint%20&amp;amp;url=https://blog.nanobox.io/the-vision-of-nanobox/">@tyler_flint</a>
+          know on Twitter.</p>
+      </div>
+      <hr class="end">
+    </div>
     <aside>
   <ul>
     <li><h2>Recent Posts</h2></li>

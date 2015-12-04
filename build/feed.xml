@@ -5,13 +5,89 @@
   <id>http://blog.nanobox.io/</id>
   <link href="http://blog.nanobox.io/"/>
   <link href="http://blog.nanobox.io/feed.xml" rel="self"/>
-  <updated>2015-11-25T11:49:00-07:00</updated>
+  <updated>2015-12-04T14:08:00-07:00</updated>
+  <entry>
+    <title>The Vision of Nanobox</title>
+    <link rel="alternate" href="http://blog.nanobox.io/the-vision-of-nanobox/"/>
+    <id>http://blog.nanobox.io/the-vision-of-nanobox/</id>
+    <published>2015-12-04T14:08:00-07:00</published>
+    <updated>2015-12-04T14:11:09-07:00</updated>
+    <author>
+      <name>Tyler Flint</name>
+    </author>
+    <content type="html">&lt;p&gt;As Nanobox has received a lot of attention over the last few weeks, we have felt the need to externalize our vision for the future of Nanobox. &lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;TLDR:&lt;/strong&gt; Three guiding principles in the development of Nanobox: zero configuration, team-based workflow, and intuitive infrastructure management.&lt;/p&gt;
+
+&lt;h2 id="our-target-users"&gt;Our Target Users&lt;/h2&gt;
+
+&lt;p&gt;Nanobox was designed to solve environment-specific problems for application developers. We realize not everyone will want or need to use Nanobox, and that’s ok. Specifically, we’re in the business of eliminating the overhead of environment setup and configuration from application developers. &lt;/p&gt;
+
+&lt;h2 id="our-vision"&gt;Our Vision&lt;/h2&gt;
+
+&lt;p&gt;Although Nanobox can be used in a variety of ways, all future development will be focused on providing application developers with a streamlined workflow through the following guiding principles:&lt;/p&gt;
+
+&lt;h3 id="zero-configuration"&gt;Zero Configuration&lt;/h3&gt;
+
+&lt;p&gt;The ultimate goal of Nanobox is to make provisioning development and production environments as easy and seamless as possible. Nanobox will make opinionated, best-practice decisions on your behalf to setup your environment, leaving you to just write your application.&lt;/p&gt;
+
+&lt;p&gt;It can be a real challenge to build a local dev environment that matches (or even gets close to) your production environment. Configuration of each can be daunting. Nanobox aims to automate this process by both detecting the needs of your application, then provisioning and configuring your environment to suit.&lt;/p&gt;
+
+&lt;p&gt;The bulk of automation happens through &lt;a href="https://docs.nanobox.io/engines/"&gt;Engines&lt;/a&gt;. Engines are what “sniff” your app’s codebase and configure the environment to match your needs. The current library of engines is still in its infancy, but as more devs contribute new language engines and framework-specific engines, Nanobox’s ability to accurately detect and configure your environment will improve.&lt;/p&gt;
+
+&lt;h4 id="you’re-still-in-control"&gt;You’re Still in Control&lt;/h4&gt;
+
+&lt;p&gt;We know the term “zero configuration” and the “magic” associated with automation scares some. While automation and a zero-configuration platform is our goal, know that you will always have the ability to custom-configure your environment through a &lt;a href="https://docs.nanobox.io/boxfile/"&gt;Boxfile&lt;/a&gt; or through &lt;a href="https://desktop.nanobox.io/engine-dev/"&gt;building a custom engine&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h3 id="team-based-workflow"&gt;Team-Based Workflow&lt;/h3&gt;
+
+&lt;p&gt;Adding a new developer to a project  typically involves a few hours, if not days, of getting their local workstation setup, granting access and permissions on all the necessary project dependencies, then troubleshooting the idiosyncrasies of their workstation. &lt;/p&gt;
+
+&lt;p&gt;With Nanobox desktop, all that would be involved is granting the user access to the codebase, having them clone it to their local machine, then running &lt;code&gt;nanobox dev&lt;/code&gt;. Everything the app needs to run is included in the repo. Once running, the environment is housed inside of an isolated Virtual Machine (VM) and is identical to any other collaborators’ running the same app using Nanobox.&lt;/p&gt;
+
+&lt;p&gt;This is just one example of how Nanobox hopes to streamline collaborative development. &lt;a href="https://nanobox.io/cloud/"&gt;Nanobox Cloud&lt;/a&gt; will introduce a completely new team-based workflow for production apps. Stay tuned...&lt;/p&gt;
+
+&lt;h3 id="intuitive-management"&gt;Intuitive Management&lt;/h3&gt;
+
+&lt;p&gt;With Nanobox Desktop, we’ve invested a large amount of time and effort into making the process as simple and intuitive as possible. A single command, ‘nanobox dev’, is the only requirement for building a fully-automated development environment. All decisions have been and will be heavily geared towards keeping the process simple. &lt;/p&gt;
+
+&lt;p&gt;Again, keep your eye out for Nanobox Cloud. The release will introduce a new approach to managing production infrastructure. &lt;/p&gt;
+
+&lt;hr&gt;
+
+&lt;h2 id="contributor-love"&gt;Contributor Love&lt;/h2&gt;
+
+&lt;p&gt;Today we’re starting what we’d like to be a weekly tradition. We just want to recognize and thank those who have contributed to Nanobox and Nanopack projects in the past week. We’ll try our best to mention everyone who has contributed, but we may miss some. If you have contributed and we’ve missed you, please know how grateful we are and we’ll try to get you in next week.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;a href="https://github.com/harobed"&gt;harobed&lt;/a&gt;&lt;/strong&gt;&lt;br&gt;
+• Helped to identify many issues in Nanobox&lt;br&gt;
+• Helped to identify critical issues in the &lt;a href="https://engines.nanobox.io/releases/00d59bc3-7943-4082-97b8-44be36055f4b"&gt;Python Engine&lt;/a&gt;&lt;br&gt;
+• Provided a &lt;a href="https://github.com/nanobox-io/nanobox-python-sample"&gt;sample Python app&lt;/a&gt; for testing the Python engine.  &lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;a href="https://github.com/mattn"&gt;mattn&lt;/a&gt;&lt;/strong&gt;&lt;br&gt;
+• Fixed an issue where Windows wasn’t properly checking if VirtualBox was installed.  &lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;a href="https://github.com/dsandstrom"&gt;dsandstrom&lt;/a&gt;&lt;/strong&gt;&lt;br&gt;
+• Identified a bug in the Nanobox CLI that prevented the &lt;code&gt;.ssh&lt;/code&gt; directory from being mounted correctly.&lt;br&gt;
+• Identified 404 pages on the Nanobox Desktop site.  &lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;a href="https://github.com/wdiechmann"&gt;wdiechmann&lt;/a&gt;&lt;/strong&gt;&lt;br&gt;
+• Helped to find a bug in the ruby engine that prevented data services in the Boxfile from being recognized.  &lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;a href="https://github.com/audieleon"&gt;audieleon&lt;/a&gt;&lt;/strong&gt;&lt;br&gt;
+• Helped to identify a bug where &lt;code&gt;nanobox dev&lt;/code&gt; would fail if the user’s &lt;code&gt;.ssh&lt;/code&gt; directory wasn’t in the user’s home directory.&lt;br&gt;
+• Helped to identify a bug where &lt;code&gt;nanobox dev&lt;/code&gt; fails if NFS and it’s dependencies are not installed on the user system.  &lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;a href="https://github.com/vahagnaharonian"&gt;vahagnaharonian&lt;/a&gt;&lt;/strong&gt;&lt;br&gt;
+• Fixed the password prompt in the Nanobox Mac installer&lt;/p&gt;
+</content>
+  </entry>
   <entry>
     <title>Thanksgiving Update</title>
     <link rel="alternate" href="http://blog.nanobox.io/thanksgiving-update/"/>
     <id>http://blog.nanobox.io/thanksgiving-update/</id>
     <published>2015-11-25T11:49:00-07:00</published>
-    <updated>2015-11-25T11:58:16-07:00</updated>
+    <updated>2015-12-04T14:13:08-07:00</updated>
     <author>
       <name>Scott Anderson</name>
     </author>
@@ -39,7 +115,8 @@
 &lt;p&gt;&lt;a href="https://github.com/nanobox-io/nanobox-engine-python/issues/4"&gt;Python&lt;/a&gt;&lt;br&gt;
 &lt;a href="https://github.com/nanobox-io/nanobox-engine-django/issues/1"&gt;Django&lt;/a&gt;&lt;br&gt;
 &lt;a href="https://github.com/nanobox-io/nanobox-engine-golang/issues/5"&gt;Go&lt;/a&gt;&lt;br&gt;
-&lt;a href="https://github.com/nanobox-io/nanobox-engine-elixir/issues/2"&gt;Elixir&lt;/a&gt;  &lt;a href="https://github.com/nanobox-io/nanobox-engine-java/issues/5"&gt;Java&lt;/a&gt;&lt;br&gt;
+&lt;a href="https://github.com/nanobox-io/nanobox-engine-elixir/issues/2"&gt;Elixir&lt;/a&gt;&lt;br&gt;
+&lt;a href="https://github.com/nanobox-io/nanobox-engine-java/issues/5"&gt;Java&lt;/a&gt;&lt;br&gt;
 &lt;a href="https://github.com/nanobox-io/nanobox-engine-scala/issues/2"&gt;Scala&lt;/a&gt;&lt;br&gt;
 &lt;a href="https://github.com/nanobox-io/nanobox-engine-clojure/issues/1"&gt;Clojure&lt;/a&gt;&lt;br&gt;
 &lt;a href="https://github.com/nanobox-io/nanobox-engine-nodejs/issues/7"&gt;Node.js&lt;/a&gt;&lt;br&gt;
@@ -122,7 +199,7 @@
     <link rel="alternate" href="http://blog.nanobox.io/nanopack-a-new-vision-for-automated-infrastructure/"/>
     <id>http://blog.nanobox.io/nanopack-a-new-vision-for-automated-infrastructure/</id>
     <published>2015-11-13T13:03:00-07:00</published>
-    <updated>2015-11-13T13:15:17-07:00</updated>
+    <updated>2015-12-04T14:09:47-07:00</updated>
     <author>
       <name>Tyler Flint</name>
     </author>
@@ -229,44 +306,6 @@
 &lt;h3 id="upcoming-events"&gt;Upcoming Events&lt;/h3&gt;
 
 &lt;p&gt;Nanobox will be presenting at the &amp;quot;NodeJS Ninjas&amp;quot; meetup group in SLC on Nov 18th at 6:00pm. Details can be found &lt;a href="http://www.meetup.com/utahnodejs/events/226098953/"&gt;here&lt;/a&gt;.&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>Focus on Apps, Not Configuring Dev Environments</title>
-    <link rel="alternate" href="http://blog.nanobox.io/auto-configure-virtual-development-environments/"/>
-    <id>http://blog.nanobox.io/auto-configure-virtual-development-environments/</id>
-    <published>2015-10-23T12:00:00-06:00</published>
-    <updated>2015-10-23T13:35:49-06:00</updated>
-    <author>
-      <name>Tyler Flint</name>
-    </author>
-    <content type="html">&lt;p&gt;&lt;strong&gt;TLDR:&lt;/strong&gt; Introducing a better local development workflow. Watch the Demo.&lt;/p&gt;
-
-&lt;div class="video" id="video-demo"&gt;
-  &lt;iframe width="560" height="315" src="https://www.youtube.com/embed/TV4iBxytfyE?rel=0&amp;amp;showinfo=0" frameborder="0" allowfullscreen&gt;&lt;/iframe&gt;
-&lt;/div&gt;
-
-&lt;h2 id="declutter-workstations-with-a-better-workflow"&gt;Declutter Workstations with a Better Workflow&lt;/h2&gt;
-
-&lt;p&gt;We’re excited to announce the release of Nanobox Desktop, which automatically generates fully virtualized environments on your local workstation from a single command. Nanobox auto-detects the application type, provisions a virtual machine (VM), and creates all of the app’s related services inside the VM - all without complex manual configuration.&lt;/p&gt;
-
-&lt;p&gt;Under the hood, Nanobox uses &lt;a href="https://www.virtualbox.org/"&gt;Virtualbox&lt;/a&gt; to create a VM for each app. It leverages &lt;a href="https://www.vagrantup.com"&gt;Vagrant&lt;/a&gt; for VM creation and &lt;a href="https://www.docker.com/"&gt;Docker&lt;/a&gt; to “containerize” processes inside the VM. By cleanly isolating application environments, apps with all their dependencies can be managed simply, without cruft or workstation configuration. &lt;/p&gt;
-
-&lt;h2 id="tap-into-community-expertise"&gt;Tap into Community Expertise&lt;/h2&gt;
-
-&lt;p&gt;We can’t know everything required to configure all virtual development environments. Instead, we provide simple tools that promote a community-driven collection of specialized Engines which install runtimes, detect dependencies, and compile your codebase. By default, Nanobox pulls from this &lt;a href="https://engines.nanobox.io"&gt;catalogue of community-contributed engines&lt;/a&gt;. Anyone can add and use custom Engines with minimal effort.&lt;/p&gt;
-
-&lt;h2 id="you’re-in-charge-of-the-automation"&gt;You’re in Charge of the Automation&lt;/h2&gt;
-
-&lt;p&gt;While automated configuration might sound a bit scary, Nanobox ensures that you’re always in control. Adding a &lt;a href="https://docs.nanobox.io/boxfile/"&gt;Boxfile&lt;/a&gt; in the root of an application overrides or supplements the automated build. Boxfile configuration can be as simple as specifying a custom Engine or adding a Postgres service, or more complex, like choosing a specific Ruby runtime or enabling MySQL configuration settings.&lt;/p&gt;
-
-&lt;p&gt;Need more control? Create a custom Engine and auto-configure even the nit-pickiest of development environments. &lt;/p&gt;
-
-&lt;h2 id="getting-started"&gt;Getting Started&lt;/h2&gt;
-
-&lt;p&gt;Ultimately, you have to see it to believe it. You should check out the &lt;a href="#video-demo"&gt;video demo&lt;/a&gt;. If you’re too strapped for time to watch a 2 minute video, you’re spending too much time managing a cluttered local environment. &lt;a href="https://desktop.nanobox.io/downloads"&gt;Download Nanobox&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;We’d love to get your feedback or answer additional questions, so hop into our &lt;a href="https://webchat.freenode.net/?channels=nanobox"&gt;#nanobox IRC channel&lt;/a&gt; for a chat.&lt;/p&gt;
 </content>
   </entry>
 </feed>

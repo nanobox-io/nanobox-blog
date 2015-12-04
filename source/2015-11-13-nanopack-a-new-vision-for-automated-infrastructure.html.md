@@ -2,7 +2,7 @@
 title: Nanopack - A New Vision for Automated Infrastructure
 date: 2015-11-13 20:03 UTC
 author: tyler
-tags: Open Source
+tags: Open Source, Our Vision
 ---
 
 Today we’d like to introduce [Nanopack](http://nanopack.io), our vision for a fully-automated, API-driven infrastructure. Five years ago, we launched [Pagoda Box](https://pagodabox.io) with a mission to empower application developers by eliminating systems administration. The challenge for both Pagoda Box and Nanobox is that we need the ability to manipulate, configure, and build infrastructure in real-time via remote APIs.
