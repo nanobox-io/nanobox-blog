@@ -11,7 +11,7 @@
     <link rel="alternate" href="http://blog.nanobox.io/the-vision-of-nanobox/"/>
     <id>http://blog.nanobox.io/the-vision-of-nanobox/</id>
     <published>2015-12-04T14:08:00-07:00</published>
-    <updated>2015-12-04T14:11:09-07:00</updated>
+    <updated>2015-12-04T15:51:29-07:00</updated>
     <author>
       <name>Tyler Flint</name>
     </author>
@@ -49,7 +49,7 @@
 
 &lt;h3 id="intuitive-management"&gt;Intuitive Management&lt;/h3&gt;
 
-&lt;p&gt;With Nanobox Desktop, we’ve invested a large amount of time and effort into making the process as simple and intuitive as possible. A single command, ‘nanobox dev’, is the only requirement for building a fully-automated development environment. All decisions have been and will be heavily geared towards keeping the process simple. &lt;/p&gt;
+&lt;p&gt;With Nanobox Desktop, we’ve invested a large amount of time and effort into making the process as simple and intuitive as possible. A single command, ‘nanobox dev’, is the only requirement for building a fully-virtualized development environment. All decisions have been and will be heavily geared towards keeping the process simple. &lt;/p&gt;
 
 &lt;p&gt;Again, keep your eye out for Nanobox Cloud. The release will introduce a new approach to managing production infrastructure. &lt;/p&gt;
 

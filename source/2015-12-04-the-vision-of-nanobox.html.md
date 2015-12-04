@@ -35,7 +35,7 @@ This is just one example of how Nanobox hopes to streamline collaborative develo
 
 ### Intuitive Management
 
-With Nanobox Desktop, we’ve invested a large amount of time and effort into making the process as simple and intuitive as possible. A single command, ‘nanobox dev’, is the only requirement for building a fully-automated development environment. All decisions have been and will be heavily geared towards keeping the process simple. 
+With Nanobox Desktop, we’ve invested a large amount of time and effort into making the process as simple and intuitive as possible. A single command, ‘nanobox dev’, is the only requirement for building a fully-virtualized development environment. All decisions have been and will be heavily geared towards keeping the process simple. 
 
 Again, keep your eye out for Nanobox Cloud. The release will introduce a new approach to managing production infrastructure. 
 
