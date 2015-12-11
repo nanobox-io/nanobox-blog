@@ -75,80 +75,69 @@
     <div class="wrapper fade-in">
       
   <div class="title-block">
-    <h2 class="new"><a href="/the-vision-of-nanobox/">The Vision of Nanobox</a></h2>
+    <h2 class="new"><a href="/new-feature-live-reloading/">New Feature&#58; Live Reloading</a></h2>
     <p class="meta">
       <span class="author">Tyler Flint</span>
        &#9642;  
-      <span class="date">Dec  4 2015</span>
+      <span class="date">Dec 11 2015</span>
     </p>
   </div>
 
   <div class="content">
-    <p>As Nanobox has received a lot of attention over the last few weeks, we have felt the need to externalize our vision for the future of Nanobox. </p>
+    <p>These days, almost every modern web framework is embracing the ability to live reload the browser when a source file is modified. It’s a cool trend; one we happen to use daily on most of our web applications. Over the past 6 months we’ve been obsessed with figuring out how to develop an application using livereload in dev mode on nanobox. In the past couple of weeks, thanks in large part to <a href="https://github.com/lyondhill">Lyon</a>, we’ve made some great progress towards this goal and today we’re excited to release and demo this functionality.</p>
 
-<p><strong>TLDR:</strong> Three guiding principles in the development of Nanobox: zero configuration, team-based workflow, and intuitive infrastructure management.</p>
+<p><strong>TLDR:</strong> Livereload works on nanobox! Check it out in the demo <a href="#video-demo">below</a>. </p>
 
-<h2 id="our-target-users">Our Target Users</h2>
+<h2 id="the-problem">The Problem</h2>
 
-<p>Nanobox was designed to solve environment-specific problems for application developers. We realize not everyone will want or need to use Nanobox, and that’s ok. Specifically, we’re in the business of eliminating the overhead of environment setup and configuration from application developers. </p>
+<p>Generally, livereload (outside of nanobox) works by subscribing to an I/O event notification layer provided by the operating system kernel. The livereload library “watches” files and directories for changes, then waits for the event notification from the kernel indicating a file or directory has been modified. When a file is modified, certain hooks run which may re-compile code or generate static assets accordingly. The livereload server then informs the browser, connected over a websocket, that a file has been modified and the browser refreshes.</p>
 
-<h2 id="our-vision">Our Vision</h2>
+<p>With nanobox, your application runs inside of a virtual machine (VM), and the source code is mounted inside. Livereload functionality breaks because the livereload server subscribes to events on the OS of the guest VM, but changes to the source code are made on the OS of the host machine. While the changes to the files are reflected inside the VM via the mount, the change event is triggered on the host OS, not on the guest OS. Thus, changes are not broadcast and the livereload server never triggers a re-compile and browser refresh.</p>
 
-<p>Although Nanobox can be used in a variety of ways, all future development will be focused on providing application developers with a streamlined workflow through the following guiding principles:</p>
+<h2 id="the-solution">The Solution</h2>
 
-<h3 id="zero-configuration">Zero Configuration</h3>
+<p>Our initial instinct, after having spent the past year in kernel development on illumos, was to try to modify the behavior of NFS and the VirtualBox fs driver behavior to replicate events from the host on the client OS. This effort didn’t make it far, as it proved to be a major undertaking without any guarantee that our work would be accepted by the vendors who maintain these projects. </p>
 
-<p>The ultimate goal of Nanobox is to make provisioning development and production environments as easy and seamless as possible. Nanobox will make opinionated, best-practice decisions on your behalf to setup your environment, leaving you to just write your application.</p>
+<p>Instead, we took a step back and realized we could accomplish the goal in a much less obtrusive manner. When you run <code>nanobox dev</code>, a watcher thread (go routine if you want to be technical about it) subscribes to the kernel event notification layer and waits to be informed of changes to the source code. When a change to a file or directory is triggered, the watcher thread connects to the nanobox-server daemon inside the VM and relays the event. The nanobox-server daemon then touches the file inside the VM, which ultimately forces a propagation of the event to the livereload server. </p>
 
-<p>It can be a real challenge to build a local dev environment that matches (or even gets close to) your production environment. Configuration of each can be daunting. Nanobox aims to automate this process by both detecting the needs of your application, then provisioning and configuring your environment to suit.</p>
+<p>It took a lot of iterations to flesh out the bugs and required a major refactor to handle tens of thousands of file change events per second. We’re excited to say that it’s now complete, stable, and working quite well! Your application doesn’t need to change or do anything special. The entire I/O event propagation and relay system is completely transparent to the application and the nanobox user.</p>
 
-<p>The bulk of automation happens through <a href="https://docs.nanobox.io/engines/">Engines</a>. Engines are what “sniff” your app’s codebase and configure the environment to match your needs. The current library of engines is still in its infancy, but as more devs contribute new language engines and framework-specific engines, Nanobox’s ability to accurately detect and configure your environment will improve.</p>
+<p>I created a short demo that demonstrates this process. Enjoy!</p>
 
-<h4 id="you’re-still-in-control">You’re Still in Control</h4>
-
-<p>We know the term “zero configuration” and the “magic” associated with automation scares some. While automation and a zero-configuration platform is our goal, know that you will always have the ability to custom-configure your environment through a <a href="https://docs.nanobox.io/boxfile/">Boxfile</a> or through <a href="https://desktop.nanobox.io/engine-dev/">building a custom engine</a>.</p>
-
-<h3 id="team-based-workflow">Team-Based Workflow</h3>
-
-<p>Adding a new developer to a project  typically involves a few hours, if not days, of getting their local workstation setup, granting access and permissions on all the necessary project dependencies, then troubleshooting the idiosyncrasies of their workstation. </p>
-
-<p>With Nanobox desktop, all that would be involved is granting the user access to the codebase, having them clone it to their local machine, then running <code>nanobox dev</code>. Everything the app needs to run is included in the repo. Once running, the environment is housed inside of an isolated Virtual Machine (VM) and is identical to any other collaborators’ running the same app using Nanobox.</p>
-
-<p>This is just one example of how Nanobox hopes to streamline collaborative development. <a href="https://nanobox.io/cloud/">Nanobox Cloud</a> will introduce a completely new team-based workflow for production apps. Stay tuned...</p>
-
-<h3 id="intuitive-management">Intuitive Management</h3>
-
-<p>With Nanobox Desktop, we’ve invested a large amount of time and effort into making the process as simple and intuitive as possible. A single command, ‘nanobox dev’, is the only requirement for building a fully-virtualized development environment. All decisions have been and will be heavily geared towards keeping the process simple. </p>
-
-<p>Again, keep your eye out for Nanobox Cloud. The release will introduce a new approach to managing production infrastructure. </p>
-
-<hr>
+<div class="video" id="video-demo">
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/Donrr7YXkak?rel=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>
+</div>
 
 <h2 id="contributor-love">Contributor Love</h2>
 
-<p>Today we’re starting what we’d like to be a weekly tradition. We just want to recognize and thank those who have contributed to Nanobox and Nanopack projects in the past week. We’ll try our best to mention everyone who has contributed, but we may miss some. If you have contributed and we’ve missed you, please know how grateful we are and we’ll try to get you in next week.</p>
+<p>Special thanks to all those who contributed to Nanobox &amp; Nanopack projects this week. If we missed you, let us know and we&#39;ll be sure to get you in next week.</p>
 
-<p><strong><a href="https://github.com/harobed">harobed</a></strong><br>
-• Helped to identify many issues in Nanobox<br>
-• Helped to identify critical issues in the <a href="https://engines.nanobox.io/releases/00d59bc3-7943-4082-97b8-44be36055f4b">Python Engine</a><br>
-• Provided a <a href="https://github.com/nanobox-io/nanobox-python-sample">sample Python app</a> for testing the Python engine.  </p>
+<p><strong><a href="https://github.com/Flat">Flat</a></strong><br>
+- Fixed some typos in engine publishing<br>
+- Made the update process more stable<br>
+- Helped work through the windows update process  </p>
+
+<p><strong><a href="https://github.com/alytvynov">alytvynov</a></strong><br>
+- Fixed scribble usage on Yoke  </p>
 
 <p><strong><a href="https://github.com/mattn">mattn</a></strong><br>
-• Fixed an issue where Windows wasn’t properly checking if VirtualBox was installed.  </p>
+- Helped us identify and understand proxy situations  </p>
 
-<p><strong><a href="https://github.com/dsandstrom">dsandstrom</a></strong><br>
-• Identified a bug in the Nanobox CLI that prevented the <code>.ssh</code> directory from being mounted correctly.<br>
-• Identified 404 pages on the Nanobox Desktop site.  </p>
+<p><strong>Walther Diechmann</strong><br>
+- Helped identify LAN networking issues<br>
+- Spurred a discussion that produced a plausible feature for bridge networking  </p>
 
-<p><strong><a href="https://github.com/wdiechmann">wdiechmann</a></strong><br>
-• Helped to find a bug in the ruby engine that prevented data services in the Boxfile from being recognized.  </p>
+<p><strong><a href="https://github.com/Andrew-College">Andrew-College</a></strong><br>
+- Identified a missing shared library in Oracle Java package  </p>
 
-<p><strong><a href="https://github.com/audieleon">audieleon</a></strong><br>
-• Helped to identify a bug where <code>nanobox dev</code> would fail if the user’s <code>.ssh</code> directory wasn’t in the user’s home directory.<br>
-• Helped to identify a bug where <code>nanobox dev</code> fails if NFS and it’s dependencies are not installed on the user system.  </p>
+<p><strong><a href="https://github.com/fnmunhoz">fnmunhoz</a></strong><br>
+- Identified incorrect ruby_runtime cofigurations and helped confirm a fix  </p>
 
-<p><strong><a href="https://github.com/vahagnaharonian">vahagnaharonian</a></strong><br>
-• Fixed the password prompt in the Nanobox Mac installer</p>
+<p><strong><a href="https://github.com/ehsanminachi">ehsanminachi</a></strong><br>
+- Helped identify specific yoke scenarios for documentation  </p>
+
+<p><strong><a href="https://github.com/imkheong">imkheong</a></strong><br>
+- Working to identify windows-specific Vagrantfile generation syntax errors  </p>
 
   </div>
 
@@ -165,11 +154,19 @@
 
   <div class="feedback">
     <p>Have feedback on this post? Let
-      <a target="_blank" href="https://twitter.com/intent/tweet?text=@nanobox_io%20&amp;amp;url=https://blog.nanobox.io/the-vision-of-nanobox/">@nanobox_io</a>
-        or <a target="_blank" href="https://twitter.com/intent/tweet?text=@tyler_flint%20&amp;amp;url=https://blog.nanobox.io/the-vision-of-nanobox/">@tyler_flint</a>
+      <a target="_blank" href="https://twitter.com/intent/tweet?text=@nanobox_io%20&amp;amp;url=https://blog.nanobox.io/new-feature-live-reloading/">@nanobox_io</a>
+        or <a target="_blank" href="https://twitter.com/intent/tweet?text=@tyler_flint%20&amp;amp;url=https://blog.nanobox.io/new-feature-live-reloading/">@tyler_flint</a>
       know on Twitter.</p>
   </div> 
 
+    <div class="title-block small">
+      <h2><a href="/the-vision-of-nanobox/">The Vision of Nanobox</a></h2>
+      <p class="meta">
+        <span class="author">Tyler Flint</span>
+         &#9642; 
+        <span class="date">Dec  4 2015</span>
+      </p>
+    </div>
     <div class="title-block small">
       <h2><a href="/thanksgiving-update/">Thanksgiving Update</a></h2>
       <p class="meta">
@@ -224,24 +221,22 @@
     <aside>
   <ul>
     <li><h2>Recent Posts</h2></li>
+      <li><a href="/new-feature-live-reloading/">New Feature&#58; Live Reloading</a> <span class="small-date">Dec 11</span></li>
       <li><a href="/the-vision-of-nanobox/">The Vision of Nanobox</a> <span class="small-date">Dec  4</span></li>
       <li><a href="/thanksgiving-update/">Thanksgiving Update</a> <span class="small-date">Nov 25</span></li>
       <li><a href="/3-projects-in-2-days-trend-on-hacker-news-github/">3 Projects in 2 Days Trend on Hacker News & Github</a> <span class="small-date">Nov 18</span></li>
       <li><a href="/nanopack-a-new-vision-for-automated-infrastructure/">Nanopack - A New Vision for Automated Infrastructure</a> <span class="small-date">Nov 13</span></li>
-      <li><a href="/new-feature-engine-overlays/">New Feature&#58; Engine Overlays</a> <span class="small-date">Nov  6</span></li>
-      <li><a href="/this-week-in-nanobox-10-30-15/">This Week in Nanobox</a> <span class="small-date">Oct 30</span></li>
-      <li><a href="/auto-configure-virtual-development-environments/">Focus on Apps, Not Configuring Dev Environments</a> <span class="small-date">Oct 23</span></li>
   </ul>
   <ul>
     <li><h2>Tags</h2></li>
       <li><a href="/tags/open-source/">Open Source (3)</a></li>
       <li><a href="/tags/updates/">Updates (2)</a></li>
-      <li><a href="/tags/features/">Features (1)</a></li>
+      <li><a href="/tags/features/">Features (2)</a></li>
       <li><a href="/tags/our-vision/">Our Vision (2)</a></li>
   </ul>
   <ul>
     <li><h2>Archives</h2></li>
-      <li><a href="/2015/">2015 (7)</a></li>
+      <li><a href="/2015/">2015 (8)</a></li>
   </ul>
   <p class="feed">Subscribe to the <a href="/feed.xml" target="_blank">feed</a></p>
 </aside>

@@ -5,7 +5,72 @@
   <id>http://blog.nanobox.io/</id>
   <link href="http://blog.nanobox.io/"/>
   <link href="http://blog.nanobox.io/feed.xml" rel="self"/>
-  <updated>2015-12-04T14:08:00-07:00</updated>
+  <updated>2015-12-11T15:20:00-07:00</updated>
+  <entry>
+    <title>New Feature&amp;#58; Live Reloading</title>
+    <link rel="alternate" href="http://blog.nanobox.io/new-feature-live-reloading/"/>
+    <id>http://blog.nanobox.io/new-feature-live-reloading/</id>
+    <published>2015-12-11T15:20:00-07:00</published>
+    <updated>2015-12-11T16:17:17-07:00</updated>
+    <author>
+      <name>Tyler Flint</name>
+    </author>
+    <content type="html">&lt;p&gt;These days, almost every modern web framework is embracing the ability to live reload the browser when a source file is modified. It’s a cool trend; one we happen to use daily on most of our web applications. Over the past 6 months we’ve been obsessed with figuring out how to develop an application using livereload in dev mode on nanobox. In the past couple of weeks, thanks in large part to &lt;a href="https://github.com/lyondhill"&gt;Lyon&lt;/a&gt;, we’ve made some great progress towards this goal and today we’re excited to release and demo this functionality.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;TLDR:&lt;/strong&gt; Livereload works on nanobox! Check it out in the demo &lt;a href="#video-demo"&gt;below&lt;/a&gt;. &lt;/p&gt;
+
+&lt;h2 id="the-problem"&gt;The Problem&lt;/h2&gt;
+
+&lt;p&gt;Generally, livereload (outside of nanobox) works by subscribing to an I/O event notification layer provided by the operating system kernel. The livereload library “watches” files and directories for changes, then waits for the event notification from the kernel indicating a file or directory has been modified. When a file is modified, certain hooks run which may re-compile code or generate static assets accordingly. The livereload server then informs the browser, connected over a websocket, that a file has been modified and the browser refreshes.&lt;/p&gt;
+
+&lt;p&gt;With nanobox, your application runs inside of a virtual machine (VM), and the source code is mounted inside. Livereload functionality breaks because the livereload server subscribes to events on the OS of the guest VM, but changes to the source code are made on the OS of the host machine. While the changes to the files are reflected inside the VM via the mount, the change event is triggered on the host OS, not on the guest OS. Thus, changes are not broadcast and the livereload server never triggers a re-compile and browser refresh.&lt;/p&gt;
+
+&lt;h2 id="the-solution"&gt;The Solution&lt;/h2&gt;
+
+&lt;p&gt;Our initial instinct, after having spent the past year in kernel development on illumos, was to try to modify the behavior of NFS and the VirtualBox fs driver behavior to replicate events from the host on the client OS. This effort didn’t make it far, as it proved to be a major undertaking without any guarantee that our work would be accepted by the vendors who maintain these projects. &lt;/p&gt;
+
+&lt;p&gt;Instead, we took a step back and realized we could accomplish the goal in a much less obtrusive manner. When you run &lt;code&gt;nanobox dev&lt;/code&gt;, a watcher thread (go routine if you want to be technical about it) subscribes to the kernel event notification layer and waits to be informed of changes to the source code. When a change to a file or directory is triggered, the watcher thread connects to the nanobox-server daemon inside the VM and relays the event. The nanobox-server daemon then touches the file inside the VM, which ultimately forces a propagation of the event to the livereload server. &lt;/p&gt;
+
+&lt;p&gt;It took a lot of iterations to flesh out the bugs and required a major refactor to handle tens of thousands of file change events per second. We’re excited to say that it’s now complete, stable, and working quite well! Your application doesn’t need to change or do anything special. The entire I/O event propagation and relay system is completely transparent to the application and the nanobox user.&lt;/p&gt;
+
+&lt;p&gt;I created a short demo that demonstrates this process. Enjoy!&lt;/p&gt;
+
+&lt;div class="video" id="video-demo"&gt;
+  &lt;iframe width="560" height="315" src="https://www.youtube.com/embed/Donrr7YXkak?rel=0&amp;amp;showinfo=0" frameborder="0" allowfullscreen&gt;&lt;/iframe&gt;
+&lt;/div&gt;
+
+&lt;h2 id="contributor-love"&gt;Contributor Love&lt;/h2&gt;
+
+&lt;p&gt;Special thanks to all those who contributed to Nanobox &amp;amp; Nanopack projects this week. If we missed you, let us know and we&amp;#39;ll be sure to get you in next week.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;a href="https://github.com/Flat"&gt;Flat&lt;/a&gt;&lt;/strong&gt;&lt;br&gt;
+- Fixed some typos in engine publishing&lt;br&gt;
+- Made the update process more stable&lt;br&gt;
+- Helped work through the windows update process  &lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;a href="https://github.com/alytvynov"&gt;alytvynov&lt;/a&gt;&lt;/strong&gt;&lt;br&gt;
+- Fixed scribble usage on Yoke  &lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;a href="https://github.com/mattn"&gt;mattn&lt;/a&gt;&lt;/strong&gt;&lt;br&gt;
+- Helped us identify and understand proxy situations  &lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Walther Diechmann&lt;/strong&gt;&lt;br&gt;
+- Helped identify LAN networking issues&lt;br&gt;
+- Spurred a discussion that produced a plausible feature for bridge networking  &lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;a href="https://github.com/Andrew-College"&gt;Andrew-College&lt;/a&gt;&lt;/strong&gt;&lt;br&gt;
+- Identified a missing shared library in Oracle Java package  &lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;a href="https://github.com/fnmunhoz"&gt;fnmunhoz&lt;/a&gt;&lt;/strong&gt;&lt;br&gt;
+- Identified incorrect ruby_runtime cofigurations and helped confirm a fix  &lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;a href="https://github.com/ehsanminachi"&gt;ehsanminachi&lt;/a&gt;&lt;/strong&gt;&lt;br&gt;
+- Helped identify specific yoke scenarios for documentation  &lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;a href="https://github.com/imkheong"&gt;imkheong&lt;/a&gt;&lt;/strong&gt;&lt;br&gt;
+- Working to identify windows-specific Vagrantfile generation syntax errors  &lt;/p&gt;
+</content>
+  </entry>
   <entry>
     <title>The Vision of Nanobox</title>
     <link rel="alternate" href="http://blog.nanobox.io/the-vision-of-nanobox/"/>
@@ -264,48 +329,6 @@
 &lt;h2 id="making-engine-development-faster"&gt;Making Engine Development Faster&lt;/h2&gt;
 
 &lt;p&gt;Engine overlays allow engine developers to include already established functionality into their own engines without having to duplicate code or fork existing engines. Framework maintainers can overlay a language-generic engine to lay the foundation for their application and only worry about functionality specific to their framework. In short, overlays keep you from having to do things that have already been done.&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>This Week in Nanobox</title>
-    <link rel="alternate" href="http://blog.nanobox.io/this-week-in-nanobox-10-30-15/"/>
-    <id>http://blog.nanobox.io/this-week-in-nanobox-10-30-15/</id>
-    <published>2015-10-30T16:38:00-06:00</published>
-    <updated>2015-10-30T16:39:35-06:00</updated>
-    <author>
-      <name>Steve Domino</name>
-    </author>
-    <content type="html">&lt;p&gt;This week we&amp;#39;ve added some cool new features to &lt;a href="https://desktop.nanobox.io"&gt;Nanobox Desktop&lt;/a&gt; and have resolved a few issues.&lt;/p&gt;
-
-&lt;h4 id="new-features"&gt;New Features:&lt;/h4&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Nanobox now generates dynamic SSH ports allowing you to now run multiple nanoboxes at the same time &lt;em&gt;(awesome)&lt;/em&gt;.&lt;/li&gt;
-&lt;li&gt;The way nanobox generates the dynamic IP for its private network is much smarter and greatly reduces the likelihood of conflicting IP’s.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h4 id="resolved-issues"&gt;Resolved Issues:&lt;/h4&gt;
-
-&lt;ul&gt;
-&lt;li&gt;The &lt;code&gt;vagrant.log&lt;/code&gt; and &lt;code&gt;server.log&lt;/code&gt; are now correctly generated inside the &amp;#39;app&amp;#39; folder (&lt;code&gt;~.nanobox/apps/&amp;lt;app-name&amp;gt;&lt;/code&gt;).&lt;/li&gt;
-&lt;li&gt;An issue causing the VM to continuously suspend after a &amp;#39;nanobox reload&amp;#39; has been resolved.&lt;/li&gt;
-&lt;li&gt;Fixed a race condition where nanobox was attempting to kill the docker DHCP server before it was available to kill, causing the VM to freeze.&lt;/li&gt;
-&lt;li&gt;Fixed an issue where nanobox was &amp;#39;ping flooding&amp;#39; the server causing the server to die and the client (nanobox) to suspend the VM.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id="whats-next-for-nanobox"&gt;Whats Next for Nanobox?&lt;/h2&gt;
-
-&lt;h3 id="overlays"&gt;Overlays&lt;/h3&gt;
-
-&lt;p&gt;The next big thing on our feature list is support for “overlays”; a quick way to combine functionality from different engines.&lt;/p&gt;
-
-&lt;p&gt;The way an overlay works is it takes a list of &lt;a href="https://docs.nanobox.io/engines/"&gt;engines&lt;/a&gt; and overlays their functionality (files). For example, a Ruby on Rails (RoR) engine would overlay the NodeJS and Ruby engines with it&amp;#39;s own functionality. These overlays would allow the RoR engine to use things like Ruby and Bower.js without having to add them explicitly into the engine.&lt;/p&gt;
-
-&lt;p&gt;This way, when there are updates to an overlay’d engine, the engine itself wouldn’t need to be updated. For example, if the PHP engine is updated, the Wordpress engine, which includes the PHP engine as an overlay, wouldn&amp;#39;t need to pull in those updates. It would simply get the updates once it&amp;#39;s compiled.&lt;/p&gt;
-
-&lt;h3 id="upcoming-events"&gt;Upcoming Events&lt;/h3&gt;
-
-&lt;p&gt;Nanobox will be presenting at the &amp;quot;NodeJS Ninjas&amp;quot; meetup group in SLC on Nov 18th at 6:00pm. Details can be found &lt;a href="http://www.meetup.com/utahnodejs/events/226098953/"&gt;here&lt;/a&gt;.&lt;/p&gt;
 </content>
   </entry>
 </feed>
