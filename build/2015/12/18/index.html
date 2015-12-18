@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv='X-UA-Compatible' content='IE=edge;chrome=1' />
-  <title>New Feature&#58; Live Reloading - Nanobox Blog</title>
+  <title>Nanobox Blog</title>
   <link rel="shortcut icon" type="image/png" href="/images/favicon-57864095.png"/>
   <link href='https://fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic' rel='stylesheet' type='text/css'>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
@@ -20,7 +20,7 @@
   <script async src='//www.google-analytics.com/analytics.js'></script>
 </head>
   <body>
-  <div class='top-nav'>
+    <div class='top-nav'>
   <a href="https://nanobox.io"><svg enable-background='new 0 0 19 33' id='nb-logo-sm' space='preserve' version='1.1' viewbox='0 0 19 33' x='0px' xmlns:xlink='http://www.w3.org/1999/xlink' xmlns='http://www.w3.org/2000/svg' y='0px'>
     <g>
       <g>
@@ -73,89 +73,21 @@
 </div>
     
     <div class="wrapper fade-in">
-      <div class="title-block">
-        <h1>New Feature&#58; Live Reloading</h1>
-        <p class="meta">
-          <span class="author">Tyler Flint</span>
-           &#9642; 
-          <span class="date">Dec 11 2015</span>
-        </p>
-      </div>
-      <div class="content">
-        <p>These days, almost every modern web framework is embracing the ability to live reload the browser when a source file is modified. It’s a cool trend; one we happen to use daily on most of our web applications. Over the past 6 months we’ve been obsessed with figuring out how to develop an application using livereload in dev mode on nanobox. In the past couple of weeks, thanks in large part to <a href="https://github.com/lyondhill">Lyon</a>, we’ve made some great progress towards this goal and today we’re excited to release and demo this functionality.</p>
+      <h1 class="small">Archive for
+    Dec 18 2015
+</h1>
 
-<p><strong>TLDR:</strong> Livereload works on nanobox! Check it out in the demo <a href="#video-demo">below</a>. </p>
+  <div class="title-block small">
+    <h2><a href="/holiday-gifts-new-features/">Holiday Gifts - New Features</a></h2>
+    <p class="meta">
+      <span class="author">Tyler Flint</span>
+       &#9642; 
+      <span class="date">Dec 18 2015</span>
+    </p>
+  </div>
 
-<h2 id="the-problem">The Problem</h2>
 
-<p>Generally, livereload (outside of nanobox) works by subscribing to an I/O event notification layer provided by the operating system kernel. The livereload library “watches” files and directories for changes, then waits for the event notification from the kernel indicating a file or directory has been modified. When a file is modified, certain hooks run which may re-compile code or generate static assets accordingly. The livereload server then informs the browser, connected over a websocket, that a file has been modified and the browser refreshes.</p>
-
-<p>With nanobox, your application runs inside of a virtual machine (VM), and the source code is mounted inside. Livereload functionality breaks because the livereload server subscribes to events on the OS of the guest VM, but changes to the source code are made on the OS of the host machine. While the changes to the files are reflected inside the VM via the mount, the change event is triggered on the host OS, not on the guest OS. Thus, changes are not broadcast and the livereload server never triggers a re-compile and browser refresh.</p>
-
-<h2 id="the-solution">The Solution</h2>
-
-<p>Our initial instinct, after having spent the past year in kernel development on illumos, was to try to modify the behavior of NFS and the VirtualBox fs driver behavior to replicate events from the host on the client OS. This effort didn’t make it far, as it proved to be a major undertaking without any guarantee that our work would be accepted by the vendors who maintain these projects. </p>
-
-<p>Instead, we took a step back and realized we could accomplish the goal in a much less obtrusive manner. When you run <code>nanobox dev</code>, a watcher thread (go routine if you want to be technical about it) subscribes to the kernel event notification layer and waits to be informed of changes to the source code. When a change to a file or directory is triggered, the watcher thread connects to the nanobox-server daemon inside the VM and relays the event. The nanobox-server daemon then touches the file inside the VM, which ultimately forces a propagation of the event to the livereload server. </p>
-
-<p>It took a lot of iterations to flesh out the bugs and required a major refactor to handle tens of thousands of file change events per second. We’re excited to say that it’s now complete, stable, and working quite well! Your application doesn’t need to change or do anything special. The entire I/O event propagation and relay system is completely transparent to the application and the nanobox user.</p>
-
-<p>I created a short demo that demonstrates this process. Enjoy!</p>
-
-<div class="video" id="video-demo">
-  <iframe width="560" height="315" src="https://www.youtube.com/embed/Donrr7YXkak?rel=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>
-</div>
-
-<h2 id="contributor-love">Contributor Love</h2>
-
-<p>Special thanks to all those who contributed to Nanobox &amp; Nanopack projects this week. If we missed you, let us know and we&#39;ll be sure to get you in next week.</p>
-
-<p><strong><a href="https://github.com/Flat">Flat</a></strong><br>
-- Fixed some typos in engine publishing<br>
-- Made the update process more stable<br>
-- Helped work through the windows update process  </p>
-
-<p><strong><a href="https://github.com/alytvynov">alytvynov</a></strong><br>
-- Fixed scribble usage on Yoke  </p>
-
-<p><strong><a href="https://github.com/mattn">mattn</a></strong><br>
-- Helped us identify and understand proxy situations  </p>
-
-<p><strong>Walther Diechmann</strong><br>
-- Helped identify LAN networking issues<br>
-- Spurred a discussion that produced a plausible feature for bridge networking  </p>
-
-<p><strong><a href="https://github.com/Andrew-College">Andrew-College</a></strong><br>
-- Identified a missing shared library in Oracle Java package  </p>
-
-<p><strong><a href="https://github.com/fnmunhoz">fnmunhoz</a></strong><br>
-- Identified incorrect ruby_runtime cofigurations and helped confirm a fix  </p>
-
-<p><strong><a href="https://github.com/ehsanminachi">ehsanminachi</a></strong><br>
-- Helped identify specific yoke scenarios for documentation  </p>
-
-<p><strong><a href="https://github.com/imkheong">imkheong</a></strong><br>
-- Working to identify windows-specific Vagrantfile generation syntax errors  </p>
-
-      </div>
-      <div class="author-block">
-        <img class="gravatar" src="https://s.gravatar.com/avatar/d16320670cd226d7d4984698585e2fbc">
-        <div class="info">
-          <p class="author"><span>Tyler Flint</span>            
-             <a class="twitter" target="_blank" href="https://twitter.com/tyler_flint">@tyler_flint</a>
-              <a class="github" target="_blank" href="https://github.com/tylerflint">tylerflint</a>
-          </p>
-          <p class="summary">Husband, dad, LDS, entrepreneur, Nanobox cofounder.</p>
-        </div>
-      </div>
-      <div class="feedback">
-        <p>Have feedback on this post? Let
-          <a target="_blank" href="https://twitter.com/intent/tweet?text=@nanobox_io%20&amp;amp;url=https://blog.nanobox.io/new-feature-live-reloading/">@nanobox_io</a>
-            or <a target="_blank" href="https://twitter.com/intent/tweet?text=@tyler_flint%20&amp;amp;url=https://blog.nanobox.io/new-feature-live-reloading/">@tyler_flint</a>
-          know on Twitter.</p>
-      </div>
-      <hr class="end">
-    </div>
+    </div>    
     <aside>
   <ul>
     <li><h2>Recent Posts</h2></li>

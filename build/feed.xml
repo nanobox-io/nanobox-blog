@@ -5,7 +5,80 @@
   <id>http://blog.nanobox.io/</id>
   <link href="http://blog.nanobox.io/"/>
   <link href="http://blog.nanobox.io/feed.xml" rel="self"/>
-  <updated>2015-12-11T15:20:00-07:00</updated>
+  <updated>2015-12-18T09:57:00-07:00</updated>
+  <entry>
+    <title>Holiday Gifts - New Features</title>
+    <link rel="alternate" href="http://blog.nanobox.io/holiday-gifts-new-features/"/>
+    <id>http://blog.nanobox.io/holiday-gifts-new-features/</id>
+    <published>2015-12-18T09:57:00-07:00</published>
+    <updated>2015-12-18T10:02:33-07:00</updated>
+    <author>
+      <name>Tyler Flint</name>
+    </author>
+    <content type="html">&lt;p&gt;As we prepare for the holidays, we’re excited to rollout a series of new features and enhancements. The past few weeks have been very good to Nanobox, and we’re anxiously nearing a beta release of Nanobox Desktop. We have a lot of functionality to cover, so let’s get right to it...&lt;/p&gt;
+
+&lt;h2 id="zero-config-dev-mode"&gt;Zero Config Dev Mode&lt;/h2&gt;
+
+&lt;h3 id="the-problem"&gt;The Problem&lt;/h3&gt;
+
+&lt;p&gt;The &amp;#39;dev&amp;#39; container environment is auto-configured and the source code from the host is mounted into the dev container. As part of the environment preparation, engines may configure required services like Redis or Postgres. By design, nanobox will not alter the original source code on the host in any way. The usability challenge here is that, as a result of nanobox being nonintrusive, &amp;#39;nanobox dev&amp;#39; can&amp;#39;t auto-generate application configuration. If nanobox were to modify or generate application configuration files, those changes would be pushed back onto the original source, thus violating our strict nonintrusive contract.&lt;/p&gt;
+
+&lt;p&gt;Essentially, an application using nanobox in dev mode will require the developer to modify the configuration manually in order to connect to the auto-generated services within nanobox. Not ideal.&lt;/p&gt;
+
+&lt;h3 id="the-solution"&gt;The Solution&lt;/h3&gt;
+
+&lt;p&gt;The solution is to allow the engine to generate the configuration files as it would in run mode. Then when the dev container is created, those generated configuration files are bind mounted on top of the original configuration files. This allows the application within the dev container to connect to the auto-generated services, without requiring manual intervention or modifying the source files. &lt;/p&gt;
+
+&lt;p&gt;This behavior provides engine developers with powerful leverage to create zero-configuration development environments. In the coming months, users can expect to run &lt;code&gt;nanobox dev&lt;/code&gt; in their application source directory and have a fully-configured application without any modifications to the actual source code.&lt;/p&gt;
+
+&lt;p&gt;This was a substantial, coordinated effort across multiple projects of various specialties contributed by &lt;a href="https://github.com/glinton"&gt;Greg (glinton)&lt;/a&gt;, &lt;a href="https://github.com/lyondhill"&gt;Lyon (lyondhill)&lt;/a&gt;, &lt;a href="https://github.com/sdomino"&gt;Domino (sdomino)&lt;/a&gt;, and &lt;a href="https://github.com/tylerflint"&gt;myself (tylerflint)&lt;/a&gt;. &lt;/p&gt;
+
+&lt;h2 id="custom-dev-working-directory"&gt;Custom Dev Working Directory&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href="https://github.com/lyondhill"&gt;Lyon&lt;/a&gt; has provided an enhancement to the &lt;code&gt;nanobox dev&lt;/code&gt; workflow by giving you the ability to specify a custom working directory the dev console session drops you into. This can be set by the application developer for a specific app, or transparently via the engine and is extremely helpful for languages like &lt;a href="https://golang.org/"&gt;go&lt;/a&gt;, which require the build process to occur within a specific directory. &lt;/p&gt;
+
+&lt;p&gt;The configuration happens within the ‘dev’ node of the Boxfile, like this:&lt;/p&gt;
+&lt;pre class="highlight yaml"&gt;&lt;code&gt;&lt;span class="s"&gt;dev&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt;
+  &lt;span class="s"&gt;working_dir&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;'&lt;/span&gt;&lt;span class="s"&gt;/code/some/nested/dir'&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id="tcp-udp-and-http-converge"&gt;TCP, UDP, and HTTP Converge&lt;/h2&gt;
+
+&lt;p&gt;As the modern web evolves into mobile and IoT, applications are evolving away from the typical http request/response cycle. In fact, we’re seeing that many applications can handle multiple types of services within the same process. &lt;a href="http://nanopack.io/"&gt;Nanopack&lt;/a&gt; projects are examples of this; wherein the majority of these projects offer a tcp or udp service, but expose an http api for management. &lt;/p&gt;
+
+&lt;p&gt;With ‘nanobox run’, which is the &lt;a href="https://nanobox.io/cloud/"&gt;Nanobox Cloud&lt;/a&gt; emulator, you can now natively support multiple services within the same process. Not only is this helpful when running your app locally within &lt;a href="https://desktop.nanobox.io/"&gt;Desktop&lt;/a&gt;, but also in how you will run your app in production with &lt;a href="https://nanobox.io/cloud/"&gt;Cloud&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Within the Boxfile, you can specify ports for each web service. To accomplish this functionality, port definitions have been expanded to support the protocol. Here’s an example of an app’s web service that depends on multiple protocols:&lt;/p&gt;
+&lt;pre class="highlight yaml"&gt;&lt;code&gt;&lt;span class="s"&gt;web1&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt;
+  &lt;span class="s"&gt;ports&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt;
+    &lt;span class="pi"&gt;-&lt;/span&gt; &lt;span class="s"&gt;tcp:9000&lt;/span&gt;
+    &lt;span class="pi"&gt;-&lt;/span&gt; &lt;span class="s"&gt;http:80:8080&lt;/span&gt;
+    &lt;span class="pi"&gt;-&lt;/span&gt; &lt;span class="s"&gt;https:443:8080&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;As shown in this example, a port declaration follows this format: &lt;code&gt;&amp;lt;protocol&amp;gt;:&amp;lt;external port&amp;gt;:&amp;lt;internal port&amp;gt;&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;The external port is the publicly accessible port clients use. The internal port is the port your application listens on within the container. Again, special thanks to &lt;a href="https://github.com/lyondhill"&gt;Lyon&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id="stand-alone-updater"&gt;Stand-Alone Updater&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href="https://github.com/sdomino"&gt;Domino&lt;/a&gt; has been hard at work on a stand-alone updater binary. Unsuspecting bugs are still lurking, hard as we try. We will get them all eventually, but in the meantime, we’ve decided a stand-alone updater is prudent, as often times one of these unforeseen issues can (and have) impeded the ability to update the binary to a version where the bug is fixed. The update process will look the same, however, behind the scenes, an isolated child process will be launched to handle the update procedure. This will also bring auto-update capabilities to Windows!&lt;/p&gt;
+
+&lt;h2 id="proxy-support"&gt;Proxy Support&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href="https://github.com/glinton"&gt;Greg&lt;/a&gt; has brought proxy support to Nanobox Desktop, thanks to the insights and help of &lt;a href="https://github.com/mattn"&gt;Matt&lt;/a&gt; (the creator of &lt;a href="https://github.com/mattn/gom"&gt;Gom&lt;/a&gt;). The beauty of this implementation is that if your host is configured to use a proxy, Nanobox Desktop will detect it and configure both Docker and the nanobox daemon inside the VM to use the same proxy configuration.&lt;/p&gt;
+
+&lt;h2 id="build-image-enhancements"&gt;Build Image Enhancements&lt;/h2&gt;
+
+&lt;p&gt;Finally, &lt;a href="https://github.com/tylerflint"&gt;I’ve&lt;/a&gt; added a series of enhancements and bug fixes to the build process. Thanks in part to &lt;a href="https://github.com/jason-riddle"&gt;Jason&lt;/a&gt;, who discovered some Python environment inconsistencies, we were able to identify some foundational changes that provide a seamless dev workflow for Python and other virtual environments. &lt;/p&gt;
+
+&lt;h2 id="happy-holidays"&gt;Happy Holidays&lt;/h2&gt;
+
+&lt;p&gt;We’ve seen lots of movement in a short period of time, thanks to the &lt;a href="https://github.com/orgs/nanobox-io/people"&gt;dedicated team&lt;/a&gt; and to all those who have volunteered time and code to this effort. Stay tuned for some exciting announcements at the beginning of the year and a clear roadmap for &lt;a href="https://nanobox.io/cloud/"&gt;Cloud&lt;/a&gt; and &lt;a href="https://engines.nanobox.io/"&gt;engines&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Happy holidays!&lt;/p&gt;
+</content>
+  </entry>
   <entry>
     <title>New Feature&amp;#58; Live Reloading</title>
     <link rel="alternate" href="http://blog.nanobox.io/new-feature-live-reloading/"/>
@@ -287,48 +360,6 @@
 &lt;p&gt;Nanopack is a collection of open source projects that embrace the Unix philosophy of a singular purpose. The collective result is left to the imagination of the consumer, likely dictated by the needs of a project. We value collaboration and recognize there are other organizations and efforts that are inline with our vision. &lt;/p&gt;
 
 &lt;p&gt;We need your help to realize this vision. If you’re a systems administrator or a devops person, we need your assistance to identify scenarios and vet potential solutions. If you’re a programmer, we have lots of code that needs to be written. We need help documenting and spreading the word. Get more inforamtion about Nanopack at &lt;a href="http://nanopack.io"&gt;nanopack.io&lt;/a&gt; and get in touch on &lt;a href="https://github.com/nanopack"&gt;Github&lt;/a&gt;.&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>New Feature&amp;#58; Engine Overlays</title>
-    <link rel="alternate" href="http://blog.nanobox.io/new-feature-engine-overlays/"/>
-    <id>http://blog.nanobox.io/new-feature-engine-overlays/</id>
-    <published>2015-11-06T12:01:00-07:00</published>
-    <updated>2015-11-06T12:25:54-07:00</updated>
-    <author>
-      <name>Scott Anderson</name>
-    </author>
-    <content type="html">&lt;p&gt;Last week we set out to tackle the issue of importing functionality from one engine into another. The need for this feature became apparent as nearly every engine needed the option to run bower for front-end dependencies. Bower is an npm module and requires a node.js runtime. Although a node.js engine already exists that conditionally installs node, then runs a &lt;code&gt;bower install&lt;/code&gt; if a bower.json exists, we found ourselves duplicating this code and functionality across engines. Other scenarios such as a WordPress engine needing to import the existing logic from the &lt;a href="https://engines.nanobox.io/releases/9cfde7f2-44e8-45fe-80f7-800d6acf2b4b"&gt;php engine&lt;/a&gt; made the problem abundantly clear:&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;TLDR:&lt;/strong&gt; We needed a simple way to combine functionality from different engines.&lt;/p&gt;
-
-&lt;h2 id="stacking-engines"&gt;Stacking Engines&lt;/h2&gt;
-
-&lt;p&gt;Having spent much of our time in the past 3 years within the Illumos and SmartOS communities, we’ve seen first-hand how well overlaying files can work in a shell/config-centric world. Illumos uses this pattern as a way to create distributions, overriding core functionality and also extending behavior. &lt;/p&gt;
-
-&lt;p&gt;The idea is simple: Stack the contents of an engine on top of another engine. One by one, the contents of the overlaid engines are layered on top of the previous engine. This means that new files are added and files with the same name are replaced. Though simple, the approach provides great flexibility.&lt;/p&gt;
-
-&lt;h2 id="example"&gt;Example&lt;/h2&gt;
-
-&lt;p&gt;To see how this feature can be put to use, let’s take a look at the &lt;a href="https://engines.nanobox.io/releases/67f616c1-91f1-4dae-83fc-b81b8fcf9e61"&gt;WordPress engine&lt;/a&gt;:&lt;/p&gt;
-
-&lt;p&gt;First, the WordPress engine specifies in the Enginefile that it wants to overlay the php engine:&lt;/p&gt;
-&lt;pre class="highlight yaml"&gt;&lt;code&gt;&lt;span class="s"&gt;overlays&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt;
-  &lt;span class="pi"&gt;-&lt;/span&gt; &lt;span class="s"&gt;php&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;The full Enginefile can be referenced here:&lt;br&gt;
-&lt;a href="https://github.com/nanobox-io/nanobox-engine-wordpress/blob/master/Enginefile"&gt;https://github.com/nanobox-io/nanobox-engine-wordpress/blob/master/Enginefile&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Now, the WordPress engine can source the bash scripts provided by the php engine:&lt;br&gt;
-&lt;a href="https://github.com/nanobox-io/nanobox-engine-wordpress/blob/master/lib/wordpress.sh#L5"&gt;https://github.com/nanobox-io/nanobox-engine-wordpress/blob/master/lib/wordpress.sh#L5&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Finally, the WordPress ‘prepare’ bin script can now call functions provided by the php engine:&lt;br&gt;
-&lt;a href="https://github.com/nanobox-io/nanobox-engine-wordpress/blob/master/bin/prepare#L14-L24"&gt;https://github.com/nanobox-io/nanobox-engine-wordpress/blob/master/bin/prepare#L14-L24&lt;/a&gt;&lt;/p&gt;
-
-&lt;h2 id="making-engine-development-faster"&gt;Making Engine Development Faster&lt;/h2&gt;
-
-&lt;p&gt;Engine overlays allow engine developers to include already established functionality into their own engines without having to duplicate code or fork existing engines. Framework maintainers can overlay a language-generic engine to lay the foundation for their application and only worry about functionality specific to their framework. In short, overlays keep you from having to do things that have already been done.&lt;/p&gt;
 </content>
   </entry>
 </feed>

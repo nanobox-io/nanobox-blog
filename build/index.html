@@ -75,69 +75,77 @@
     <div class="wrapper fade-in">
       
   <div class="title-block">
-    <h2 class="new"><a href="/new-feature-live-reloading/">New Feature&#58; Live Reloading</a></h2>
+    <h2 class="new"><a href="/holiday-gifts-new-features/">Holiday Gifts - New Features</a></h2>
     <p class="meta">
       <span class="author">Tyler Flint</span>
        &#9642;  
-      <span class="date">Dec 11 2015</span>
+      <span class="date">Dec 18 2015</span>
     </p>
   </div>
 
   <div class="content">
-    <p>These days, almost every modern web framework is embracing the ability to live reload the browser when a source file is modified. It’s a cool trend; one we happen to use daily on most of our web applications. Over the past 6 months we’ve been obsessed with figuring out how to develop an application using livereload in dev mode on nanobox. In the past couple of weeks, thanks in large part to <a href="https://github.com/lyondhill">Lyon</a>, we’ve made some great progress towards this goal and today we’re excited to release and demo this functionality.</p>
+    <p>As we prepare for the holidays, we’re excited to rollout a series of new features and enhancements. The past few weeks have been very good to Nanobox, and we’re anxiously nearing a beta release of Nanobox Desktop. We have a lot of functionality to cover, so let’s get right to it...</p>
 
-<p><strong>TLDR:</strong> Livereload works on nanobox! Check it out in the demo <a href="#video-demo">below</a>. </p>
+<h2 id="zero-config-dev-mode">Zero Config Dev Mode</h2>
 
-<h2 id="the-problem">The Problem</h2>
+<h3 id="the-problem">The Problem</h3>
 
-<p>Generally, livereload (outside of nanobox) works by subscribing to an I/O event notification layer provided by the operating system kernel. The livereload library “watches” files and directories for changes, then waits for the event notification from the kernel indicating a file or directory has been modified. When a file is modified, certain hooks run which may re-compile code or generate static assets accordingly. The livereload server then informs the browser, connected over a websocket, that a file has been modified and the browser refreshes.</p>
+<p>The &#39;dev&#39; container environment is auto-configured and the source code from the host is mounted into the dev container. As part of the environment preparation, engines may configure required services like Redis or Postgres. By design, nanobox will not alter the original source code on the host in any way. The usability challenge here is that, as a result of nanobox being nonintrusive, &#39;nanobox dev&#39; can&#39;t auto-generate application configuration. If nanobox were to modify or generate application configuration files, those changes would be pushed back onto the original source, thus violating our strict nonintrusive contract.</p>
 
-<p>With nanobox, your application runs inside of a virtual machine (VM), and the source code is mounted inside. Livereload functionality breaks because the livereload server subscribes to events on the OS of the guest VM, but changes to the source code are made on the OS of the host machine. While the changes to the files are reflected inside the VM via the mount, the change event is triggered on the host OS, not on the guest OS. Thus, changes are not broadcast and the livereload server never triggers a re-compile and browser refresh.</p>
+<p>Essentially, an application using nanobox in dev mode will require the developer to modify the configuration manually in order to connect to the auto-generated services within nanobox. Not ideal.</p>
 
-<h2 id="the-solution">The Solution</h2>
+<h3 id="the-solution">The Solution</h3>
 
-<p>Our initial instinct, after having spent the past year in kernel development on illumos, was to try to modify the behavior of NFS and the VirtualBox fs driver behavior to replicate events from the host on the client OS. This effort didn’t make it far, as it proved to be a major undertaking without any guarantee that our work would be accepted by the vendors who maintain these projects. </p>
+<p>The solution is to allow the engine to generate the configuration files as it would in run mode. Then when the dev container is created, those generated configuration files are bind mounted on top of the original configuration files. This allows the application within the dev container to connect to the auto-generated services, without requiring manual intervention or modifying the source files. </p>
 
-<p>Instead, we took a step back and realized we could accomplish the goal in a much less obtrusive manner. When you run <code>nanobox dev</code>, a watcher thread (go routine if you want to be technical about it) subscribes to the kernel event notification layer and waits to be informed of changes to the source code. When a change to a file or directory is triggered, the watcher thread connects to the nanobox-server daemon inside the VM and relays the event. The nanobox-server daemon then touches the file inside the VM, which ultimately forces a propagation of the event to the livereload server. </p>
+<p>This behavior provides engine developers with powerful leverage to create zero-configuration development environments. In the coming months, users can expect to run <code>nanobox dev</code> in their application source directory and have a fully-configured application without any modifications to the actual source code.</p>
 
-<p>It took a lot of iterations to flesh out the bugs and required a major refactor to handle tens of thousands of file change events per second. We’re excited to say that it’s now complete, stable, and working quite well! Your application doesn’t need to change or do anything special. The entire I/O event propagation and relay system is completely transparent to the application and the nanobox user.</p>
+<p>This was a substantial, coordinated effort across multiple projects of various specialties contributed by <a href="https://github.com/glinton">Greg (glinton)</a>, <a href="https://github.com/lyondhill">Lyon (lyondhill)</a>, <a href="https://github.com/sdomino">Domino (sdomino)</a>, and <a href="https://github.com/tylerflint">myself (tylerflint)</a>. </p>
 
-<p>I created a short demo that demonstrates this process. Enjoy!</p>
+<h2 id="custom-dev-working-directory">Custom Dev Working Directory</h2>
 
-<div class="video" id="video-demo">
-  <iframe width="560" height="315" src="https://www.youtube.com/embed/Donrr7YXkak?rel=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>
-</div>
+<p><a href="https://github.com/lyondhill">Lyon</a> has provided an enhancement to the <code>nanobox dev</code> workflow by giving you the ability to specify a custom working directory the dev console session drops you into. This can be set by the application developer for a specific app, or transparently via the engine and is extremely helpful for languages like <a href="https://golang.org/">go</a>, which require the build process to occur within a specific directory. </p>
 
-<h2 id="contributor-love">Contributor Love</h2>
+<p>The configuration happens within the ‘dev’ node of the Boxfile, like this:</p>
+<pre class="highlight yaml"><code><span class="s">dev</span><span class="pi">:</span>
+  <span class="s">working_dir</span><span class="pi">:</span> <span class="s1">'</span><span class="s">/code/some/nested/dir'</span>
+</code></pre>
 
-<p>Special thanks to all those who contributed to Nanobox &amp; Nanopack projects this week. If we missed you, let us know and we&#39;ll be sure to get you in next week.</p>
+<h2 id="tcp-udp-and-http-converge">TCP, UDP, and HTTP Converge</h2>
 
-<p><strong><a href="https://github.com/Flat">Flat</a></strong><br>
-- Fixed some typos in engine publishing<br>
-- Made the update process more stable<br>
-- Helped work through the windows update process  </p>
+<p>As the modern web evolves into mobile and IoT, applications are evolving away from the typical http request/response cycle. In fact, we’re seeing that many applications can handle multiple types of services within the same process. <a href="http://nanopack.io/">Nanopack</a> projects are examples of this; wherein the majority of these projects offer a tcp or udp service, but expose an http api for management. </p>
 
-<p><strong><a href="https://github.com/alytvynov">alytvynov</a></strong><br>
-- Fixed scribble usage on Yoke  </p>
+<p>With ‘nanobox run’, which is the <a href="https://nanobox.io/cloud/">Nanobox Cloud</a> emulator, you can now natively support multiple services within the same process. Not only is this helpful when running your app locally within <a href="https://desktop.nanobox.io/">Desktop</a>, but also in how you will run your app in production with <a href="https://nanobox.io/cloud/">Cloud</a>.</p>
 
-<p><strong><a href="https://github.com/mattn">mattn</a></strong><br>
-- Helped us identify and understand proxy situations  </p>
+<p>Within the Boxfile, you can specify ports for each web service. To accomplish this functionality, port definitions have been expanded to support the protocol. Here’s an example of an app’s web service that depends on multiple protocols:</p>
+<pre class="highlight yaml"><code><span class="s">web1</span><span class="pi">:</span>
+  <span class="s">ports</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="s">tcp:9000</span>
+    <span class="pi">-</span> <span class="s">http:80:8080</span>
+    <span class="pi">-</span> <span class="s">https:443:8080</span>
+</code></pre>
 
-<p><strong>Walther Diechmann</strong><br>
-- Helped identify LAN networking issues<br>
-- Spurred a discussion that produced a plausible feature for bridge networking  </p>
+<p>As shown in this example, a port declaration follows this format: <code>&lt;protocol&gt;:&lt;external port&gt;:&lt;internal port&gt;</code></p>
 
-<p><strong><a href="https://github.com/Andrew-College">Andrew-College</a></strong><br>
-- Identified a missing shared library in Oracle Java package  </p>
+<p>The external port is the publicly accessible port clients use. The internal port is the port your application listens on within the container. Again, special thanks to <a href="https://github.com/lyondhill">Lyon</a>.</p>
 
-<p><strong><a href="https://github.com/fnmunhoz">fnmunhoz</a></strong><br>
-- Identified incorrect ruby_runtime cofigurations and helped confirm a fix  </p>
+<h2 id="stand-alone-updater">Stand-Alone Updater</h2>
 
-<p><strong><a href="https://github.com/ehsanminachi">ehsanminachi</a></strong><br>
-- Helped identify specific yoke scenarios for documentation  </p>
+<p><a href="https://github.com/sdomino">Domino</a> has been hard at work on a stand-alone updater binary. Unsuspecting bugs are still lurking, hard as we try. We will get them all eventually, but in the meantime, we’ve decided a stand-alone updater is prudent, as often times one of these unforeseen issues can (and have) impeded the ability to update the binary to a version where the bug is fixed. The update process will look the same, however, behind the scenes, an isolated child process will be launched to handle the update procedure. This will also bring auto-update capabilities to Windows!</p>
 
-<p><strong><a href="https://github.com/imkheong">imkheong</a></strong><br>
-- Working to identify windows-specific Vagrantfile generation syntax errors  </p>
+<h2 id="proxy-support">Proxy Support</h2>
+
+<p><a href="https://github.com/glinton">Greg</a> has brought proxy support to Nanobox Desktop, thanks to the insights and help of <a href="https://github.com/mattn">Matt</a> (the creator of <a href="https://github.com/mattn/gom">Gom</a>). The beauty of this implementation is that if your host is configured to use a proxy, Nanobox Desktop will detect it and configure both Docker and the nanobox daemon inside the VM to use the same proxy configuration.</p>
+
+<h2 id="build-image-enhancements">Build Image Enhancements</h2>
+
+<p>Finally, <a href="https://github.com/tylerflint">I’ve</a> added a series of enhancements and bug fixes to the build process. Thanks in part to <a href="https://github.com/jason-riddle">Jason</a>, who discovered some Python environment inconsistencies, we were able to identify some foundational changes that provide a seamless dev workflow for Python and other virtual environments. </p>
+
+<h2 id="happy-holidays">Happy Holidays</h2>
+
+<p>We’ve seen lots of movement in a short period of time, thanks to the <a href="https://github.com/orgs/nanobox-io/people">dedicated team</a> and to all those who have volunteered time and code to this effort. Stay tuned for some exciting announcements at the beginning of the year and a clear roadmap for <a href="https://nanobox.io/cloud/">Cloud</a> and <a href="https://engines.nanobox.io/">engines</a>.</p>
+
+<p>Happy holidays!</p>
 
   </div>
 
@@ -154,11 +162,19 @@
 
   <div class="feedback">
     <p>Have feedback on this post? Let
-      <a target="_blank" href="https://twitter.com/intent/tweet?text=@nanobox_io%20&amp;amp;url=https://blog.nanobox.io/new-feature-live-reloading/">@nanobox_io</a>
-        or <a target="_blank" href="https://twitter.com/intent/tweet?text=@tyler_flint%20&amp;amp;url=https://blog.nanobox.io/new-feature-live-reloading/">@tyler_flint</a>
+      <a target="_blank" href="https://twitter.com/intent/tweet?text=@nanobox_io%20&amp;amp;url=https://blog.nanobox.io/holiday-gifts-new-features/">@nanobox_io</a>
+        or <a target="_blank" href="https://twitter.com/intent/tweet?text=@tyler_flint%20&amp;amp;url=https://blog.nanobox.io/holiday-gifts-new-features/">@tyler_flint</a>
       know on Twitter.</p>
   </div> 
 
+    <div class="title-block small">
+      <h2><a href="/new-feature-live-reloading/">New Feature&#58; Live Reloading</a></h2>
+      <p class="meta">
+        <span class="author">Tyler Flint</span>
+         &#9642; 
+        <span class="date">Dec 11 2015</span>
+      </p>
+    </div>
     <div class="title-block small">
       <h2><a href="/the-vision-of-nanobox/">The Vision of Nanobox</a></h2>
       <p class="meta">
@@ -221,22 +237,22 @@
     <aside>
   <ul>
     <li><h2>Recent Posts</h2></li>
+      <li><a href="/holiday-gifts-new-features/">Holiday Gifts - New Features</a> <span class="small-date">Dec 18</span></li>
       <li><a href="/new-feature-live-reloading/">New Feature&#58; Live Reloading</a> <span class="small-date">Dec 11</span></li>
       <li><a href="/the-vision-of-nanobox/">The Vision of Nanobox</a> <span class="small-date">Dec  4</span></li>
       <li><a href="/thanksgiving-update/">Thanksgiving Update</a> <span class="small-date">Nov 25</span></li>
       <li><a href="/3-projects-in-2-days-trend-on-hacker-news-github/">3 Projects in 2 Days Trend on Hacker News & Github</a> <span class="small-date">Nov 18</span></li>
-      <li><a href="/nanopack-a-new-vision-for-automated-infrastructure/">Nanopack - A New Vision for Automated Infrastructure</a> <span class="small-date">Nov 13</span></li>
   </ul>
   <ul>
     <li><h2>Tags</h2></li>
       <li><a href="/tags/open-source/">Open Source (3)</a></li>
-      <li><a href="/tags/updates/">Updates (2)</a></li>
-      <li><a href="/tags/features/">Features (2)</a></li>
+      <li><a href="/tags/updates/">Updates (3)</a></li>
+      <li><a href="/tags/features/">Features (3)</a></li>
       <li><a href="/tags/our-vision/">Our Vision (2)</a></li>
   </ul>
   <ul>
     <li><h2>Archives</h2></li>
-      <li><a href="/2015/">2015 (8)</a></li>
+      <li><a href="/2015/">2015 (9)</a></li>
   </ul>
   <p class="feed">Subscribe to the <a href="/feed.xml" target="_blank">feed</a></p>
 </aside>
