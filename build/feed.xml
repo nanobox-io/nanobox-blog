@@ -5,7 +5,84 @@
   <id>http://blog.nanobox.io/</id>
   <link href="http://blog.nanobox.io/"/>
   <link href="http://blog.nanobox.io/feed.xml" rel="self"/>
-  <updated>2015-12-18T09:57:00-07:00</updated>
+  <updated>2016-02-11T09:09:00-07:00</updated>
+  <entry>
+    <title>We're Back with Updates</title>
+    <link rel="alternate" href="http://blog.nanobox.io/we-re-back-with-updates/"/>
+    <id>http://blog.nanobox.io/we-re-back-with-updates/</id>
+    <published>2016-02-11T09:09:00-07:00</published>
+    <updated>2016-02-11T12:07:39-07:00</updated>
+    <author>
+      <name>Scott Anderson</name>
+    </author>
+    <content type="html">&lt;p&gt;It’s been awhile since our last post, but we’ve been hard at work and have a lot of updates to share with you. Our last post was in December and a lot has changed. This post is an overview of those changes.&lt;/p&gt;
+
+&lt;h2 id="prepping-for-a-production-product"&gt;Prepping for a Production Product&lt;/h2&gt;
+
+&lt;p&gt;The majority of the last two months has actually been spent soul searching.&lt;/p&gt;
+
+&lt;p&gt;Up to this point, Nanobox consisted of two separate and distinct projects: Nanobox Desktop and Nanobox Cloud. This structure never felt right to us. In our minds, these are really two parts of the same project; one for the development phase of an application, and one for the production phase of an application. To better align with our vision of what Nanobox is, we’re restructuring the project.&lt;/p&gt;
+
+&lt;h3 id="nanobox"&gt;Nanobox&lt;/h3&gt;
+
+&lt;p&gt;From the outside, Nanobox will no longer be two projects. Nanobox is a service that enables you to build, manage, and scale infrastructures on your cloud provider of choice. It includes a local development tool that creates a virtual local environment using the exact same runtimes and configuration that will be used in your production environment.&lt;/p&gt;
+
+&lt;p&gt;The effects of this restructure trickle down through the Nanobox CLI and the structure of nanobox.io.&lt;/p&gt;
+
+&lt;h3 id="nanobox-dev-a-significant-change-to-the-nanobox-cli"&gt;Nanobox Dev - A Significant Change to the Nanobox CLI&lt;/h3&gt;
+
+&lt;p&gt;With two distinct Nanobox projects, we were at a loss as to how we should structure our CLI. Having separate CLIs for each project didn’t feel right, but how do we structure a CLI for two distinct interactions: local and production? Burying production tools behind local development tools felt out of place too.&lt;/p&gt;
+
+&lt;p&gt;In the end, we realized the end goal of any application is to run in production. Local development is an important step in that process. We came to the decision that there needed to be a single Nanobox CLI with commands that focus on interacting with a production app. And within the CLI, there should be a subset of commands designed to provision and manage local virtual development environments.&lt;/p&gt;
+
+&lt;p&gt;To that end, the &lt;code&gt;dev&lt;/code&gt; sub-command now houses the functionality that, up to this point, Nanobox is known for; creating and managing a local development VM. The majority of commands used in previous versions of the Nanobox CLI are now nested under the &lt;code&gt;dev&lt;/code&gt; sub-command. For example:&lt;/p&gt;
+&lt;pre class="highlight shell"&gt;&lt;code&gt;&lt;span class="gp"&gt;$ &lt;/span&gt;nanobox dev
+&lt;span class="c"&gt;# Starts the Nanobox VM, provisions your app,&lt;/span&gt;
+&lt;span class="c"&gt;# and drops you into an interactive console&lt;/span&gt;
+
+&lt;span class="gp"&gt;$ &lt;/span&gt;nanobox dev info
+&lt;span class="c"&gt;# Displays information about your Nanobox VM&lt;/span&gt;
+&lt;span class="c"&gt;# and running app&lt;/span&gt;
+
+&lt;span class="gp"&gt;$ &lt;/span&gt;nanobox dev console
+&lt;span class="c"&gt;# Opens an interactive terminal from inside&lt;/span&gt;
+&lt;span class="c"&gt;# your app on the Nanobox VM&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;There are identical commands using the base &lt;code&gt;nanobox&lt;/code&gt; command, that will interact with your future production Nanobox app(s).&lt;/p&gt;
+
+&lt;h4 id="these-updates-are-currently-in-testing"&gt;These Updates are Currently in Testing&lt;/h4&gt;
+
+&lt;p&gt;Since the changes are so significant, they haven’t been added to the stable Nanobox release, but are being tested in our dev release. We expect to merge the updates into the stable release by the end of the month. If you want to help test the bleeding-edge version of the Nanobox CLI, you can do the following:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Copy your nanobox executable&lt;/li&gt;
+&lt;li&gt;Rename your copied nanobox executable to “nanobox-dev”&lt;/li&gt;
+&lt;li&gt;Run an update using the nanobox-dev executable: &lt;code&gt;nanobox-dev update&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Test the &lt;code&gt;dev&lt;/code&gt; subcommands with &lt;code&gt;nanobox-dev dev&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;You can view the changelog &lt;a href="https://github.com/nanobox-io/nanobox/blob/master/CHANGELOG.md"&gt;here&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h3 id="site-restructure"&gt;Site Restructure&lt;/h3&gt;
+
+&lt;p&gt;The restructuring of the Nanobox project has necessitated some minor tweaks to the Nanobox family of sites. Some already exist and others are on their way. Here’s a quick overview:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;nanobox.io&lt;/strong&gt; - The landing site for Nanobox&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;dev.nanobox.io&lt;/strong&gt; - A micro-site that will highlight the local development functionality provided by the &lt;code&gt;nanobox dev&lt;/code&gt; subcommand.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;docs.nanobox.io&lt;/strong&gt; - Documentation for Nanobox&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;shelf.nanobox.io&lt;/strong&gt; - (&lt;em&gt;Name Pending&lt;/em&gt;) A catalog of engines, services, quickstarts, and boxfiles usable on Nanobox. More on this next week.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;dashboard.nanobox.io&lt;/strong&gt; - The dashboard for managing production apps with Nanobox.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id="custom-services"&gt;Custom Services&lt;/h2&gt;
+
+&lt;p&gt;Since the beginning, Nanobox was designed to allow for custom engines, giving you the ability to fully customize your code’s runtime environment. We’re excited to announce that in the near future, you’ll be able to do the exact same thing with data services. This will allow you to custom build your own PostgreSQL database, Redis service, or your very own open-source queueing engine. It’s totally up to you!&lt;/p&gt;
+
+&lt;p&gt;More information will be coming in the future. We’re excited to let you have full control over every aspect of your application’s infrastructure.&lt;/p&gt;
+</content>
+  </entry>
   <entry>
     <title>Holiday Gifts - New Features</title>
     <link rel="alternate" href="http://blog.nanobox.io/holiday-gifts-new-features/"/>
@@ -330,36 +407,6 @@
 &lt;h2 id="thank-you-thank-you-thank-you"&gt;Thank You, Thank You, Thank You&lt;/h2&gt;
 
 &lt;p&gt;Again, we can’t say thank you enough. This really has been a crazy couple of days and we’re excited for what the community has done and for what the future holds.&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>Nanopack - A New Vision for Automated Infrastructure</title>
-    <link rel="alternate" href="http://blog.nanobox.io/nanopack-a-new-vision-for-automated-infrastructure/"/>
-    <id>http://blog.nanobox.io/nanopack-a-new-vision-for-automated-infrastructure/</id>
-    <published>2015-11-13T13:03:00-07:00</published>
-    <updated>2015-12-04T14:09:47-07:00</updated>
-    <author>
-      <name>Tyler Flint</name>
-    </author>
-    <content type="html">&lt;p&gt;Today we’d like to introduce &lt;a href="http://nanopack.io"&gt;Nanopack&lt;/a&gt;, our vision for a fully-automated, API-driven infrastructure. Five years ago, we launched &lt;a href="https://pagodabox.io"&gt;Pagoda Box&lt;/a&gt; with a mission to empower application developers by eliminating systems administration. The challenge for both Pagoda Box and Nanobox is that we need the ability to manipulate, configure, and build infrastructure in real-time via remote APIs.&lt;/p&gt;
-
-&lt;h2 id="the-problem-in-the-wild"&gt;The Problem in the Wild&lt;/h2&gt;
-
-&lt;p&gt;Let me provide a real scenario we dealt with early on with Pagoda Box that clearly illustrates the problem: Pagoda Box allows a developer to add SSL/TLS encryption to their app from the app dashboard. After the cert is created, an Nginx web server needed to be re-configured for the app. This process entailed SSH’ing into the web server machines, updating the configuration file, then reloading the nginx process. While this process was automated, it became clear that it was brittle, unstable, and would not scale. &lt;/p&gt;
-
-&lt;p&gt;As we were reaching critical mass and struggling to deal with scale and growth, we took a step back to re-assess. We looked at this and other processes then realized the solution was clear: we needed to develop and manage our infrastructure like we do our apps; with direct API-access at the source for real-time configuration. Instead of logging into machines, updating config files, and reloading services, we needed to expose the configuration of these services via an API. Instead of using nginx for SSL termination, we built a lightweight, API-driven SSL terminator that enabled us to apply a TLS/SSL cert in real-time, with a single API call.&lt;/p&gt;
-
-&lt;h2 id="sharing-our-philosophy-amp-our-projects"&gt;Sharing Our Philosophy &amp;amp; Our Projects&lt;/h2&gt;
-
-&lt;p&gt;Over the years, this pattern became our guiding philosophy. Today, we’d like to share that philosophy, as well as all of our internal components and services for nanobox cloud.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href="http://nanopack.io" style="max-width: 10em; margin: 0 auto; display: block;"&gt;
-  &lt;img src="/images/nanopack-logo.svg"&gt;
-&lt;/a&gt; &lt;/p&gt;
-
-&lt;p&gt;Nanopack is a collection of open source projects that embrace the Unix philosophy of a singular purpose. The collective result is left to the imagination of the consumer, likely dictated by the needs of a project. We value collaboration and recognize there are other organizations and efforts that are inline with our vision. &lt;/p&gt;
-
-&lt;p&gt;We need your help to realize this vision. If you’re a systems administrator or a devops person, we need your assistance to identify scenarios and vet potential solutions. If you’re a programmer, we have lots of code that needs to be written. We need help documenting and spreading the word. Get more inforamtion about Nanopack at &lt;a href="http://nanopack.io"&gt;nanopack.io&lt;/a&gt; and get in touch on &lt;a href="https://github.com/nanopack"&gt;Github&lt;/a&gt;.&lt;/p&gt;
 </content>
   </entry>
 </feed>

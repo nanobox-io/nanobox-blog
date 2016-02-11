@@ -15,13 +15,13 @@ a                   { color: $blue-1; text-decoration: none; @include transition
 
 // First heading link on the home page
 h2.new              { font-size: 3.5em; font-weight: 300; color: $yellow-2; line-height: 1.1em; margin: .68em 0 .09em;
-  a                 { color: $yellow-2; 
+  a                 { color: $yellow-2;
     &:hover         { color: $blue-1; }
   }
 }
 
 // Block that contains post title, author, & date
-.title-block        { margin-bottom: 2em; 
+.title-block        { margin-bottom: 2em;
   .meta             { margin-top: 0; font-size: .8em; font-weight: 700; color: $gblue-6;
     .author         { margin-right: .25em; text-transform: uppercase; letter-spacing: 1px; }
     .date           { margin-left: .25em; text-transform: uppercase; letter-spacing: 1px; }
@@ -35,16 +35,16 @@ h2.new              { font-size: 3.5em; font-weight: 300; color: $yellow-2; line
 }
 
 // Top Nav Styles
-.top-nav            { margin: 0 auto; padding: 1.15em 1em; position: relative; max-width: 1060px; @include box-sizing; 
-  svg               { 
+.top-nav            { margin: 0 auto; padding: 1.15em 1em; position: relative; max-width: 1060px; @include box-sizing;
+  svg               {
     &#nb-logo-sm    { width: 1.05em; margin-right: 1.05em; }
-    &#nb-logotype   { width: 7em; margin: .4em .8em .4em 0; vertical-align: top; 
+    &#nb-logotype   { width: 7em; margin: .4em .8em .4em 0; vertical-align: top;
       path          { @include transition(fill .15s); }
-    } 
+    }
   }
-  a                 { 
+  a                 {
     &.blog          { display: inline-block; margin: 0; padding: .1em 1.1em; color: $gblue-7; border-left: 1px solid $gblue-3; font-style: italic; vertical-align: top; }
-    &:hover         { color: $gblue-8; 
+    &:hover         { color: $gblue-8;
       svg#nb-logotype path { fill: $gblue-6; }
     }
   }
@@ -80,7 +80,7 @@ h2.new              { font-size: 3.5em; font-weight: 300; color: $yellow-2; line
   blockquote        { margin: 3em 0; padding: .35em 2em .15em; color: $gblue-6; border-left: 4px solid $gblue-2;
     p               { font-size: 1.25em; font-style: italic; line-height: 1.5em; }
   }
-  table             { width: 100%; margin-bottom: 2em; 
+  table             { width: 100%; margin-bottom: 2em;
     thead           { background: $gblue-0; }
     th              { padding: .5em .8em; border: 1px solid $gblue-2; color: $gblue-6; font-size: .95em; }
     td              { padding: .5em .8em; border: 1px solid $gblue-2; }
@@ -105,7 +105,7 @@ h2.new              { font-size: 3.5em; font-weight: 300; color: $yellow-2; line
   .info             { display: inline-block; width: 80%; }
   .author           { margin: 0 0 .2em; font-size: 1.1em; font-style: italic; line-height: 1.4em; color: $gblue-8;
     span            { margin-right: .75em; }
-    a               { font-size: .9em; color: $gblue-6; margin-right: .75em; 
+    a               { font-size: .9em; color: $gblue-6; margin-right: .75em;
       &:hover       { color: $gblue-8; }
       &.twitter:before { content: "\f099"; display: inline; font-family: 'FontAwesome'; font-style: normal; margin-right: .2em; }
       &.github:before  { content: "\f09b"; display: inline; font-family: 'FontAwesome'; font-style: normal; margin-right: .2em; }
@@ -124,7 +124,7 @@ hr.end              { border: none; border-top: 1px solid $gblue-4; }
 // Pagination on list pages
 .pagination         { width: 100%; margin: 0; padding: 3em 0; font-size: .9em; list-style: none; font-style: italic; border-top: 1px solid $gblue-4;
   table             { width: 100% }
-  td                { width: 33%; 
+  td                { width: 33%;
     &:last-child    { text-align: right; }
     &:nth-child(2)  { text-align: center; }
   }
@@ -139,7 +139,7 @@ aside               { width: 100%; max-width: 45em; margin: 2em auto 0; padding:
   h2                { font-size: .8em; font-weight: 700; color: $gblue-7; text-transform: uppercase; letter-spacing: 1px; }
   li                { margin: .5em 0; line-height: 1.1em; }
   a                 { font-size: .9em; color: $blue-0; }
-  .small-date       { margin-left: .3em; font-size: .65em; font-weight: 700; color: $gblue-5; text-transform: uppercase; }
+  .small-date       { font-size: .65em; font-weight: 700; color: $gblue-5; text-transform: uppercase; }
   .feed             { font-size: .9em; font-style: italic;
     &:before        { content: "\f09e"; display: inline; margin-right: .4em; font-family: 'FontAwesome'; font-style: normal; }
   }

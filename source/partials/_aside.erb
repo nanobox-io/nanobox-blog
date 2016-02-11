@@ -2,7 +2,10 @@
   <ul>
     <li><h2>Recent Posts</h2></li>
     <% blog.articles[0...5].each do |article| %>
-      <li><%= link_to article.title, article %> <span class="small-date"><%= article.date.strftime('%b %e') %></span></li>
+      <li>
+        <span class="small-date"><%= article.date.strftime('%b %e') %></span><br/>
+        <%= link_to article.title, article %>
+      </li>
     <% end %>
   </ul>
   <ul>
