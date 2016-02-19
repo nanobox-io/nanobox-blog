@@ -75,81 +75,86 @@
     <div class="wrapper fade-in">
       
   <div class="title-block">
-    <h2 class="new"><a href="/we-re-back-with-updates/">We're Back with Updates</a></h2>
+    <h2 class="new"><a href="/our-move-away-from-zero-config/">Our Move Away from “Zero-Config”</a></h2>
     <p class="meta">
       <span class="author">Scott Anderson</span>
        &#9642;  
-      <span class="date">Feb 11 2016</span>
+      <span class="date">Feb 19 2016</span>
     </p>
   </div>
 
   <div class="content">
-    <p>It’s been awhile since our last post, but we’ve been hard at work and have a lot of updates to share with you. Our last post was in December and a lot has changed. This post is an overview of those changes.</p>
+    <p>In our initial <a href="/the-vision-of-nanobox/">vision of Nanobox</a>, our hope was to create a system that would scan your codebase and auto-detect/auto-configure what it needed to run. While this level automation sounds great on paper, we found that it feels too magical for most. Initial feedback was that it felt like control was taken away, and we totally understand. This helped us to realize that, moving forward, we need to put more control of the process into your hands.</p>
 
-<h2 id="prepping-for-a-production-product">Prepping for a Production Product</h2>
+<p>To help conceptualize what we feel Nanobox needs to be, we’ve studied LEGO to see what makes them so popular.</p>
 
-<p>The majority of the last two months has actually been spent soul searching.</p>
+<h3 id="the-lego-metaphor">The LEGO Metaphor</h3>
 
-<p>Up to this point, Nanobox consisted of two separate and distinct projects: Nanobox Desktop and Nanobox Cloud. This structure never felt right to us. In our minds, these are really two parts of the same project; one for the development phase of an application, and one for the production phase of an application. To better align with our vision of what Nanobox is, we’re restructuring the project.</p>
+<p>Legos tapped into my love of creating; bringing something into existence that didn’t exist before. It’s that same love and passion led me to where I am today and I’m betting that, on some level, it’s the same for you.</p>
 
-<h3 id="nanobox">Nanobox</h3>
+<p>What made LEGO so great was that rather than giving me a pre-built, glued-together pirate ship, they gave me all the pieces I needed to build a pirate ship. The set came with directions, but I didn’t have to follow them. I could do whatever I wanted and I loved the creative freedom.</p>
 
-<p>From the outside, Nanobox will no longer be two projects. Nanobox is a service that enables you to build, manage, and scale infrastructures on your cloud provider of choice. It includes a local development tool that creates a virtual local environment using the exact same runtimes and configuration that will be used in your production environment.</p>
+<p>We’ve placed LEGO on a spectrum consisting of 3 parts: A pre-built pirate ship, LEGO blocks, and a block of wood.</p>
 
-<p>The effects of this restructure trickle down through the Nanobox CLI and the structure of nanobox.io.</p>
+<p><img style="display: block; max-width: 665px; margin: 0 auto;" src="/images/lego-spectrum-6b899295.svg"></p>
 
-<h3 id="nanobox-dev-a-significant-change-to-the-nanobox-cli">Nanobox Dev - A Significant Change to the Nanobox CLI</h3>
+<p>We’ll start with the opposite ends of the spectrum:</p>
 
-<p>With two distinct Nanobox projects, we were at a loss as to how we should structure our CLI. Having separate CLIs for each project didn’t feel right, but how do we structure a CLI for two distinct interactions: local and production? Burying production tools behind local development tools felt out of place too.</p>
+<h4 id="the-pirate-ship">The Pirate Ship</h4>
 
-<p>In the end, we realized the end goal of any application is to run in production. Local development is an important step in that process. We came to the decision that there needed to be a single Nanobox CLI with commands that focus on interacting with a production app. And within the CLI, there should be a subset of commands designed to provision and manage local virtual development environments.</p>
+<p>It’s a pirate ship. It’s cool, but you have no say in how it’s designed or built. It is what it is and there’s not much you can do to change it.</p>
 
-<p>To that end, the <code>dev</code> sub-command now houses the functionality that, up to this point, Nanobox is known for; creating and managing a local development VM. The majority of commands used in previous versions of the Nanobox CLI are now nested under the <code>dev</code> sub-command. For example:</p>
-<pre class="highlight shell"><code><span class="gp">$ </span>nanobox dev
-<span class="c"># Starts the Nanobox VM, provisions your app,</span>
-<span class="c"># and drops you into an interactive console</span>
+<p><em>Development Parallel</em>: A pre-defined solution that works, but may not be exactly what you want or need. I won’t say the original direction of Nanobox was all the way at this end of the spectrum, but it was getting close.</p>
 
-<span class="gp">$ </span>nanobox dev info
-<span class="c"># Displays information about your Nanobox VM</span>
-<span class="c"># and running app</span>
+<h4 id="the-wood-block">The Wood Block</h4>
 
-<span class="gp">$ </span>nanobox dev console
-<span class="c"># Opens an interactive terminal from inside</span>
-<span class="c"># your app on the Nanobox VM</span>
-</code></pre>
+<p>You can create pretty much anything out of this wood block, but it will be time-consuming and difficult.</p>
 
-<p>There are identical commands using the base <code>nanobox</code> command, that will interact with your future production Nanobox app(s).</p>
+<p><em>Development Parallel</em>: Building an infrastructure from scratch. It’s possible, but time-consuming, difficult, and can require expertise you may not have.</p>
 
-<h4 id="these-updates-are-currently-in-testing">These Updates are Currently in Testing</h4>
+<h4 id="legos">Legos</h4>
 
-<p>Since the changes are so significant, they haven’t been added to the stable Nanobox release, but are being tested in our dev release. We expect to merge the updates into the stable release by the end of the month. If you want to help test the bleeding-edge version of the Nanobox CLI, you can do the following:</p>
+<p>LEGO provides building blocks that can be used to build just about anything. They come in different shapes and sizes, but they follow standards and patterns that allow them to all work together.</p>
 
-<ol>
-<li>Copy your nanobox executable</li>
-<li>Rename your copied nanobox executable to “nanobox-dev”</li>
-<li>Run an update using the nanobox-dev executable: <code>nanobox-dev update</code></li>
-<li>Test the <code>dev</code> subcommands with <code>nanobox-dev dev</code></li>
-</ol>
+<p><em>Development Parallel</em>: Nanobox. This is what we aim to provide: a system in which all the necessary “building blocks” are available in the form of engines and services, but you put them together how you’d like. These “blocks” follow standards and patterns so they work together, but the tedium is eliminated. You’re given the pieces necessary to build your vision.</p>
 
-<p>You can view the changelog <a href="https://github.com/nanobox-io/nanobox/blob/master/CHANGELOG.md">here</a>.</p>
+<h2 id="changes-to-nanobox">Changes to Nanobox</h2>
 
-<h3 id="site-restructure">Site Restructure</h3>
+<p>With this shift in thinking, we’re implementing changes to give you more control.</p>
 
-<p>The restructuring of the Nanobox project has necessitated some minor tweaks to the Nanobox family of sites. Some already exist and others are on their way. Here’s a quick overview:</p>
+<h3 id="emphasis-on-the-boxfile">Emphasis on the Boxfile</h3>
 
-<ul>
-<li><strong>nanobox.io</strong> - The landing site for Nanobox</li>
-<li><strong>dev.nanobox.io</strong> - A micro-site that will highlight the local development functionality provided by the <code>nanobox dev</code> subcommand.</li>
-<li><strong>docs.nanobox.io</strong> - Documentation for Nanobox</li>
-<li><strong>shelf.nanobox.io</strong> - (<em>Name Pending</em>) A catalog of engines, services, quickstarts, and boxfiles usable on Nanobox. More on this next week.</li>
-<li><strong>dashboard.nanobox.io</strong> - The dashboard for managing production apps with Nanobox.</li>
-</ul>
+<p>The Boxfile is a simple yaml config file that defines what services and configuration your app needs to run. Up to this point, Boxfiles have been optional since engines have carried the weight of assuming your app’s needs.</p>
 
-<h2 id="custom-services">Custom Services</h2>
+<p>Engines no longer make assumptions about the needs of your app (more on that below). Boxfiles now carry the full weight of app configuration, letting you to explicitly define your app’s needs. Because of this shift, <em>Boxfiles are now required</em>.</p>
 
-<p>Since the beginning, Nanobox was designed to allow for custom engines, giving you the ability to fully customize your code’s runtime environment. We’re excited to announce that in the near future, you’ll be able to do the exact same thing with data services. This will allow you to custom build your own PostgreSQL database, Redis service, or your very own open-source queueing engine. It’s totally up to you!</p>
+<p>Using the LEGO metaphor, the Boxfile is where you tell Nanobox what blocks you need and how they should fit together.</p>
 
-<p>More information will be coming in the future. We’re excited to let you have full control over every aspect of your application’s infrastructure.</p>
+<h3 id="simplified-engines">Simplified Engines</h3>
+
+<p>By shifting the burden of configuration into the Boxfile, engines have been greatly simplified. The original scope of engines included scripts that would “sniff” your codebase and auto-detect the needs of your app. The sniff process, while cool, wasn’t fool-proof and required a lot of upfront work by engine developers to get it to work properly.</p>
+
+<p>Engines will no longer try to auto-detect the needs of applications other than the primary runtime. All services and configuration will be specified in your Boxfile.</p>
+
+<h4 id="no-more-overlays">No More Overlays</h4>
+
+<p>We know this was a short-lived feature, but with the new structure of engines, overlays are no longer necessary or feasible. The original purpose of overlays was to easily layer the functionality of multiple engines into one, removing the need to duplicate auto-detection and code configuration. With the reduction of engine auto-detection capabilities, this is no longer necessary.</p>
+
+<p>Another reason overlays are being removed is because we’re changing how engines are stored. Previously, engines had to be published to and hosted on Nanobox in order to be used. Now, engines will be hosted elsewhere, such as Github. Overlays will not work with this setup.</p>
+
+<h4 id="no-more-enginefiles">No More Enginefiles</h4>
+
+<p>Enginefiles existed only to allow engines to be published to Nanobox. Since the need for publishing has been removed, enginefiles are no longer necessary.</p>
+
+<h3 id="the-registry">The Registry</h3>
+
+<p>The Registry (<em>name pending</em>) will be a searchable catalog of engines, services, Boxfiles, and quickstarts (codebases pre-populated with a boxfile). Anybody can create engines and services and add them to the registry, allowing you to find and use them. You can also share Boxfiles built for specific frameworks, making it easy to share and see what others have done to get apps running. To go back to the LEGO metaphor, this will be your bucket of blocks.</p>
+
+<h2 id="gearing-up-for-a-production-offering">Gearing Up for a Production Offering</h2>
+
+<p>As mentioned in our <a href="/we-re-back-with-updates/">last post</a>, everything we’ve done over that last few months has been in preparation for a production offering. We’re getting really close to a private beta and would love some help. If you’re interested in being a part of the Nanobox beta, go to <a href="https://nanobox.io">nanobox.io</a> and click “Sign up for the Private Beta”.</p>
+
+<p>Thanks for the support. You’re awesome!</p>
 
   </div>
 
@@ -166,11 +171,19 @@
 
   <div class="feedback">
     <p>Have feedback on this post? Let
-      <a target="_blank" href="https://twitter.com/intent/tweet?text=@nanobox_io%20&amp;amp;url=https://blog.nanobox.io/we-re-back-with-updates/">@nanobox_io</a>
-        or <a target="_blank" href="https://twitter.com/intent/tweet?text=@scott_dsgn%20&amp;amp;url=https://blog.nanobox.io/we-re-back-with-updates/">@scott_dsgn</a>
+      <a target="_blank" href="https://twitter.com/intent/tweet?text=@nanobox_io%20&amp;amp;url=https://blog.nanobox.io/our-move-away-from-zero-config/">@nanobox_io</a>
+        or <a target="_blank" href="https://twitter.com/intent/tweet?text=@scott_dsgn%20&amp;amp;url=https://blog.nanobox.io/our-move-away-from-zero-config/">@scott_dsgn</a>
       know on Twitter.</p>
   </div> 
 
+    <div class="title-block small">
+      <h2><a href="/we-re-back-with-updates/">We're Back with Updates</a></h2>
+      <p class="meta">
+        <span class="author">Scott Anderson</span>
+         &#9642; 
+        <span class="date">Feb 11 2016</span>
+      </p>
+    </div>
     <div class="title-block small">
       <h2><a href="/holiday-gifts-new-features/">Holiday Gifts - New Features</a></h2>
       <p class="meta">
@@ -235,20 +248,28 @@
         <span class="date">Oct 30 2015</span>
       </p>
     </div>
-    <div class="title-block small">
-      <h2><a href="/auto-configure-virtual-development-environments/">Focus on Apps, Not Configuring Dev Environments</a></h2>
-      <p class="meta">
-        <span class="author">Tyler Flint</span>
-         &#9642; 
-        <span class="date">Oct 23 2015</span>
-      </p>
-    </div>
 
+  <div class="pagination">
+    <table>
+      <tr>
+        <td>
+            <li class="older"><a href="/page/2/">Older</a></li>
+        </td>
+        <td>Page 1 of 2</td>
+        <td>
+        </td>
+      </tr>
+    </table>
+  </div>
 
     </div>    
     <aside>
   <ul>
     <li><h2>Recent Posts</h2></li>
+      <li>
+        <span class="small-date">Feb 19</span><br/>
+        <a href="/our-move-away-from-zero-config/">Our Move Away from “Zero-Config”</a>
+      </li>
       <li>
         <span class="small-date">Feb 11</span><br/>
         <a href="/we-re-back-with-updates/">We're Back with Updates</a>
@@ -265,21 +286,17 @@
         <span class="small-date">Dec  4</span><br/>
         <a href="/the-vision-of-nanobox/">The Vision of Nanobox</a>
       </li>
-      <li>
-        <span class="small-date">Nov 25</span><br/>
-        <a href="/thanksgiving-update/">Thanksgiving Update</a>
-      </li>
   </ul>
   <ul>
     <li><h2>Tags</h2></li>
       <li><a href="/tags/open-source/">Open Source (3)</a></li>
-      <li><a href="/tags/updates/">Updates (4)</a></li>
-      <li><a href="/tags/features/">Features (3)</a></li>
+      <li><a href="/tags/updates/">Updates (5)</a></li>
+      <li><a href="/tags/features/">Features (4)</a></li>
       <li><a href="/tags/our-vision/">Our Vision (3)</a></li>
   </ul>
   <ul>
     <li><h2>Archives</h2></li>
-      <li><a href="/2016/">2016 (1)</a></li>
+      <li><a href="/2016/">2016 (2)</a></li>
       <li><a href="/2015/">2015 (9)</a></li>
   </ul>
   <p class="feed">Subscribe to the <a href="/feed.xml" target="_blank">feed</a></p>

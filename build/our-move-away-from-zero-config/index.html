@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv='X-UA-Compatible' content='IE=edge;chrome=1' />
-  <title>Nanobox Blog</title>
+  <title>Our Move Away from “Zero-Config” - Nanobox Blog</title>
   <link rel="shortcut icon" type="image/png" href="/images/favicon-57864095.png"/>
   <link href='https://fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic' rel='stylesheet' type='text/css'>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
@@ -20,7 +20,7 @@
   <script async src='//www.google-analytics.com/analytics.js'></script>
 </head>
   <body>
-    <div class='top-nav'>
+  <div class='top-nav'>
   <a href="https://nanobox.io"><svg enable-background='new 0 0 19 33' id='nb-logo-sm' space='preserve' version='1.1' viewbox='0 0 19 33' x='0px' xmlns:xlink='http://www.w3.org/1999/xlink' xmlns='http://www.w3.org/2000/svg' y='0px'>
     <g>
       <g>
@@ -73,37 +73,106 @@
 </div>
     
     <div class="wrapper fade-in">
-      <h1 class="small">Archive for
-    Dec 2015
-</h1>
+      <div class="title-block">
+        <h1>Our Move Away from “Zero-Config”</h1>
+        <p class="meta">
+          <span class="author">Scott Anderson</span>
+           &#9642; 
+          <span class="date">Feb 19 2016</span>
+        </p>
+      </div>
+      <div class="content">
+        <p>In our initial <a href="/the-vision-of-nanobox/">vision of Nanobox</a>, our hope was to create a system that would scan your codebase and auto-detect/auto-configure what it needed to run. While this level automation sounds great on paper, we found that it feels too magical for most. Initial feedback was that it felt like control was taken away, and we totally understand. This helped us to realize that, moving forward, we need to put more control of the process into your hands.</p>
 
-  <div class="title-block small">
-    <h2><a href="/holiday-gifts-new-features/">Holiday Gifts - New Features</a></h2>
-    <p class="meta">
-      <span class="author">Tyler Flint</span>
-       &#9642; 
-      <span class="date">Dec 18 2015</span>
-    </p>
-  </div>
-  <div class="title-block small">
-    <h2><a href="/new-feature-live-reloading/">New Feature&#58; Live Reloading</a></h2>
-    <p class="meta">
-      <span class="author">Tyler Flint</span>
-       &#9642; 
-      <span class="date">Dec 11 2015</span>
-    </p>
-  </div>
-  <div class="title-block small">
-    <h2><a href="/the-vision-of-nanobox/">The Vision of Nanobox</a></h2>
-    <p class="meta">
-      <span class="author">Tyler Flint</span>
-       &#9642; 
-      <span class="date">Dec  4 2015</span>
-    </p>
-  </div>
+<p>To help conceptualize what we feel Nanobox needs to be, we’ve studied LEGO to see what makes them so popular.</p>
 
+<h3 id="the-lego-metaphor">The LEGO Metaphor</h3>
 
-    </div>    
+<p>Legos tapped into my love of creating; bringing something into existence that didn’t exist before. It’s that same love and passion led me to where I am today and I’m betting that, on some level, it’s the same for you.</p>
+
+<p>What made LEGO so great was that rather than giving me a pre-built, glued-together pirate ship, they gave me all the pieces I needed to build a pirate ship. The set came with directions, but I didn’t have to follow them. I could do whatever I wanted and I loved the creative freedom.</p>
+
+<p>We’ve placed LEGO on a spectrum consisting of 3 parts: A pre-built pirate ship, LEGO blocks, and a block of wood.</p>
+
+<p><img style="display: block; max-width: 665px; margin: 0 auto;" src="/images/lego-spectrum-6b899295.svg"></p>
+
+<p>We’ll start with the opposite ends of the spectrum:</p>
+
+<h4 id="the-pirate-ship">The Pirate Ship</h4>
+
+<p>It’s a pirate ship. It’s cool, but you have no say in how it’s designed or built. It is what it is and there’s not much you can do to change it.</p>
+
+<p><em>Development Parallel</em>: A pre-defined solution that works, but may not be exactly what you want or need. I won’t say the original direction of Nanobox was all the way at this end of the spectrum, but it was getting close.</p>
+
+<h4 id="the-wood-block">The Wood Block</h4>
+
+<p>You can create pretty much anything out of this wood block, but it will be time-consuming and difficult.</p>
+
+<p><em>Development Parallel</em>: Building an infrastructure from scratch. It’s possible, but time-consuming, difficult, and can require expertise you may not have.</p>
+
+<h4 id="legos">Legos</h4>
+
+<p>LEGO provides building blocks that can be used to build just about anything. They come in different shapes and sizes, but they follow standards and patterns that allow them to all work together.</p>
+
+<p><em>Development Parallel</em>: Nanobox. This is what we aim to provide: a system in which all the necessary “building blocks” are available in the form of engines and services, but you put them together how you’d like. These “blocks” follow standards and patterns so they work together, but the tedium is eliminated. You’re given the pieces necessary to build your vision.</p>
+
+<h2 id="changes-to-nanobox">Changes to Nanobox</h2>
+
+<p>With this shift in thinking, we’re implementing changes to give you more control.</p>
+
+<h3 id="emphasis-on-the-boxfile">Emphasis on the Boxfile</h3>
+
+<p>The Boxfile is a simple yaml config file that defines what services and configuration your app needs to run. Up to this point, Boxfiles have been optional since engines have carried the weight of assuming your app’s needs.</p>
+
+<p>Engines no longer make assumptions about the needs of your app (more on that below). Boxfiles now carry the full weight of app configuration, letting you to explicitly define your app’s needs. Because of this shift, <em>Boxfiles are now required</em>.</p>
+
+<p>Using the LEGO metaphor, the Boxfile is where you tell Nanobox what blocks you need and how they should fit together.</p>
+
+<h3 id="simplified-engines">Simplified Engines</h3>
+
+<p>By shifting the burden of configuration into the Boxfile, engines have been greatly simplified. The original scope of engines included scripts that would “sniff” your codebase and auto-detect the needs of your app. The sniff process, while cool, wasn’t fool-proof and required a lot of upfront work by engine developers to get it to work properly.</p>
+
+<p>Engines will no longer try to auto-detect the needs of applications other than the primary runtime. All services and configuration will be specified in your Boxfile.</p>
+
+<h4 id="no-more-overlays">No More Overlays</h4>
+
+<p>We know this was a short-lived feature, but with the new structure of engines, overlays are no longer necessary or feasible. The original purpose of overlays was to easily layer the functionality of multiple engines into one, removing the need to duplicate auto-detection and code configuration. With the reduction of engine auto-detection capabilities, this is no longer necessary.</p>
+
+<p>Another reason overlays are being removed is because we’re changing how engines are stored. Previously, engines had to be published to and hosted on Nanobox in order to be used. Now, engines will be hosted elsewhere, such as Github. Overlays will not work with this setup.</p>
+
+<h4 id="no-more-enginefiles">No More Enginefiles</h4>
+
+<p>Enginefiles existed only to allow engines to be published to Nanobox. Since the need for publishing has been removed, enginefiles are no longer necessary.</p>
+
+<h3 id="the-registry">The Registry</h3>
+
+<p>The Registry (<em>name pending</em>) will be a searchable catalog of engines, services, Boxfiles, and quickstarts (codebases pre-populated with a boxfile). Anybody can create engines and services and add them to the registry, allowing you to find and use them. You can also share Boxfiles built for specific frameworks, making it easy to share and see what others have done to get apps running. To go back to the LEGO metaphor, this will be your bucket of blocks.</p>
+
+<h2 id="gearing-up-for-a-production-offering">Gearing Up for a Production Offering</h2>
+
+<p>As mentioned in our <a href="/we-re-back-with-updates/">last post</a>, everything we’ve done over that last few months has been in preparation for a production offering. We’re getting really close to a private beta and would love some help. If you’re interested in being a part of the Nanobox beta, go to <a href="https://nanobox.io">nanobox.io</a> and click “Sign up for the Private Beta”.</p>
+
+<p>Thanks for the support. You’re awesome!</p>
+
+      </div>
+      <div class="author-block">
+        <img class="gravatar" src="https://s.gravatar.com/avatar/842ad9f55bff4d00dc2ddad8dbcd1f36">
+        <div class="info">
+          <p class="author"><span>Scott Anderson</span>            
+             <a class="twitter" target="_blank" href="https://twitter.com/scott_dsgn">@scott_dsgn</a>
+              <a class="github" target="_blank" href="https://github.com/sanderson">sanderson</a>
+          </p>
+          <p class="summary">Designer, writer, code dabbler, foodie, husband & father.</p>
+        </div>
+      </div>
+      <div class="feedback">
+        <p>Have feedback on this post? Let
+          <a target="_blank" href="https://twitter.com/intent/tweet?text=@nanobox_io%20&amp;amp;url=https://blog.nanobox.io/our-move-away-from-zero-config/">@nanobox_io</a>
+            or <a target="_blank" href="https://twitter.com/intent/tweet?text=@scott_dsgn%20&amp;amp;url=https://blog.nanobox.io/our-move-away-from-zero-config/">@scott_dsgn</a>
+          know on Twitter.</p>
+      </div>
+      <hr class="end">
+    </div>
     <aside>
   <ul>
     <li><h2>Recent Posts</h2></li>
